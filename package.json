@@ -1,0 +1,37 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "watch": "dart-sass --watch src/resources/scss/app.scss src/public/css/app.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeLinh0000/nodejs_blog.git"
+  },
+  "keywords": [
+    "f8",
+    "f8",
+    "nodejs",
+    "blog",
+    "nodejs"
+  ],
+  "author": "linh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeLinh0000/nodejs_blog/issues"
+  },
+  "homepage": "https://github.com/LeLinh0000/nodejs_blog#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.3"
+  },
+  "devDependencies": {
+    "dart-sass": "^1.25.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.12"
+  }
+}
