@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon --inspect src/index.js",
     "watch": "dart-sass --watch src/resources/scss/app.scss src/public/css/app.css",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -25,13 +26,19 @@
     "url": "https://github.com/LeLinh0000/nodejs_blog/issues"
   },
   "homepage": "https://github.com/LeLinh0000/nodejs_blog#readme",
+  "lint-staged": {
+    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.3.3"
   },
   "devDependencies": {
     "dart-sass": "^1.25.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^11.1.2",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "prettier": "^2.4.1"
   }
 }
