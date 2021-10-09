@@ -2,8 +2,8 @@
 <div class="app__container">
     <div class="grid wide">
         <div class="row sm-gutter app__content">
-            <div class="col l-2 m-0 c-0">
-                <nav class="category">
+            <div class="col l-2-4 m-0 c-0">
+                <nav class="products-category">
                     <h3 class="category__heading">
                         <!-- <i class="category__heading-icon fas fa-list"></i> -->
                         Danh mục
@@ -27,8 +27,117 @@
                         </li>
                     </ul>
                 </nav>
+                <nav class="products-filter">
+
+                    {{!-- Rating --}}
+                    <div class="products-filter-container">
+                        <h4 class="products-filter-heading">Đánh giá</h4>
+                        <div class="rating-list">
+                            <a href="" class="rating-list-item">
+                                <p class="rating-list-star">
+                                    <i class="rating-list-star-item fas fa-star"></i>
+                                    <i class="rating-list-star-item fas fa-star"></i>
+                                    <i class="rating-list-star-item fas fa-star"></i>
+                                    <i class="rating-list-star-item fas fa-star"></i>
+                                    <i class="rating-list-star-item fas fa-star"></i>
+                                </p>
+                                <span class="rating-list-item-text">
+                                    Từ 5 sao
+                                </span>
+                            </a>
+                            <a href="" class="rating-list-item">
+                                <p class="rating-list-star">
+                                    <i class="rating-list-star-item fas fa-star"></i>
+                                    <i class="rating-list-star-item fas fa-star"></i>
+                                    <i class="rating-list-star-item fas fa-star"></i>
+                                    <i class="rating-list-star-item fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </p>
+                                <span class="rating-list-item-text">
+                                    Từ 4 sao
+                                </span>
+                            </a>
+                            <a href="" class="rating-list-item">
+                                <p class="rating-list-star">
+                                    <i class="rating-list-star-item fas fa-star"></i>
+                                    <i class="rating-list-star-item fas fa-star"></i>
+                                    <i class="rating-list-star-item fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </p>
+                                <span class="rating-list-item-text">
+                                    Từ 3 sao
+                                </span>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    {{!-- Price --}}
+                    <div class="products-filter-container">
+                        <h4 class="products-filter-heading">Giá</h4>
+                        <div class="block" data-view-id="search_filter_container" data-view-label="Giá">
+                            <div class="fast-price-filter">
+                                <div class="fast-price-filter-item"><span class="">Dưới 70.000</span></div>
+                                <div class="fast-price-filter-item"><span class="">Từ 70.000 đến 120.000</span></div>
+                                <div class="fast-price-filter-item"><span class="">Từ 120.000 đến 230.000</span></div>
+                                <div class="fast-price-filter-item"><span class="">Trên 230.000</span></div></div>
+                                <div class="price-small-text">Chọn khoảng giá</div>
+                                <div class="price-input-group"><input pattern="[0-9]*" placeholder="Giá từ" value="0">
+                                <span>-</span>
+                                <input pattern="[0-9]*" placeholder="Giá đến" value="0"></div>
+                                <button id="price-filter-btn" data-view-id="search_filter_submit_button">Áp dụng</button>
+                        </div>
+                    </div>
+
+                    {{!-- Author --}}
+                    <div class="products-filter-container">
+                        <h4 class="products-filter-heading">Tác giả</h4>
+                        <div class="products-filter-checkbox">
+                            <div class="products-filter-checkbox-item">
+                                <input type="checkbox" name="" id="">
+                                <p>Nhiều tác giả</p>
+                            </div>
+                            <div class="products-filter-checkbox-item">
+                                <input type="checkbox" name="" id="">
+                                <p>Nguyễn Nhật Ánh</p>
+                            </div>
+                            <div class="products-filter-checkbox-item">
+                                <input type="checkbox" name="" id="">
+                                <p>Nam Cao</p>
+                            </div>
+                            <div class="products-filter-checkbox-item">
+                                <input type="checkbox" name="" id="">
+                                <p>Nguyễn Ngọc Tư</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{!-- Publisher --}}
+                    <div class="products-filter-container">
+                        <h4 class="products-filter-heading">Công ty phát hành</h4>
+                        <div class="products-filter-checkbox">
+                            <div class="products-filter-checkbox-item">
+                                <input type="checkbox" name="" id="">
+                                <p>Nhã Nam</p>
+                            </div>
+                            <div class="products-filter-checkbox-item">
+                                <input type="checkbox" name="" id="">
+                                <p>NXB Trẻ</p>
+                            </div>
+                            <div class="products-filter-checkbox-item">
+                                <input type="checkbox" name="" id="">
+                                <p>AZ Việt Nam</p>
+                            </div>
+                            <div class="products-filter-checkbox-item">
+                                <input type="checkbox" name="" id="">
+                                <p>Đinh Tị</p>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
             </div>
-            <div class="col l-10 m-12 c-12">
+            <div class="col l-9-6 m-12 c-12">
                 <div class="home-filter hide-on-mobile-tablet">
                     <span class="home-filter__label">Sắp xếp theo</span>
                     <button class="home-filter__btn btn">Phổ biến</button>
@@ -194,7 +303,7 @@
     </div>
 </div>
 
-<div class="table">
+{{!-- <div class="table">
     <form method="POST" action="">
         <table>
             <tr>
@@ -244,4 +353,4 @@
         <button type="submit">Add</button>
         </table>
     </form>
-</div>
+</div> --}}
