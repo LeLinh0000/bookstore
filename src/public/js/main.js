@@ -33,7 +33,6 @@ function handleScroll() {
     var turnUpBtn = document.querySelector('.turn__up');
     window.addEventListener('scroll', function () {
         var x = window.pageYOffset;
-        console.log(turnUpBtn);
         if (x > 300) {
             turnUpBtn.classList.add('turn__up--active');
         } else {
@@ -43,3 +42,18 @@ function handleScroll() {
 }
 
 handleScroll();
+
+// Auth
+var register = document.querySelector('#register-btn');
+var login = document.querySelector('.login-btn');
+
+console.log(login);
+// document.querySelector(".modal").style.display = "flex";
+
+login.onclick = function () {
+    console.log('Show login');
+    document.querySelector('.modal').style.display = 'flex';
+    document.querySelector('#register-form').style.display = 'none';
+};
+
+// Validate
