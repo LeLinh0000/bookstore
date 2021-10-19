@@ -78,7 +78,7 @@
                                 Trợ giúp
                             </a>
                         </li>
-                        <li id="register-btn" class="header__navbar-item header__navbar-item--strong header__navbar-item--separate"><a href="./register">Đăng ký</a></li>
+                        <li id="register-btn" class="header__navbar-item header__navbar-item--strong header__navbar-item--separate">Đăng ký</li>
                         <li id="login-btn" class="header__navbar-item header__navbar-item--strong login-btn">Đăng nhập</li>
                         <li class="header__navbar-item header__navbar-user">
                             <img src="/img/avatar.png" alt="" class="header__navbar-user-img">
@@ -98,7 +98,7 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul>   
                 </nav>
 
                 <!-- Header with search -->
@@ -237,8 +237,41 @@
                         <li class="category__menu-item"><a href="./" class="category__menu-link">Trang chủ</a></li>
                         <li class="category__menu-item"><a href="./products" class="category__menu-link">Sản phẩm</a></li>
                         <li class="category__menu-item"><a href="" class="category__menu-link">Blog</a></li>
-                        <li class="category__menu-item"><a href="" class="category__menu-link">Liên hệ</a></li>
+                        <li class="category__menu-item"><a href="./contact" class="category__menu-link">Liên hệ</a></li>
                     </ul>
                 </div>
             </div>
         </header>
+        
+        <script>
+            var register = document.querySelector('#register-btn');
+            var login = document.querySelector('#login-btn');
+
+            // document.querySelector(".modal").style.display = "flex";
+
+            login.onclick = function () {
+                document.querySelector('.modal').style.display = 'flex';
+                document.querySelector('.main-register').style.display = 'none';
+                document.querySelector('#login-form').style.display = 'block';
+
+            };
+
+             console.log(register);
+            register.onclick = function () {
+                console.log('Show login');
+                document.querySelector('.main-register').style.display = 'flex';
+
+                document.querySelector('.modal').style.display = 'block';
+                document.querySelector('.modal').style.position = 'absolute';
+                document.querySelector('.modal').style.height = '1500px';
+
+                document.querySelector('#login-form').style.display = 'none';
+            };
+
+            window.onclick = function(event) {
+                if (event.target == document.querySelector('.modal')) {
+                    document.querySelector('.modal').style.display = "none";
+                }
+            }
+        
+        </script>

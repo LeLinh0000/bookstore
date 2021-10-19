@@ -1,10 +1,10 @@
-const newsRouter = require('./news');
+const contactRouter = require('./contact');
 const siteRouter = require('./site');
 const productsRouter = require('./products');
 const registerRouter = require('./register');
 
 function route(app) {
-    app.use('/news', newsRouter);
+    app.use('/contact', contactRouter);
 
     app.use('/products', productsRouter);
 

@@ -120,3 +120,20 @@
         <div class="turn__up">
             <a href="#header__navbar"><i class="fas fa-arrow-circle-up"></i></a>
         </div>
+
+<script>
+    function handleScroll() {
+        var turnUpBtn = document.querySelector('.turn__up');
+        window.addEventListener('scroll', function () {
+            var x = window.pageYOffset;
+            if (x > 300) {
+                turnUpBtn.classList.add('turn__up--active');
+            } else {
+                turnUpBtn.classList.remove('turn__up--active');
+            }
+        });
+    }
+
+    handleScroll();
+</script>
+        

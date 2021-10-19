@@ -1,0 +1,70 @@
+<div class="contact-container">
+    <!-- The video -->
+    <hr>
+
+    <div class="bg-video">
+        <video autoplay muted loop id="myVideo">
+            <source src="video/bg.mp4" type="video/mp4">
+        </video>
+        
+    </div>
+
+
+    <div class="masthead">
+            <div class="masthead-content text-white">
+                <div class="container-fluid px-4 px-lg-0">
+                    <h1 class="fst-italic lh-1 mb-4">Welcome to Bookstore</h1>
+                    <p class="mb-5 contact-sub-heading">Chúng tôi luôn nổ lực để mang đến cho bạn những trải nghiệm mua sắm tuyệt vời nhất!</p>
+                    <p class="mb-5 contact-text">Liên hệ với chúng tôi ngay tại địa chỉ:</p>
+                    <p class="mb-5 contact-text">SĐT: 0909090909</p>
+                    <p class="mb-5 contact-text">Email: bookstore@gmail.com</p>
+                    <p class="mb-5 contact-text">Cửa hàng: phường Xuân Khánh, quận Ninh Kiều, tp Cần Thơ</p>
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- * * SB Forms Contact Form * *-->
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- This form is pre-integrated with SB Forms.-->
+                    <!-- To make this form functional, sign up at-->
+                    <!-- https://startbootstrap.com/solution/contact-forms-->
+                    <!-- to get an API token!-->
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                        <!-- Email address input-->
+                        <div class="row input-group-newsletter">
+                            <div class="col"><input class="form-control" id="email" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>
+                            <div class="col-auto"><button class="btn-contact btn-contact-primary disabled" id="submitButton-contact" type="submit">Notify Me!</button></div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Social Icons-->
+        <!-- For more icon options, visit https://fontawesome.com/icons?d=gallery&p=2&s=brands-->
+        <div class="social-icons">
+            <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
+                <a class="btn-social-contact btn-dark m-3" href="#!"><i class="fab fa-twitter"></i></a>
+                <a class="btn-social-contact btn-dark m-3" href="#!"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn-social-contact btn-dark m-3" href="#!"><i class="fab fa-instagram"></i></a>
+                {{!-- <button id="myBtn-pause" onclick="myFunction()">Pause</button> --}}
+            </div>
+        </div>
+  
+</div>
+
+<script>
+// Get the video
+var video = document.getElementById("myVideo");
+
+// Get the button
+var btn = document.getElementById("myBtn-pause");
+
+// Pause and play the video, and change the button text
+function myFunction() {
+  if (video.paused) {
+    video.play();
+    btn.innerHTML = "Pause";
+  } else {
+    video.pause();
+    btn.innerHTML = "Play";
+  }
+}
+</script>
