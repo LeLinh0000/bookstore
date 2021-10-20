@@ -1,6 +1,6 @@
 <!-- Modal layout -->
     <div class="modal">
-        <div class="modal__overlay">
+        {{!-- <div class="modal__overlay"> --}}
 
             <div class="modal__body">
                 
@@ -9,7 +9,7 @@
                     <div class="auth-form__container">
                          <form action="" method="POST" class="form" id="login-form-item">
                             <h3 class="heading">Đăng nhập</h3>
-                            <p class="desc">Chào mừng bạn đến với Bookstore ❤️</p>
+                            <p class="desc">Chào mừng bạn đến với Bookstore</p>
                             <span class="close-modal">&times;</span>
                             <div class="spacer"></div>
                         
@@ -168,7 +168,7 @@
                 </div>
 
             </div>
-        </div>
+        {{!-- </div> --}}
     </div>
 
     <script src="js/validator.js"></script>
@@ -183,12 +183,27 @@
     </script>
     <script>
         var closeBtn = document.querySelectorAll('.close-modal');
-        closeBtn[0].onclick = function() {
-            document.querySelector('.modal').style.display = 'none';
+        var modal = document.querySelector('.modal');
+        var loginForm = document.querySelector('#login-form');
+        var registerForm = document.querySelector('.main-register');
+
+        // When the user clicks anywhere outside of the modal, close it
+        // loginForm.onclick = function(event.stopPropagation());
+        // registerForm.onclick = function(event.stopPropagation());
+
+        window.onclick = function(event) {
+            console.log(event.target);
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        closeBtn[0].onclick = function(event) {
+            modal.style.display = 'none';
             document.querySelector('.main-register').style.display = 'none';
         }
         closeBtn[1].onclick = function() {
-            document.querySelector('.modal').style.display = 'none';
+            modal.style.display = 'none';
             document.querySelector('.main-register').style.display = 'none';
         }
     </script>
