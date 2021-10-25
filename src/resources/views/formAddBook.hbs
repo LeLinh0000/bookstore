@@ -1,0 +1,133 @@
+    <div class="main-register grid wide">
+
+        <div class="form-add-book">
+            <form method="POST" action="">
+                <table>
+                    <tr>
+                        <th> Tên sách: </th>
+                        <td><input name="tensach" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th> Giá: </th>
+                        <td><input name="gia" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th> Tap: </th>
+                        <td><input name="tap" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th> Hình thức bìa: </th>
+                        <td><input name="hinhthucbia" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th> Ngôn ngữ: </th>
+                        <td><input name="ngonngu" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th> Số trang: </th>
+                        <td><input name="sotrang" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th> Kích thước: </th>
+                        <td><input name="kichthuoc" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th> Năm xuất bản: </th>
+                        <td><input name="namxuatban" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th> Mô tả sản phẩm: </th>
+                        <td><input name="mota_sach" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th> Tác giả: </th>
+                        <td id="input-tg">
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> Nhà phát hành: </th>
+                        <td>
+                            
+                            <select name="nhaphathanh" id="">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> Nhà xuất bản: </th>
+                        <td>
+                            <select name="nhaxuatban" id="input-nxb">
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <button type="reset">Làm lại</button>
+                        <button type="submit">Thêm</button>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+      
+      
+    </div>
+<script>
+    /* // Tac gia
+    fetch('http://localhost:3000/data/author')
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+            const tacgiaHTML = data.map((tacgia, index) => {
+                return `
+                    <input type="checkbox" name="tacgia[]" value="${tacgia.ID_TACGIA}">${tacgia.TEN_TACGIA}
+                `
+            })
+            document.querySelector('#input-tg').innerHTML = tacgiaHTML.join('');
+        });
+
+// Nha xuat ban
+    fetch('http://localhost:3000/data/publisher')
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+            const nxbHTML = data.map((nxb, index) => {
+                return `
+                    <option value="${nxb.ID_NHAXUATBAN}">${nxb.TEN_NHAXUATBAN}</option>
+                `
+            })
+            document.querySelector('#input-nxb').innerHTML = nxbHTML.join('');
+        }); */
+
+    Promise.all([
+        fetch("http://localhost:3000/data/author"),
+        fetch("http://localhost:3000/data/publisher"),
+    ]).then(([author, publisher]) => {
+        author.json()
+            .then(data => {
+                const tacgiaHTML = data.map((tacgia, index) => {
+                    return `
+                        <input type="checkbox" name="tacgia[]" value="${tacgia.ID_TACGIA}">${tacgia.TEN_TACGIA}
+                    `
+                })
+                document.querySelector('#input-tg').innerHTML = tacgiaHTML.join('');
+            });
+            
+        publisher.json()
+            .then(data => {
+                const nxbHTML = data.map((nxb, index) => {
+                    return `
+                        <option value="${nxb.ID_NHAXUATBAN}">${nxb.TEN_NHAXUATBAN}</option>
+                    `
+                })
+                document.querySelector('#input-nxb').innerHTML = nxbHTML.join('');
+            });
+        
+    }).catch((err) => {
+        console.log(err);
+    });
+
+</script>

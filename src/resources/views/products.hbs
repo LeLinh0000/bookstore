@@ -322,20 +322,24 @@
     <form method="POST" action="">
         <table>
             <tr>
-            <th> Tên sản phẩm: </th>
-            <td><input name="tensp" type="text"></td>
+            <th> Tên sách: </th>
+            <td><input name="tensach" type="text"></td>
         </tr>
         <tr>
-            <th> Gia bìa: </th>
-            <td><input name="giabia" type="text"></td>
+            <th> Giá: </th>
+            <td><input name="gia" type="text"></td>
         </tr>
         <tr>
-            <th> Giá bán: </th>
-            <td><input name="giaban" type="text"></td>
+            <th> Tap: </th>
+            <td><input name="tap" type="text"></td>
         </tr>
         <tr>
             <th> Hình thức bìa: </th>
             <td><input name="hinhthucbia" type="text"></td>
+        </tr>
+        <tr>
+            <th> Ngôn ngữ: </th>
+            <td><input name="ngonngu" type="text"></td>
         </tr>
         <tr>
             <th> Số trang: </th>
@@ -351,19 +355,35 @@
         </tr>
         <tr>
             <th> Mô tả sản phẩm: </th>
-            <td><input name="motasanpham" type="text"></td>
-        </tr>
-        <tr>
-            <th> Khuyến mãi: </th>
-            <td><input name="khuyenmai" type="text"></td>
+            <td><input name="mota_sach" type="text"></td>
         </tr>
         <tr>
             <th> Tác giả: </th>
-            <td><input name="tacgia" type="text"></td>
+            <td>
+                <input name="tacgia[]" type="checkbox">Nguyễn Ngọc Tư
+                <input name="tacgia[]" type="checkbox">Nguyễn Nhật Ánh
+                <input name="tacgia[]" type="checkbox">Nam Cao
+            </td>
         </tr>
         <tr>
-            <th> Nhà cung cấp: </th>
-            <td><input name="nhacungcap" type="text"></td>
+            <th> Nhà phát hành: </th>
+            <td>
+                <select name="nhaphathanh" id="">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th> Nhà xuất bản: </th>
+            <td>
+                <select name="nhaxuatban" id="">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </td>
         </tr>
         <button type="submit">Add</button>
         </table>

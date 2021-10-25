@@ -5,17 +5,17 @@
                         <li class="header__navbar-item header__navbar-item--has-qr header__navbar-item--separate">
                             Nhập mã bookstore để giảm 10% cho đơn hàng từ 150k!
                             <!-- Header QR code -->
-                            <div class="header__qr">
-                                <img src="./assets/img/qr_code.png" alt="QR code" class="header__qr-img">
+                            {{!-- <div class="header__qr">
+                                <img src="/assets/img/qr_code.png" alt="QR code" class="header__qr-img">
                                 <div class="header__qr-apps">
                                     <a href="" class="header__qr-link">
-                                        <img src="./assets/img/google_play.png" alt="Google Play" class="header__qr-download-img">
+                                        <img src="/assets/img/google_play.png" alt="Google Play" class="header__qr-download-img">
                                     </a>
                                     <a href="" class="header__qr-link">
                                         <img src="./assets/img/app_store.png" alt="App Store" class="header__qr-download-img">
                                     </a>
                                 </div>
-                            </div>
+                            </div> --}}
                         </li>
                         <li class="header__navbar-item">
                             <span class="header__navbar-title--no-pointer">Kết nối</span>
@@ -41,7 +41,7 @@
                                 <ul class="header__notify-list">
                                     <li class="header__notify-item header__notify-item--view">
                                         <a href="" class="header__notify-link">
-                                            <img src="./assets/img/products/product8.jpg" alt="" class="header__notify-img">
+                                            <img src="/img/products/product1.jpg" alt="" class="header__notify-img">
                                             <div class="header__notify-info">
                                                 <span class="header__notify-name">Áo Sweater Thun Dài Tay Unisex Mới Mhất</span>
                                                 <span class="header__notify-description">Áo Sweater Thun Dài Tay Unisex Form Rộng Nhiều Màu</span>
@@ -50,7 +50,7 @@
                                     </li>
                                     <li class="header__notify-item">
                                         <a href="" class="header__notify-link">
-                                            <img src="./assets/img/products/product5.jpg" alt="" class="header__notify-img">
+                                            <img src="/img/products/product1.jpg" alt="" class="header__notify-img">
                                             <div class="header__notify-info">
                                                 <span class="header__notify-name">Áo thun nam TinoFun</span>
                                                 <span class="header__notify-description">Áo thun nam TinoFun thể thao cổ tròn đẹp tay dài mã TT53 phong cách Hàn Quốc form rộng co giãn tay lỡ mùa</span>
@@ -59,7 +59,7 @@
                                     </li>
                                     <li class="header__notify-item">
                                         <a href="" class="header__notify-link">
-                                            <img src="./assets/img/products/product6.png" alt="" class="header__notify-img">
+                                            <img src="/img/products/product1.jpg" alt="" class="header__notify-img">
                                             <div class="header__notify-info">
                                                 <span class="header__notify-name">Áo thun tay dài unisex form rộng</span>
                                                 <span class="header__notify-description">Áo thun tay dài unisex form rộng Trơn nam nữ basic tea phong cách ulzzang, áo sweart nam nữ, Áo Thun Tay Dài Ullzzang [Unisex - Đủ Màu]</span>
@@ -163,7 +163,7 @@
 
                             <!-- No cart: header__cart-list--no-cart -->
                             <div class="header__cart-list">
-                                <img src="./assets/img/no_cart.png" alt="" class="header__cart-no-cart-img">
+                                <img src="/img/no_cart.png" alt="" class="header__cart-no-cart-img">
                                 <span class="header__cart-list-no-cart-msg">
                                     Chưa có sản phẩm
                                 </span>
@@ -172,7 +172,7 @@
                                 <ul class="header__cart-list-item">
                                     <!-- Cart item -->
                                     <li class="header__cart-item">
-                                        <img src="./assets/img/products/product1.jpg" alt="" class="header__cart-img">
+                                        <img src="/img/products/product1.jpg" alt="" class="header__cart-img">
                                         <div class="header__cart-item-info">
                                             <div class="header__cart-item-head">
                                                 <h5 class="header__cart-item-name">Áo Thun nam Tay Lỡ  Form rộng TRUTH</h5>
@@ -190,7 +190,7 @@
                                     </li>
 
                                     <li class="header__cart-item">
-                                        <img src="./assets/img/products/product5.jpg" alt="" class="header__cart-img">
+                                        <img src="/img/products/product1.jpg" alt="" class="header__cart-img">
                                         <div class="header__cart-item-info">
                                             <div class="header__cart-item-head">
                                                 <h5 class="header__cart-item-name">Áo thun nam TinoFun thể thao cổ tròn đẹp tay dài mã TT53 phong cách Hàn Quốc form rộng co giãn tay lỡ mùa hè thu</h5>
@@ -208,7 +208,7 @@
                                     </li>
 
                                     <li class="header__cart-item">
-                                        <img src="./assets/img/products/product7.jpg" alt="" class="header__cart-img">
+                                        <img src="/img/products/product1.jpg" alt="" class="header__cart-img">
                                         <div class="header__cart-item-info">
                                             <div class="header__cart-item-head">
                                                 <h5 class="header__cart-item-name">Áo thun nam TinoFun cổ tròn đẹp tay dài mã TT52 phong cách Hàn Quốc form rộng tay lỡ co giãn mùa hè thu</h5>
@@ -256,9 +256,8 @@
 
             };
 
-             console.log(register);
+            
             register.onclick = function () {
-                console.log('Show login');
                 document.querySelector('.main-register').style.display = 'flex';
 
                 document.querySelector('.modal').style.display = 'block';

@@ -171,7 +171,7 @@
         {{!-- </div> --}}
     </div>
 
-    <script src="js/validator.js"></script>
+    <script src="/js/validator.js"></script>
     <script>
           //Mong muốn
          var form = new Validator("#login-form-item");
@@ -187,12 +187,9 @@
         var loginForm = document.querySelector('#login-form');
         var registerForm = document.querySelector('.main-register');
 
-        // When the user clicks anywhere outside of the modal, close it
-        // loginForm.onclick = function(event.stopPropagation());
-        // registerForm.onclick = function(event.stopPropagation());
+     
 
         window.onclick = function(event) {
-            console.log(event.target);
             if (event.target == modal) {
                 modal.style.display = "none";
             }
