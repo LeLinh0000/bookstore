@@ -1,6 +1,3 @@
-const Book = require('./Book.model');
-const Author = require('./Author.model');
-
 module.exports = (sequelize, Sequelize) => {
     const BookAuthor = sequelize.define(
         'BookAuthor',
