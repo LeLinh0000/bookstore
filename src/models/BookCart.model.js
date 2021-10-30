@@ -1,22 +1,22 @@
+const Book = require('./Book.model');
+const Cart = require('./Cart.model');
+
 module.exports = (sequelize, Sequelize) => {
-    const Publisher = sequelize.define(
-        'Publisher',
+    const BookCart = sequelize.define(
+        'BookCart',
         {
-            publisherId: {
+            quantity: {
                 type: Sequelize.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
-            },
-            publisherName: {
-                type: Sequelize.STRING,
                 allowNull: false,
+                defaultValue: 0,
             },
         },
         {
             // Không tự động thêm timestamp attributes (updatedAt, createdAt)
             timestamps: false,
+            // chỉ định tên table
         },
     );
 
-    return Publisher;
+    return BookCart;
 };

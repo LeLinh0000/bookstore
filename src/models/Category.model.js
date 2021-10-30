@@ -1,21 +1,23 @@
 module.exports = (sequelize, Sequelize) => {
-    const Author = sequelize.define(
-        'Author',
+    const Category = sequelize.define(
+        'Category',
         {
-            authorId: {
+            categoryId: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            authorName: {
+            categoryName: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
         },
         {
+            // Không tự động thêm timestamp attributes (updatedAt, createdAt)
             timestamps: false,
+            // chỉ định tên table
         },
     );
 
-    return Author;
+    return Category;
 };

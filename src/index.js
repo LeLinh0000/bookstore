@@ -2,11 +2,12 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
+const AdminBro = require('admin-bro');
+const AdminBroExpress = require('@admin-bro/express');
+const AdminBroSequelize = require('@admin-bro/sequelize');
 
 const app = express();
 const port = 3000;
-
-const db = require('./common/connect');
 
 const route = require('./routes');
 
@@ -17,7 +18,24 @@ app.use(
         extended: true,
     }),
 );
+
 app.use(express.json());
+
+const db = require('./models');
+db.sequelize.sync();
+
+// AdminBro
+const adminBro = new AdminBro({
+    Databases: [],
+    rootPath: '/admin',
+});
+
+const router = AdminBroExpress.buildRouter(adminBro);
+
+app.use(adminBro.options.rootPath, router);
+console.log(`App listening at http://localhost:${port}/admin`);
+
+AdminBro.registerAdapter(AdminBroSequelize);
 
 // HTTP logger
 // app.use(morgan('combined'));

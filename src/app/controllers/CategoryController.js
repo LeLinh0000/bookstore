@@ -1,24 +1,24 @@
 const db = require('../../models/index');
-const Publisher = db.publisher;
+const Category = db.category;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new publisher
+// Create and Save a new Category
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.publisherName) {
+    if (!req.body.categoryName) {
         res.status(400).send({
             message: 'Content can not be empty!',
         });
         return;
     }
 
-    // Create a publisher
-    const publisher = {
-        publisherName: req.body.publisherName,
+    // Create a Category
+    const category = {
+        categoryName: req.body.categoryName,
     };
 
-    // Save publisher in the database
-    Publisher.create(publisher)
+    // Save Category in the database
+    Category.create(category)
         .then((data) => {
             res.send(data);
         })
@@ -26,17 +26,17 @@ exports.create = (req, res) => {
             res.status(500).send({
                 message:
                     err.message ||
-                    'Some error occurred while creating the publisher.',
+                    'Some error occurred while creating the Category.',
             });
         });
 };
 
-// Retrieve all publisher from the database.
+// Retrieve all Category from the database.
 exports.findAll = (req, res) => {
     const name = req.query.name;
-    var condition = name ? { publisherName: { [Op.like]: `%${name}%` } } : null;
+    var condition = name ? { categoryName: { [Op.like]: `%${name}%` } } : null;
 
-    Publisher.findAll({ where: condition })
+    Category.findAll({ where: condition })
         .then((data) => {
             res.send(data);
         })
@@ -44,109 +44,107 @@ exports.findAll = (req, res) => {
             res.status(500).send({
                 message:
                     err.message ||
-                    'Some error occurred while retrieving publisher.',
+                    'Some error occurred while retrieving Category.',
             });
         });
 };
 
-// Find a single publisher with an publisherId
+// Find a single Category with an categoryId
 exports.findOne = (req, res) => {
-    const publisherId = req.params.id;
+    const categoryId = req.params.id;
 
-    Publisher.findByPk(publisherId)
+    Category.findByPk(categoryId)
         .then((data) => {
             if (data) {
                 res.send(data);
             } else {
                 res.status(404).send({
-                    message: `Cannot find publisher with publisherId=${publisherId}.`,
+                    message: `Cannot find Category with categoryId=${categoryId}.`,
                 });
             }
         })
         .catch((err) => {
             res.status(500).send({
                 message:
-                    'Error retrieving publisher with publisherId=' +
-                    publisherId,
+                    'Error retrieving Category with categoryId=' + categoryId,
             });
         });
 };
 
-// Update a publisher by the id_loaisach in the request
+// Update a Category by the categoryId in the request
 exports.update = (req, res) => {
-    const publisherId = req.params.id;
+    const categoryId = req.params.id;
 
-    Publisher.update(req.body, {
-        where: { publisherId: publisherId },
+    Category.update(req.body, {
+        where: { categoryId: categoryId },
     })
         .then((num) => {
             if (num == 1) {
                 res.send({
-                    message: 'publisher was updated successfully.',
+                    message: 'Category was updated successfully.',
                 });
             } else {
                 res.send({
-                    message: `Cannot update publisher with publisherId=${publisherId}. Maybe publisher was not found or req.body is empty!`,
+                    message: `Cannot update Category with categoryId=${categoryId}. Maybe Category was not found or req.body is empty!`,
                 });
             }
         })
         .catch((err) => {
             res.status(500).send({
                 message:
-                    'Error updating publisher with publisherId=' + publisherId,
+                    'Error updating Category with categoryId=' + categoryId,
             });
         });
 };
 
-// Delete a publisher with the specified publisherId in the request
+// Delete a Category with the specified categoryId in the request
 exports.delete = (req, res) => {
-    const publisherId = req.params.id;
+    const categoryId = req.params.id;
 
-    Publisher.destroy({
-        where: { publisherId: publisherId },
+    Category.destroy({
+        where: { categoryId: categoryId },
     })
         .then((num) => {
             if (num == 1) {
                 res.send({
-                    message: 'publisher was deleted successfully!',
+                    message: 'Category was deleted successfully!',
                 });
             } else {
                 res.send({
-                    message: `Cannot delete publisher with publisherId=${publisherId}. Maybe publisher was not found!`,
+                    message: `Cannot delete Category with categoryId=${categoryId}. Maybe Category was not found!`,
                 });
             }
         })
         .catch((err) => {
             res.status(500).send({
                 message:
-                    'Could not delete publisher with publisherId=' +
-                    publisherId,
+                    'Could not delete Category with categoryId=' + categoryId,
             });
         });
 };
 
-// Delete all publisher from the database.
+// Delete all Category from the database.
 exports.deleteAll = (req, res) => {
-    Publisher.destroy({
+    Category.destroy({
         where: {},
         truncate: false,
     })
         .then((nums) => {
             res.send({
-                message: `${nums} publishers were deleted successfully!`,
+                message: `${nums} Categorys were deleted successfully!`,
             });
         })
         .catch((err) => {
             res.status(500).send({
                 message:
                     err.message ||
-                    'Some error occurred while removing all publishers.',
+                    'Some error occurred while removing all Categorys.',
             });
         });
 };
-// Find all published publisher
+// Find all published Category
 exports.findAllName = (req, res) => {
-    Publisher.findAll({ where: { publisherName: req.params.name } })
+    Category.findAll({ where: { categoryName: req.params.name } })
         .then((data) => {
             res.send(data);
         })
@@ -154,7 +152,7 @@ exports.findAllName = (req, res) => {
             res.status(500).send({
                 message:
                     err.message ||
-                    'Some error occurred while retrieving publisher.',
+                    'Some error occurred while retrieving Category.',
             });
         });
 };

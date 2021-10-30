@@ -1,21 +1,22 @@
 module.exports = (sequelize, Sequelize) => {
-    const Author = sequelize.define(
-        'Author',
+    const Image = sequelize.define(
+        'Image',
         {
-            authorId: {
+            imageId: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            authorName: {
+            path: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
         },
         {
+            // Không tự động thêm timestamp attributes (updatedAt, createdAt)
             timestamps: false,
         },
     );
 
-    return Author;
+    return Image;
 };

@@ -1,21 +1,19 @@
 module.exports = (sequelize, Sequelize) => {
-    const Author = sequelize.define(
-        'Author',
+    const Cart = sequelize.define(
+        'Cart',
         {
-            authorId: {
+            cartId: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            authorName: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
         },
         {
+            // Không tự động thêm timestamp attributes (updatedAt, createdAt)
             timestamps: false,
+            // chỉ định tên table
         },
     );
 
-    return Author;
+    return Cart;
 };

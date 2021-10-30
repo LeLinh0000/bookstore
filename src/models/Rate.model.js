@@ -1,22 +1,29 @@
 module.exports = (sequelize, Sequelize) => {
-    const Publisher = sequelize.define(
-        'Publisher',
+    const Rate = sequelize.define(
+        'Rate',
         {
-            publisherId: {
+            rateId: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            publisherName: {
-                type: Sequelize.STRING,
+            rate: {
+                type: Sequelize.INTEGER,
                 allowNull: false,
+                defaultValue: 5,
+            },
+
+            comment: {
+                type: Sequelize.STRING,
+                allowNull: true,
             },
         },
         {
             // Không tự động thêm timestamp attributes (updatedAt, createdAt)
             timestamps: false,
+            // chỉ định tên table
         },
     );
 
-    return Publisher;
+    return Rate;
 };

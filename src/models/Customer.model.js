@@ -1,61 +1,51 @@
 module.exports = (sequelize, Sequelize) => {
-    const Book = sequelize.define(
-        'Book',
+    const Customer = sequelize.define(
+        'Customer',
         {
-            bookId: {
+            customerId: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            bookName: {
+            customerName: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
 
-            coverPrice: {
-                type: Sequelize.DOUBLE,
+            birthday: {
+                type: Sequelize.STRING,
                 allowNull: false,
             },
 
-            price: {
-                type: Sequelize.DOUBLE,
+            gender: {
+                type: Sequelize.STRING,
                 allowNull: false,
             },
 
-            episode: {
-                type: Sequelize.INTEGER,
+            address: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+
+            email: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+
+            phoneNumber: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+
+            password: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+
+            avatar: {
+                type: Sequelize.STRING,
                 allowNull: true,
-                defaultValue: null,
-            },
-
-            language: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-
-            bookLayout: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-
-            quantityOfPage: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-            },
-
-            weight: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-            },
-
-            publishYear: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-            },
-
-            description: {
-                type: Sequelize.TEXT,
-                allowNull: false,
+                defaultValue: '/img/avatar/avatar.png',
             },
         },
         {
@@ -64,5 +54,5 @@ module.exports = (sequelize, Sequelize) => {
         },
     );
 
-    return Book;
+    return Customer;
 };

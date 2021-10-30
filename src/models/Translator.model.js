@@ -1,21 +1,22 @@
 module.exports = (sequelize, Sequelize) => {
-    const Author = sequelize.define(
-        'Author',
+    const Translator = sequelize.define(
+        'Translator',
         {
-            authorId: {
+            translatorId: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            authorName: {
+            translatorName: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
         },
         {
+            // Không tự động thêm timestamp attributes (updatedAt, createdAt)
             timestamps: false,
         },
     );
 
-    return Author;
+    return Translator;
 };
