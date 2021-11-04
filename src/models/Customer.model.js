@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) => {
             },
 
             birthday: {
-                type: Sequelize.STRING,
+                type: Sequelize.DATEONLY,
                 allowNull: false,
             },
 

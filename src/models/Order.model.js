@@ -10,16 +10,12 @@ module.exports = (sequelize, Sequelize) => {
             orderState: {
                 type: Sequelize.STRING,
                 allowNull: false,
-            },
-
-            orderTime: {
-                type: Sequelize.TIME,
-                allowNull: false,
+                defaultValue: 'Đang xử lý',
             },
         },
         {
             // Không tự động thêm timestamp attributes (updatedAt, createdAt)
-            timestamps: false,
+            timestamps: true,
             // chỉ định tên table
         },
     );

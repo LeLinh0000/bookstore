@@ -1,5 +1,6 @@
 const db = require('../../models/index');
 const Translator = db.translator;
+const Book = db.book;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Translator
@@ -38,7 +39,7 @@ exports.findAll = (req, res) => {
         ? { translatorName: { [Op.like]: `%${name}%` } }
         : null;
 
-    Translator.findAll({ where: condition })
+    Translator.findAll({ where: condition, include: Book })
         .then((data) => {
             res.send(data);
         })
@@ -46,30 +47,33 @@ exports.findAll = (req, res) => {
             res.status(500).send({
                 message:
                     err.message ||
-                    'Some error occurred while retrieving Translator.',
+                    'Some error occurred while retrieving translator.',
             });
         });
 };
 
 // Find a single Translator with an TranslatorId
 exports.findOne = (req, res) => {
-    const TranslatorId = req.params.id;
+    const translatorId = req.params.id;
 
-    Translator.findByPk(TranslatorId)
+    Translator.findOne({
+        where: { translatorId: translatorId },
+        include: Book,
+    })
         .then((data) => {
             if (data) {
                 res.send(data);
             } else {
                 res.status(404).send({
-                    message: `Cannot find Translator with TranslatorId=${TranslatorId}.`,
+                    message: `Cannot find translator with translatorId=${translatorId}.`,
                 });
             }
         })
         .catch((err) => {
             res.status(500).send({
                 message:
-                    'Error retrieving Translator with TranslatorId=' +
-                    TranslatorId,
+                    'Error retrieving translator with translatorId=' +
+                    translatorId,
             });
         });
 };

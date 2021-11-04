@@ -1,5 +1,6 @@
 const db = require('../../models/index');
 const Author = db.author;
+const Book = db.book;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new author
@@ -36,7 +37,7 @@ exports.findAll = (req, res) => {
     const name = req.query.name;
     var condition = name ? { authorName: { [Op.like]: `%${name}%` } } : null;
 
-    Author.findAll({ where: condition })
+    Author.findAll({ where: condition, include: Book })
         .then((data) => {
             res.send(data);
         })
@@ -53,7 +54,10 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const authorId = req.params.id;
 
-    Author.findByPk(authorId)
+    Author.findOne({
+        where: { authorId: authorId },
+        include: Book,
+    })
         .then((data) => {
             if (data) {
                 res.send(data);

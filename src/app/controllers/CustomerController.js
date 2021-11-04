@@ -1,8 +1,10 @@
 const db = require('../../models/index');
 const Customer = db.customer;
-const CustomerAuthor = db.CustomerAuthor;
-const CustomerTranslator = db.CustomerTranslator;
+const Order = db.order;
+const Cart = db.cart;
+
 const Op = db.Sequelize.Op;
+const bcrypt = require('bcrypt');
 
 // Create and Save a new Customer
 exports.create = (req, res) => {
@@ -24,24 +26,22 @@ exports.create = (req, res) => {
 
     // Create a Customer
     let avatar = req.body.avatar ? req.body.avatar : '/img/avatar/avatar.png';
+    let password = bcrypt.hashSync(req.body.password, 10);
 
     const customer = {
         customerName: req.body.customerName,
         birthday: req.body.birthday,
         gender: req.body.gender,
-        address: req.body.episode,
+        address: req.body.address,
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
-        password: req.body.password,
+        password: password,
         avatar: avatar,
     };
 
     // Save Customer in the database
     Customer.create(customer)
         .then((data) => {
-            // // Insert data to relationship table
-            // addCustomerAuthor(data);
-            // if (req.body.TranslatorTranslatorId) addCustomerTranslator(data);
             res.send(data);
         })
         .catch((err) => {
@@ -51,47 +51,6 @@ exports.create = (req, res) => {
                     'Some error occurred while creating the Customer.',
             });
         });
-
-    // Save CustomerAuthor in the database
-    // function addCustomerAuthor(data) {
-    //     const Customerauthor = {
-    //         CustomerId: data.CustomerId,
-    //         AuthorAuthorId: req.body.AuthorAuthorId,
-    //     };
-
-    //     CustomerAuthor.create(Customerauthor)
-    //         .then((dataBA) => {
-    //             res.send(dataBA);
-    //         })
-    //         .catch((err) => {
-    //             res.status(500).send({
-    //                 message:
-    //                     err.message ||
-    //                     'Some error occurred while creating the CustomerAuthor.',
-    //             });
-    //         });
-    // }
-
-    // // Save CustomerTranslator in the database
-    // function addCustomerTranslator(data) {
-    //     const CustomerTranslator = {
-    //         CustomerId: data.CustomerId,
-    //         TranslatorTranslatorId: req.body.TranslatorTranslatorId,
-    //     };
-
-    //     // Save CustomerTranslator in the database
-    //     CustomerTranslator.create(CustomerTranslator)
-    //         .then((dataBA) => {
-    //             res.send(dataBA);
-    //         })
-    //         .catch((err) => {
-    //             res.status(500).send({
-    //                 message:
-    //                     err.message ||
-    //                     'Some error occurred while creating the CustomerTranslator.',
-    //             });
-    //         });
-    // }
 };
 
 // Retrieve all Customer from the database.
@@ -99,7 +58,7 @@ exports.findAll = (req, res) => {
     const name = req.query.name;
     var condition = name ? { customerName: { [Op.like]: `%${name}%` } } : null;
 
-    Customer.findAll({ where: condition })
+    Customer.findAll({ where: condition, include: [Order, Cart] })
         .then((data) => {
             res.send(data);
         })
@@ -112,135 +71,78 @@ exports.findAll = (req, res) => {
         });
 };
 
-// Find a single Customer with an CustomerId
+// Find a single Customer with an customerId
 exports.findOne = (req, res) => {
-    const CustomerId = req.params.id;
+    const customerId = req.params.id;
 
-    Customer.findByPk(CustomerId)
+    Customer.findOne({
+        where: { customerId: customerId },
+        include: [Order, Cart],
+    })
         .then((data) => {
             if (data) {
                 res.send(data);
             } else {
                 res.status(404).send({
-                    message: `Cannot find Customer with CustomerId=${CustomerId}.`,
+                    message: `Cannot find customer with customerId=${customerId}.`,
                 });
             }
         })
         .catch((err) => {
             res.status(500).send({
                 message:
-                    'Error retrieving Customer with CustomerId=' + CustomerId,
+                    'Error retrieving customer with customerId=' + customerId,
             });
         });
 };
 
 // Update a Customer by the id_loaisach in the request
 exports.update = (req, res) => {
-    const CustomerId = req.params.id;
+    const customerId = req.params.id;
 
     // Create a Customer
-    let episode = req.body.episode ? req.body.episode : null;
-    let language = req.body.language ? req.body.language : 'Tiếng Việt';
+    let avatar = req.body.avatar ? req.body.avatar : '/img/avatar/avatar.png';
+    let password = bcrypt.hashSync(req.body.password, 10);
 
-    const Customer = {
+    const customer = {
         customerName: req.body.customerName,
-        coverPrice: req.body.coverPrice,
-        price: req.body.price,
-        episode: episode,
-        language: language,
-        CustomerLayout: req.body.CustomerLayout,
-        quantityOfPage: req.body.quantityOfPage,
-        weight: req.body.weight,
-        publishYear: req.body.publishYear,
-        description: req.body.description,
-        TranslatorId: req.body.TranslatorId,
+        birthday: req.body.birthday,
+        gender: req.body.gender,
+        address: req.body.episode,
+        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
+        password: password,
+        avatar: avatar,
     };
 
-    Customer.update(Customer, {
-        where: { CustomerId: CustomerId },
+    Customer.update(customer, {
+        where: { customerId: customerId },
     })
         .then((num) => {
             if (num == 1) {
-                updateCustomerAuthor(Customer);
                 res.send({
                     message: 'Customer was updated successfully.',
                 });
             } else {
                 res.send({
-                    message: `Cannot update Customer with CustomerId=${CustomerId}. Maybe Customer was not found or req.body is empty!`,
+                    message: `Cannot update Customer with customerId=${customerId}. Maybe Customer was not found or req.body is empty!`,
                 });
             }
         })
         .catch((err) => {
             res.status(500).send({
                 message:
-                    'Error updating Customer with CustomerId=' + CustomerId,
+                    'Error updating Customer with customerId=' + customerId,
             });
         });
-
-    // update CustomerAuthor in the database
-    function updateCustomerAuthor(data) {
-        const CustomerId = data.CustomerId;
-        const AuthorAuthorId = req.body.AuthorAuthorId;
-
-        const Customerauthor = {
-            CustomerId: CustomerId,
-            AuthorAuthorId: AuthorAuthorId,
-        };
-
-        CustomerAuthor.update(Customerauthor, {
-            where: { CustomerId: CustomerId, AuthorAuthorId: AuthorAuthorId },
-        })
-            .then((num) => {
-                if (num == 1) {
-                    res.send({
-                        message: 'CustomerAuthor was updated successfully.',
-                    });
-                } else {
-                    res.send({
-                        message: `Cannot update CustomerAuthor with CustomerId=${CustomerId}, AuthorAuthorId=${AuthorAuthorId}. Maybe CustomerAuthor was not found or req.body is empty!`,
-                    });
-                }
-            })
-            .catch((err) => {
-                res.status(500).send({
-                    message:
-                        'Error updating CustomerAuthor with CustomerId=' +
-                        CustomerId +
-                        'AuthorAuthorId=' +
-                        AuthorAuthorId,
-                });
-            });
-    }
-
-    // update CustomerTranslator in the database
-    function updateCustomerTranslator(data) {
-        const CustomerTranslator = {
-            CustomerId: data.CustomerId,
-            TranslatorTranslatorId: req.body.TranslatorTranslatorId,
-        };
-
-        // update CustomerTranslator in the database
-        CustomerTranslator.create(CustomerTranslator)
-            .then((dataBA) => {
-                res.send(dataBA);
-            })
-            .catch((err) => {
-                res.status(500).send({
-                    message:
-                        err.message ||
-                        'Some error occurred while creating the CustomerTranslator.',
-                });
-            });
-    }
 };
 
-// Delete a Customer with the specified CustomerId in the request
+// Delete a Customer with the specified customerId in the request
 exports.delete = (req, res) => {
-    const CustomerId = req.params.id;
+    const customerId = req.params.id;
 
     Customer.destroy({
-        where: { CustomerId: CustomerId },
+        where: { customerId: customerId },
     })
         .then((num) => {
             if (num == 1) {
@@ -249,14 +151,14 @@ exports.delete = (req, res) => {
                 });
             } else {
                 res.send({
-                    message: `Cannot delete Customer with CustomerId=${CustomerId}. Maybe Customer was not found!`,
+                    message: `Cannot delete Customer with customerId=${customerId}. Maybe Customer was not found!`,
                 });
             }
         })
         .catch((err) => {
             res.status(500).send({
                 message:
-                    'Could not delete Customer with CustomerId=' + CustomerId,
+                    'Could not delete Customer with customerId=' + customerId,
             });
         });
 };
@@ -281,8 +183,11 @@ exports.deleteAll = (req, res) => {
         });
 };
 // Find all published Customer
-exports.findAllName = (req, res) => {
-    Customer.findAll({ where: { customerName: req.params.name } })
+exports.findWithEmail = (req, res) => {
+    Customer.findAll({
+        where: { email: req.params.email },
+        include: [Order, Cart],
+    })
         .then((data) => {
             res.send(data);
         })

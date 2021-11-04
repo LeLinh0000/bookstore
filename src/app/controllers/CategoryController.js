@@ -1,5 +1,6 @@
 const db = require('../../models/index');
 const Category = db.category;
+const Book = db.book;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Category
@@ -36,7 +37,7 @@ exports.findAll = (req, res) => {
     const name = req.query.name;
     var condition = name ? { categoryName: { [Op.like]: `%${name}%` } } : null;
 
-    Category.findAll({ where: condition })
+    Category.findAll({ where: condition, include: Book })
         .then((data) => {
             res.send(data);
         })
@@ -53,7 +54,12 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const categoryId = req.params.id;
 
-    Category.findByPk(categoryId)
+    Category.findOne({
+        where: {
+            categoryId: categoryId,
+        },
+        include: Book,
+    })
         .then((data) => {
             if (data) {
                 res.send(data);

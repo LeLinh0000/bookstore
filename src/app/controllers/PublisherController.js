@@ -1,5 +1,6 @@
 const db = require('../../models/index');
 const Publisher = db.publisher;
+const Book = db.book;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new publisher
@@ -36,7 +37,7 @@ exports.findAll = (req, res) => {
     const name = req.query.name;
     var condition = name ? { publisherName: { [Op.like]: `%${name}%` } } : null;
 
-    Publisher.findAll({ where: condition })
+    Publisher.findAll({ where: condition, include: Book })
         .then((data) => {
             res.send(data);
         })
@@ -44,7 +45,7 @@ exports.findAll = (req, res) => {
             res.status(500).send({
                 message:
                     err.message ||
-                    'Some error occurred while retrieving publisher.',
+                    'Some error occurred while retrieving Publisher.',
             });
         });
 };
@@ -53,7 +54,10 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const publisherId = req.params.id;
 
-    Publisher.findByPk(publisherId)
+    Publisher.findOne({
+        where: { publisherId: publisherId },
+        include: Book,
+    })
         .then((data) => {
             if (data) {
                 res.send(data);

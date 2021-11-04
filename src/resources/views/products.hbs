@@ -25,20 +25,23 @@
                     </h3>
     
                     <ul class="category-list">
-                        <li class="category-item category-item--active">
-                            <a href="" class="category-item__link">Áo thun nam</a>
+                        <li class="category-item">
+                            <a href="" class="category-item__link">Sách kinh tế</a>
                         </li>
                         <li class="category-item">
-                            <a href="" class="category-item__link">Áo sơ mi nam</a>
+                            <a href="" class="category-item__link">Sách văn học</a>
                         </li>
                         <li class="category-item">
-                            <a href="" class="category-item__link">Áo khoác nam</a>
+                            <a href="" class="category-item__link">sách kỹ năng sống</a>
                         </li>
                         <li class="category-item">
-                            <a href="" class="category-item__link">Quần nam</a>
+                            <a href="" class="category-item__link">Sách thiếu nhi</a>
                         </li>
                         <li class="category-item">
-                            <a href="" class="category-item__link">Giày nam</a>
+                            <a href="" class="category-item__link">Sách kiến thức bách khoa</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="" class="category-item__link">Sách ngoại văn</a>
                         </li>
                     </ul>
                 </nav>
@@ -235,48 +238,8 @@
                 <div class="home-product">
                     <!-- Grid -> Row -> Column -->
                     <div class="row sm-gutter home-products-list">
-                        {{#each rows}}
-                            <div class="col l-2-4 m-4 c-6">
-                                <!-- Product item -->
-                                <a href="#" class="home-product-item">
-                                    <div class="home-product-item__img" style="background-image: url(/img/products/product1.jpg);"></div>
-                                    <h4 class="home-product-item__name">{{this.tensp}}</h4>
-                                    <div class="home-product-item__price">
-                                        <span class="home-product__price-old">{{this.giabia}}</span>
-                                        <span class="home-product__price-current">{{this.giaban}}</span>
-                                    </div>
-                                    <div class="home-product-item__action">
-                                        <span class="home-product-item__like home-product-item__like--liked">
-                                            <i class="home-product-item__like-icon-empty far fa-heart"></i>
-                                            <i class="home-product-item__like-icon-fill fas fa-heart"></i>
-                                        </span>
-                                        <div class="home-product-item__rating">
-                                            <i class="home-product-item__star--gold fas fa-star"></i>
-                                            <i class="home-product-item__star--gold fas fa-star"></i>
-                                            <i class="home-product-item__star--gold fas fa-star"></i>
-                                            <i class="home-product-item__star--gold fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <span class="home-product-item__sold">88 đã bán</span>
-                                    </div>
-                                    <div class="home-product-item__origin">
-                                        <span class="home-product-item__brand">Who</span>
-                                        <span class="home-product-item__origin-name">Nhật Bản</span>
-                                    </div>
-
-                                    <div class="home-product-item__favourite">
-                                        <i class="fas fa-check"></i>
-                                        <span>Yêu thích</span>
-                                    </div>
-
-                                    <div class="home-product-item__sale-off">
-                                        <span class="home-product-item__sale-off-percent">43%</span>
-                                        <span class="home-product-item__sale-off-label">GIẢM</span>
-                                    </div>
-                                </a>
-                                
-                            </div>
-                        {{/each}}
+                           
+                        
                     </div>
                 </div>
 
@@ -317,6 +280,61 @@
         </div>
     </div>
 </div>
+
+<script>
+    const bookItem = document.querySelector('.home-products-list');
+
+    fetch("http://localhost:3000/api/book")
+        .then(response => response.json())
+        .then(data => {
+            let html = data.map((book, index) => {
+                return `
+                    <div class="col l-2-4 m-4 c-6">
+                        <!-- Product item -->
+                        <a href="#" class="home-product-item">
+                            <div class="home-product-item__img" style="background-image: url(${book.Images[0].path});"></div>
+                            <h4 class="home-product-item__name">${book.bookName}</h4>
+                            <div class="home-product-item__price">
+                                <span class="home-product__price-old">${book.coverPrice}</span>
+                                <span class="home-product__price-current">${book.price}</span>
+                            </div>
+                            <div class="home-product-item__action">
+                                <span class="home-product-item__like home-product-item__like--liked">
+                                    <i class="home-product-item__like-icon-empty far fa-heart"></i>
+                                    <i class="home-product-item__like-icon-fill fas fa-heart"></i>
+                                </span>
+                                <div class="home-product-item__rating">
+                                    <i class="home-product-item__star--gold fas fa-star"></i>
+                                    <i class="home-product-item__star--gold fas fa-star"></i>
+                                    <i class="home-product-item__star--gold fas fa-star"></i>
+                                    <i class="home-product-item__star--gold fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="home-product-item__sold">88 đã bán</span>
+                            </div>
+                            <div class="home-product-item__origin">
+                                <span class="home-product-item__brand">${book.publishYear}</span>
+                                <span class="home-product-item__origin-name">${book.language}</span>
+                            </div>
+
+                            <div class="home-product-item__favourite">
+                                <i class="fas fa-check"></i>
+                                <span>Yêu thích</span>
+                            </div>
+
+                            <div class="home-product-item__sale-off">
+                                <span class="home-product-item__sale-off-percent">43%</span>
+                                <span class="home-product-item__sale-off-label">GIẢM</span>
+                            </div>
+                        </a>
+                    </div>
+                `
+            }).join('');
+
+            bookItem.innerHTML = html;
+        })
+
+</script>
 
 {{!-- <div class="table">
     <form method="POST" action="">

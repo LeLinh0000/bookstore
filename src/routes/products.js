@@ -4,14 +4,8 @@ const Book = require('../models/Book.model');
 
 const ProductsController = require('../app/controllers/ProductsController');
 
-router.get('/:idsp?', ProductsController.index);
+router.get('/', ProductsController.index);
 
-router.delete('/:idsp', ProductsController.delete);
-
-router.put('/:idsp', ProductsController.update);
-
-router.post('/', ProductsController.add);
-
-// router.get('/', ProductsController.index);
+router.get('/details', ProductsController.details_product);
 
 module.exports = router;

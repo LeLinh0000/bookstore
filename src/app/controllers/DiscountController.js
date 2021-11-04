@@ -46,7 +46,7 @@ exports.findAll = (req, res) => {
         ? { discountCode: { [Op.like]: `${discountCode}` } }
         : null;
 
-    Discount.findAll({ where: condition })
+    Discount.findAll({ where: condition, include: Book })
         .then((data) => {
             res.send(data);
         })
@@ -61,22 +61,25 @@ exports.findAll = (req, res) => {
 
 // Find a single Discount with an DiscountId
 exports.findOne = (req, res) => {
-    const DiscountId = req.params.id;
+    const discountId = req.params.id;
 
-    Discount.findByPk(DiscountId)
+    Discount.findOne({
+        where: { discountId: discountId },
+        include: Book,
+    })
         .then((data) => {
             if (data) {
                 res.send(data);
             } else {
                 res.status(404).send({
-                    message: `Cannot find Discount with DiscountId=${DiscountId}.`,
+                    message: `Cannot find discount with discountId=${discountId}.`,
                 });
             }
         })
         .catch((err) => {
             res.status(500).send({
                 message:
-                    'Error retrieving Discount with DiscountId=' + DiscountId,
+                    'Error retrieving discount with discountId=' + discountId,
             });
         });
 };
@@ -163,7 +166,7 @@ exports.findWithCondition = (req, res) => {
         var condition = { timeStart: { [Op.gte]: `${timeStart}` } };
     }
 
-    Discount.findAll({ where: condition })
+    Discount.findAll({ where: condition, include: Book })
         .then((data) => {
             res.send(data);
         })

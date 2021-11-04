@@ -18,12 +18,12 @@ module.exports = (sequelize, Sequelize) => {
             },
 
             timeStart: {
-                type: Sequelize.DATE,
+                type: Sequelize.DATEONLY,
                 allowNull: false,
             },
 
             timeEnd: {
-                type: Sequelize.DATE,
+                type: Sequelize.DATEONLY,
                 allowNull: false,
             },
         },

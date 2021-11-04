@@ -2,12 +2,18 @@ const db = require('../../models/index');
 const Book = db.book;
 const BookAuthor = db.bookAuthor;
 const BookTranslator = db.bookTranslator;
+
+const Publisher = db.publisher;
+const Author = db.author;
+const Translator = db.translator;
+const Category = db.category;
+const Image = db.image;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Book
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.BookName) {
+    if (!req.body.bookName) {
         res.status(400).send({
             message: 'Content can not be empty!',
         });
@@ -19,7 +25,7 @@ exports.create = (req, res) => {
     let language = req.body.language ? req.body.language : 'Tiếng Việt';
 
     const book = {
-        bookName: req.body.BookName,
+        bookName: req.body.bookName,
         coverPrice: req.body.coverPrice,
         price: req.body.price,
         episode: episode,
@@ -29,7 +35,7 @@ exports.create = (req, res) => {
         weight: req.body.weight,
         publishYear: req.body.publishYear,
         description: req.body.description,
-        TranslatorId: req.body.TranslatorId,
+        PublisherPublisherId: req.body.PublisherPublisherId,
     };
 
     // Save Book in the database
@@ -95,7 +101,10 @@ exports.findAll = (req, res) => {
     const name = req.query.name;
     var condition = name ? { bookName: { [Op.like]: `%${name}%` } } : null;
 
-    Book.findAll({ where: condition })
+    Book.findAll({
+        where: condition,
+        include: [Image, Author, Translator, Category, Publisher],
+    })
         .then((data) => {
             res.send(data);
         })
@@ -111,7 +120,12 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const BookId = req.params.id;
 
-    Book.findByPk(BookId)
+    Book.findOne({
+        where: {
+            bookId: BookId,
+        },
+        include: [Image, Author, Translator, Category, Publisher],
+    })
         .then((data) => {
             if (data) {
                 res.send(data);
@@ -130,14 +144,17 @@ exports.findOne = (req, res) => {
 
 // Update a Book by the id_loaisach in the request
 exports.update = (req, res) => {
-    const BookId = req.params.id;
+    const bookId = req.params.id;
+
+    const AuthorAuthorId = req.body.AuthorAuthorId;
+    const TranslatorTranslatorId = req.body.TranslatorTranslatorId;
 
     // Create a Book
     let episode = req.body.episode ? req.body.episode : null;
     let language = req.body.language ? req.body.language : 'Tiếng Việt';
 
     const book = {
-        bookName: req.body.BookName,
+        bookName: req.body.bookName,
         coverPrice: req.body.coverPrice,
         price: req.body.price,
         episode: episode,
@@ -147,42 +164,41 @@ exports.update = (req, res) => {
         weight: req.body.weight,
         publishYear: req.body.publishYear,
         description: req.body.description,
-        TranslatorId: req.body.TranslatorId,
+        PublisherPublisherId: req.body.PublisherPublisherId,
     };
 
     Book.update(book, {
-        where: { bookId: BookId },
+        where: { bookId: bookId },
     })
         .then((num) => {
             if (num == 1) {
-                updateBookAuthor(book);
+                updateBookAuthor(AuthorAuthorId, bookId);
+                updateBookTranslator(TranslatorTranslatorId, bookId);
                 res.send({
                     message: 'Book was updated successfully.',
                 });
             } else {
                 res.send({
-                    message: `Cannot update Book with BookId=${BookId}. Maybe Book was not found or req.body is empty!`,
+                    message: `Cannot update Book with bookId=${bookId}. Maybe Book was not found or req.body is empty!`,
                 });
             }
         })
         .catch((err) => {
             res.status(500).send({
-                message: 'Error updating Book with BookId=' + BookId,
+                message: 'Error updating Book with bookId=' + bookId,
             });
         });
 
     // update BookAuthor in the database
-    function updateBookAuthor(data) {
-        const BookBookId = data.bookId;
-        const AuthorAuthorId = req.body.AuthorAuthorId;
-
+    function updateBookAuthor(AuthorAuthorId, bookId) {
+        console.log(AuthorAuthorId, bookId);
         const bookauthor = {
-            BookBookId: BookBookId,
+            BookBookId: bookId,
             AuthorAuthorId: AuthorAuthorId,
         };
 
         BookAuthor.update(bookauthor, {
-            where: { BookBookId: BookBookId, AuthorAuthorId: AuthorAuthorId },
+            where: { BookBookId: bookId, AuthorAuthorId: AuthorAuthorId },
         })
             .then((num) => {
                 if (num == 1) {
@@ -190,16 +206,24 @@ exports.update = (req, res) => {
                         message: 'BookAuthor was updated successfully.',
                     });
                 } else {
-                    res.send({
-                        message: `Cannot update BookAuthor with BookBookId=${BookBookId}, AuthorAuthorId=${AuthorAuthorId}. Maybe BookAuthor was not found or req.body is empty!`,
-                    });
+                    BookAuthor.create(bookauthor)
+                        .then((data) => {
+                            res.send(data);
+                        })
+                        .catch((err) => {
+                            res.status(500).send({
+                                message:
+                                    err.message ||
+                                    'Some error occurred while creating the BookAuthor.',
+                            });
+                        });
                 }
             })
             .catch((err) => {
                 res.status(500).send({
                     message:
                         'Error updating BookAuthor with BookBookId=' +
-                        BookBookId +
+                        bookId +
                         'AuthorAuthorId=' +
                         AuthorAuthorId,
                 });
@@ -207,22 +231,46 @@ exports.update = (req, res) => {
     }
 
     // update bookTranslator in the database
-    function updateBookTranslator(data) {
+    function updateBookTranslator(TranslatorTranslatorId, bookId) {
+        console.log(TranslatorTranslatorId, bookId);
+
         const bookTranslator = {
-            BookBookId: data.bookId,
-            TranslatorTranslatorId: req.body.TranslatorTranslatorId,
+            BookBookId: bookId,
+            TranslatorTranslatorId: TranslatorTranslatorId,
         };
 
-        // update BookTranslator in the database
-        BookTranslator.create(bookTranslator)
-            .then((dataBA) => {
-                res.send(dataBA);
+        BookTranslator.update(bookTranslator, {
+            where: {
+                BookBookId: bookId,
+                TranslatorTranslatorId: TranslatorTranslatorId,
+            },
+        })
+            .then((num) => {
+                if (num == 1) {
+                    res.send({
+                        message: 'BookTranslator was updated successfully.',
+                    });
+                } else {
+                    BookTranslator.create(bookTranslator)
+                        .then((data) => {
+                            res.send(data);
+                        })
+                        .catch((err) => {
+                            res.status(500).send({
+                                message:
+                                    err.message ||
+                                    'Some error occurred while creating the BookTranslator.',
+                            });
+                        });
+                }
             })
             .catch((err) => {
                 res.status(500).send({
                     message:
-                        err.message ||
-                        'Some error occurred while creating the BookTranslator.',
+                        'Error updating BookTranslator with BookBookId=' +
+                        bookId +
+                        'TranslatorTranslatorId=' +
+                        TranslatorTranslatorId,
                 });
             });
     }
