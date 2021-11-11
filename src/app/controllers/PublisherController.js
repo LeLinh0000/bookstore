@@ -79,8 +79,12 @@ exports.findOne = (req, res) => {
 // Update a publisher by the id_loaisach in the request
 exports.update = (req, res) => {
     const publisherId = req.params.id;
+    const publisherName = req.body.publisherName;
 
-    Publisher.update(req.body, {
+    const publisher = {
+        publisherName: publisherName,
+    };
+    Publisher.update(publisher, {
         where: { publisherId: publisherId },
     })
         .then((num) => {

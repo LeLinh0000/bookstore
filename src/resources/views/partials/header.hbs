@@ -4,18 +4,6 @@
                     <ul class="header__navbar-list">
                         <li class="header__navbar-item header__navbar-item--has-qr header__navbar-item--separate">
                             Nhập mã bookstore để giảm 10% cho đơn hàng từ 150k!
-                            <!-- Header QR code -->
-                            {{!-- <div class="header__qr">
-                                <img src="/assets/img/qr_code.png" alt="QR code" class="header__qr-img">
-                                <div class="header__qr-apps">
-                                    <a href="" class="header__qr-link">
-                                        <img src="/assets/img/google_play.png" alt="Google Play" class="header__qr-download-img">
-                                    </a>
-                                    <a href="" class="header__qr-link">
-                                        <img src="./assets/img/app_store.png" alt="App Store" class="header__qr-download-img">
-                                    </a>
-                                </div>
-                            </div> --}}
                         </li>
                         <li class="header__navbar-item">
                             <span class="header__navbar-title--no-pointer">Kết nối</span>
@@ -29,75 +17,83 @@
                     </ul>
     
                     <ul class="header__navbar-list">
-                        <li class="header__navbar-item header__navbar-item--has-notify">
-                            <a href="" class="header__navbar-item-link">
-                                <i class="far fa-bell header__navbar-icon"></i>
-                                Thông báo
-                            </a>
-                            <div class="header__notify">
-                                <header class="header__notify-header">
-                                    <h3>Thông báo mới nhận</h3>
-                                </header>
-                                <ul class="header__notify-list">
-                                    <li class="header__notify-item header__notify-item--view">
-                                        <a href="" class="header__notify-link">
-                                            <img src="/img/products/product1.jpg" alt="" class="header__notify-img">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name">Áo Sweater Thun Dài Tay Unisex Mới Mhất</span>
-                                                <span class="header__notify-description">Áo Sweater Thun Dài Tay Unisex Form Rộng Nhiều Màu</span>
-                                            </div>
-                                        </a>
+                        {{#if userId}}
+                            <li class="header__navbar-item header__navbar-item--has-notify">
+                                <a href="" class="header__navbar-item-link">
+                                    <i class="far fa-bell header__navbar-icon"></i>
+                                    Thông báo
+                                </a>
+                                <div class="header__notify">
+                                    <header class="header__notify-header">
+                                        <h3>Thông báo mới nhận</h3>
+                                    </header>
+                                    <ul class="header__notify-list">
+                                        <li class="header__notify-item header__notify-item--view">
+                                            <a href="" class="header__notify-link">
+                                                <img src="/img/products/product1.jpg" alt="" class="header__notify-img">
+                                                <div class="header__notify-info">
+                                                    <span class="header__notify-name">Sách mới nhất</span>
+                                                    <span class="header__notify-description">Sách mới cập nhật tháng 11</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="header__notify-item">
+                                            <a href="" class="header__notify-link">
+                                                <img src="/img/products/product1.jpg" alt="" class="header__notify-img">
+                                                <div class="header__notify-info">
+                                                    <span class="header__notify-name">Sách mới nhất</span>
+                                                    <span class="header__notify-description">Sách mới cập nhật tháng 11</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="header__notify-item">
+                                            <a href="" class="header__notify-link">
+                                                <img src="/img/products/product1.jpg" alt="" class="header__notify-img">
+                                                <div class="header__notify-info">
+                                                    <span class="header__notify-name">Sách mới nhất</span>
+                                                    <span class="header__notify-description">Sách mới cập nhật tháng 11</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="header__notify-footer">
+                                        <a href="" class="header__notify-footer-btn">Xem tất cả</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="header__navbar-item">
+                                <a href="" class="header__navbar-item-link">
+                                    <i class="far fa-question-circle header__navbar-icon"></i>
+                                    Trợ giúp
+                                </a>
+                            </li>
+                            <li class="header__navbar-item header__navbar-user">
+                                <img src="{{userAvatar}}" alt="" class="header__navbar-user-img">
+                                <span class="header__navbar-user-name">{{userName}}</span>
+                                <ul class="header__navbar-user-menu">
+                                    <li class="header__navbar-user-item">
+                                        <a href="">Tài khoản của tôi</a>
                                     </li>
-                                    <li class="header__notify-item">
-                                        <a href="" class="header__notify-link">
-                                            <img src="/img/products/product1.jpg" alt="" class="header__notify-img">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name">Áo thun nam TinoFun</span>
-                                                <span class="header__notify-description">Áo thun nam TinoFun thể thao cổ tròn đẹp tay dài mã TT53 phong cách Hàn Quốc form rộng co giãn tay lỡ mùa</span>
-                                            </div>
-                                        </a>
+                                    <li class="header__navbar-user-item">
+                                        <a href="">Địa chỉ của tôi</a>
                                     </li>
-                                    <li class="header__notify-item">
-                                        <a href="" class="header__notify-link">
-                                            <img src="/img/products/product1.jpg" alt="" class="header__notify-img">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name">Áo thun tay dài unisex form rộng</span>
-                                                <span class="header__notify-description">Áo thun tay dài unisex form rộng Trơn nam nữ basic tea phong cách ulzzang, áo sweart nam nữ, Áo Thun Tay Dài Ullzzang [Unisex - Đủ Màu]</span>
-                                            </div>
-                                        </a>
+                                    <li class="header__navbar-user-item">
+                                        <a href="">Đơn mua</a>
+                                    </li>
+                                    <li class="header__navbar-user-item header__navbar-user-item--separate">
+                                        <a href="/auth/logout">Đăng xuất</a>
                                     </li>
                                 </ul>
-                                <div class="header__notify-footer">
-                                    <a href="" class="header__notify-footer-btn">Xem tất cả</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link">
-                                <i class="far fa-question-circle header__navbar-icon"></i>
-                                Trợ giúp
-                            </a>
-                        </li>
-                        <li id="register-btn" class="header__navbar-item header__navbar-item--strong header__navbar-item--separate">Đăng ký</li>
-                        <li id="login-btn" class="header__navbar-item header__navbar-item--strong login-btn">Đăng nhập</li>
-                        <li class="header__navbar-item header__navbar-user">
-                            <img src="/img/avatar.png" alt="" class="header__navbar-user-img">
-                            <span class="header__navbar-user-name">Linh Lê</span>
-                            <ul class="header__navbar-user-menu">
-                                <li class="header__navbar-user-item">
-                                    <a href="">Tài khoản của tôi</a>
-                                </li>
-                                <li class="header__navbar-user-item">
-                                    <a href="">Địa chỉ của tôi</a>
-                                </li>
-                                <li class="header__navbar-user-item">
-                                    <a href="">Đơn mua</a>
-                                </li>
-                                <li class="header__navbar-user-item header__navbar-user-item--separate">
-                                    <a href="">Đăng xuất</a>
-                                </li>
-                            </ul>
-                        </li>
+                            </li>
+                        {{else}}
+                            <li id="register-btn" class="header__navbar-item header__navbar-item--strong header__navbar-item--separate">Đăng ký</li>
+                            <li id="login-btn" class="header__navbar-item header__navbar-item--strong login-btn">Đăng nhập</li>
+                            <li class="header__navbar-item"></li>
+                            <li class="header__navbar-item"></li>
+                            <li class="header__navbar-item"></li>
+                        {{/if}}
+                        
+
                     </ul>   
                 </nav>
 
@@ -120,12 +116,12 @@
                             <div class="header__search-history">
                                 <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
                                 <ul class="header__search-history-list">
-                                    <li class="header__search-history-item">
+                                    {{!-- <li class="header__search-history-item">
                                         <a href="">Kem dưỡng da</a>
                                     </li>
                                     <li class="header__search-history-item">
                                         <a href="">Kem trị mụn</a>
-                                    </li>
+                                    </li> --}}
                                     
                                 </ul>
                             </div>
@@ -246,7 +242,8 @@
             var register = document.querySelector('#register-btn');
             var login = document.querySelector('#login-btn');
 
-            // document.querySelector(".modal").style.display = "flex";
+            if (register!=null && login !=null) {
+                // document.querySelector(".modal").style.display = "flex";
 
             login.onclick = function () {
                 document.querySelector('.modal').style.display = 'flex';
@@ -270,6 +267,7 @@
                 if (event.target == document.querySelector('.modal')) {
                     document.querySelector('.modal').style.display = "none";
                 }
+            }
             }
         
         </script>

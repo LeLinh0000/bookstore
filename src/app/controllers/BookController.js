@@ -2,6 +2,7 @@ const db = require('../../models/index');
 const Book = db.book;
 const BookAuthor = db.bookAuthor;
 const BookTranslator = db.bookTranslator;
+const BookCategory = db.bookCategory;
 
 const Publisher = db.publisher;
 const Author = db.author;
@@ -43,7 +44,8 @@ exports.create = (req, res) => {
         .then((data) => {
             // Insert data to relationship table
             addBookAuthor(data);
-            if (req.body.TranslatorTranslatorId) addBookTranslator(data);
+            addBookCategory(data);
+            if (req.body.bookTranslator) addBookTranslator(data);
             res.send(data);
         })
         .catch((err) => {
@@ -56,43 +58,70 @@ exports.create = (req, res) => {
 
     // Save BookAuthor in the database
     function addBookAuthor(data) {
-        const bookauthor = {
-            BookBookId: data.bookId,
-            AuthorAuthorId: req.body.AuthorAuthorId,
-        };
+        req.body.bookAuthor.forEach((element) => {
+            const bookauthor = {
+                BookBookId: data.bookId,
+                AuthorAuthorId: element,
+            };
 
-        BookAuthor.create(bookauthor)
-            .then((dataBA) => {
-                res.send(dataBA);
-            })
-            .catch((err) => {
-                res.status(500).send({
-                    message:
-                        err.message ||
-                        'Some error occurred while creating the BookAuthor.',
+            BookAuthor.create(bookauthor)
+                .then((dataBA) => {
+                    res.send(dataBA);
+                })
+                .catch((err) => {
+                    res.status(500).send({
+                        message:
+                            err.message ||
+                            'Some error occurred while creating the BookAuthor.',
+                    });
                 });
-            });
+        });
     }
 
     // Save bookTranslator in the database
     function addBookTranslator(data) {
-        const bookTranslator = {
-            BookBookId: data.bookId,
-            TranslatorTranslatorId: req.body.TranslatorTranslatorId,
-        };
+        req.body.bookTranslator.forEach((element) => {
+            const bookTranslator = {
+                BookBookId: data.bookId,
+                TranslatorTranslatorId: element,
+            };
 
-        // Save BookTranslator in the database
-        BookTranslator.create(bookTranslator)
-            .then((dataBA) => {
-                res.send(dataBA);
-            })
-            .catch((err) => {
-                res.status(500).send({
-                    message:
-                        err.message ||
-                        'Some error occurred while creating the BookTranslator.',
+            // Save BookTranslator in the database
+            BookTranslator.create(bookTranslator)
+                .then((dataBA) => {
+                    res.send(dataBA);
+                })
+                .catch((err) => {
+                    res.status(500).send({
+                        message:
+                            err.message ||
+                            'Some error occurred while creating the BookTranslator.',
+                    });
                 });
-            });
+        });
+    }
+
+    // Save bookCategory in the database
+    function addBookCategory(data) {
+        req.body.bookCategory.forEach((element) => {
+            const bookCategory = {
+                BookBookId: data.bookId,
+                CategoryCategoryId: element,
+            };
+
+            // Save BookCategory in the database
+            BookCategory.create(bookCategory)
+                .then((dataBA) => {
+                    res.send(dataBA);
+                })
+                .catch((err) => {
+                    res.status(500).send({
+                        message:
+                            err.message ||
+                            'Some error occurred while creating the BookCategory.',
+                    });
+                });
+        });
     }
 };
 

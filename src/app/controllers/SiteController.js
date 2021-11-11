@@ -1,7 +1,11 @@
 class SiteController {
     // [Get] /
     index(req, res) {
-        res.render('home');
+        res.render('home', {
+            userId: req.session.userId,
+            userName: req.session.userName,
+            userAvatar: req.session.userAvatar,
+        });
     }
 
     // [GET] /search
@@ -11,7 +15,11 @@ class SiteController {
 
     // [GET] /products
     products(req, res) {
-        res.render('products');
+        res.render('products', {
+            userId: req.session.userId,
+            userName: req.session.userName,
+            userAvatar: req.session.userAvatar,
+        });
     }
 }
 

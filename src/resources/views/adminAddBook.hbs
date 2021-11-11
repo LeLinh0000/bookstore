@@ -1,0 +1,253 @@
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Thêm sách mới</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Quản lý sách</a></li>
+              <li class="breadcrumb-item active">Thêm sách mới</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="container-fluid">
+        <!-- general form elements disabled -->
+            <div class="card card-warning">
+              <div class="card-header">
+                <h3 class="card-title">Thêm sách mới</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form action="/api/book" method="POST">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Tên sách:</label>
+                        <input type="text" name="bookName" class="form-control" placeholder="Enter ...">
+                      </div>
+                      <!-- Select multiple-->
+                      
+                      <div class="form-group">
+                        <label>Tác giả</label>
+                        <select id="addBookAuthor" name="bookAuthor[]" class="select2" multiple="multiple" data-placeholder="Select Authors" style="width: 100%;">
+                          
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Giá bìa:</label>
+                        <input type="text" name="coverPrice" class="form-control" placeholder="Enter ...">
+                      </div>
+                      <div class="form-group">
+                        <label>Giá bán</label>
+                        <input type="text" name="price" class="form-control" placeholder="Enter ...">
+                      </div>
+                      <div class="form-group">
+                        <label>Ngôn ngữ</label>
+                        <input type="text" name="language" class="form-control" placeholder="Enter ...">
+                      </div>
+                      <div class="form-group">
+                        <label>Tập</label>
+                        <input type="text" name="episode" class="form-control" placeholder="Enter ...">
+                      </div>
+                     <div class="form-group">
+                        <label>Thể loại</label>
+                        <div id="addBookCategory" class="row ml-1">
+                            
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Kích thước</label>
+                        <input type="text" name="bookLayout" class="form-control" placeholder="Enter ...">
+                      </div>
+                      <div class="form-group">
+                        <label>Số trang</label>
+                        <input type="text" name="quantityOfPage" class="form-control" placeholder="Enter ...">
+                      </div>
+                      <div class="form-group">
+                        <label>Trọng lượng</label>
+                        <input type="text" name="weight" class="form-control" placeholder="Enter ...">
+                      </div>  
+                      <div class="form-group">
+                        <label>Người dịch</label>
+                        <select id="addBookTranslator" name="bookTranslator[]" class="select2" multiple="multiple" data-placeholder="Select Translators" style="width: 100%;">
+                          <option value="1">Alabama</option>
+                          <option value="2">Alaska</option>
+                          <option value="3">California</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Nhà xuất bản</label>
+                        <select id="addBookPublisher" class="form-control" name="PublisherPublisherId">
+                          <option value="1">option 1</option>
+                          <option value="2">option 2</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Năm xuất bản</label>
+                        <input type="text" name="publishYear" class="form-control" placeholder="Enter ...">
+                      </div>
+                      {{!-- <form action="/api/imagesbook" enctype="multipart/form-data" method="POST"> --}}
+                        <div class="form-group">
+                        <label for="exampleInputFile">Hình ảnh sản phẩm</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input type="file" name="formFileMultiple[]" class="custom-file-input" id="exampleInputFile" multiple/>
+                            <label class="custom-file-label" for="exampleInputFile">Chọn ảnh</label>
+                          </div>
+                        </div>
+                      </div>
+                      {{!-- </form> --}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="card card-outline card-info">
+                        <div class="card-header">
+                          <h3 class="card-title">
+                            Mô tả sách:
+                          </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                          <textarea id="summernote" name="description">
+                            Viết mô tả sách vào đây
+                          </textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-6">
+                            <button type="reset" class="btn btn-block btn-default btn-lg">Làm lại</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-block btn-success btn-lg">Thêm</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+
+<script src="/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+<!-- Select2 -->
+<script src="/plugins/select2/js/select2.full.min.js"></scrip>
+<!-- Bootstrap4 Duallistbox -->
+<script src="/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<script src="/plugins/inputmask/jquery.inputmask.min.js"></script>  
+{{!-- <!-- InputMask -->
+<script src="/plugins/moment/moment.min.js"></script>
+<!-- date-range-picker -->
+<script src="/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script> --}}
+<!-- Summernote -->
+<script src="/plugins/summernote/summernote-bs4.min.js"></script>
+
+<script>
+  $(function () {
+
+    bsCustomFileInput.init();
+       //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    //Summernote
+    $('#summernote').summernote()
+
+ 
+  })
+
+const authorItem = document.querySelector("#addBookAuthor");
+const publisherItem = document.querySelector("#addBookPublisher");
+const categoryItem = document.querySelector("#addBookCategory");
+const translatorItem = document.querySelector("#addBookTranslator");
+
+
+Promise.all([
+        fetch("http://localhost:3000/api/author"),
+        fetch("http://localhost:3000/api/publisher"),
+        fetch("http://localhost:3000/api/category"),
+        fetch("http://localhost:3000/api/translator"),
+    ]).then(([author, publisher, category, translator]) => {
+        author.json()
+            .then(data => {
+                const authorHTML = data.map((tg, index) => {
+                    return `
+                        <option value="${tg.authorId}">${tg.authorName}</option>
+                        `
+                })
+               authorItem.innerHTML = authorHTML.join('');
+            });
+            
+        publisher.json()
+            .then(data => {
+                const publisherHTML = data.map((nxb, index) => {
+                    return `
+                        <option value="${nxb.publisherId}">${nxb.publisherName}</option>
+                    `
+                })
+                publisherItem.innerHTML = publisherHTML.join('');
+            });
+            
+        translator.json()
+            .then(data => {
+                const translatorHTML = data.map((nd, index) => {
+                    return `
+                        <option value="${nd.translatorId}">${nd.translatorName}</option>
+                    `
+                })
+                translatorItem.innerHTML = translatorHTML.join('');
+            });
+
+        category.json()
+            .then(data => {
+                const categoryHTML = data.map((tl, index) => {
+                    return `
+                        <div class="form-check col-sm-6">
+                              <input name="bookCategory[]" class="form-check-input" type="checkbox" value="${tl.categoryId}">
+                              <label class="form-check-label">${tl.categoryName}</label>
+                        </div>
+                    `
+                })
+                categoryItem.innerHTML = categoryHTML.join('');
+            });
+        
+    }).catch((err) => {
+        console.log(err);
+    });
+  </script>

@@ -12,7 +12,7 @@ router.get('/', customer.findAll);
 router.get('/find/:email', customer.findWithEmail);
 
 // Retrieve a single customer with id
-router.get('/:id', customer.findOne);
+router.get('/:id', customer.findOneId);
 
 // Update a customer with id
 router.put('/:id', customer.update);

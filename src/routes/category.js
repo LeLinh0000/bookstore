@@ -16,6 +16,7 @@ router.get('/:name', category.findAllName);
 
 // Update a category with id
 router.put('/:id', category.update);
+// router.post('/:id/:name', category.update);
 
 // Delete a category with id
 router.delete('/:id', category.delete);

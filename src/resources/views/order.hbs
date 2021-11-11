@@ -1,0 +1,164 @@
+<hr class="header-line">
+<div class="container mt-4 order-container">
+            <form class="needs-validation" name="frmthanhtoan" method="post"
+                action="#">
+                <input type="hidden" name="kh_tendangnhap" value="dnpcuong">
+
+                <div class="py-5 text-center order-header">
+                    <span>
+                        <i class="fa fa-credit-card fa-4x" aria-hidden="true"></i>
+                        <h2>Thanh toán</h2>
+                    </span>
+                    <p class="lead">Vui lòng kiểm tra thông tin đơn hàng trước khi đặt hàng</p>
+                </div>
+
+                <div class="row payment-order">
+                    <div class="col-md-4 order-md-2 mb-4">
+                        <h4 class="mb-3 order-heading">Thông tin thanh toán</h4>
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted order-sub-heading">Sản phẩm</span>
+                            <span class="badge badge-secondary badge-pill">2</span>
+                        </h4>
+                        <ul class="list-group mb-3">
+                            <input type="hidden" name="sanphamgiohang[1][sp_ma]" value="2">
+                            <input type="hidden" name="sanphamgiohang[1][gia]" value="11800000.00">
+                            <input type="hidden" name="sanphamgiohang[1][soluong]" value="2">
+
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="order-product">
+                                    <h6 class="my-0">Apple Ipad 4 Wifi 16GB</h6>
+                                    <small class="text-muted">11800000.00 x 
+                                        <div class="QuantityInput__Wrapper">
+                                            <div class="group-input">
+                                                <button class="QuantityInput_disable" id="btn-reduce-quantity" onclick="changeQuantity(-1)">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                                <input type="text" value="1" class="input-quantity">
+                                                <button id="btn-increase-quantity" onclick="changeQuantity(1)">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </small>
+                                </div>
+
+
+                                <span class="text-muted into-money">23600000</span>
+                            </li>
+                            <input type="hidden" name="sanphamgiohang[2][sp_ma]" value="4">
+                            <input type="hidden" name="sanphamgiohang[2][gia]" value="14990000.00">
+                            <input type="hidden" name="sanphamgiohang[2][soluong]" value="8">
+
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="order-product">
+                                    <h6 class="my-0">Apple iPhone 5 16GB White</h6>
+                                    <small class="text-muted">11800000.00 x 
+                                        <div class="QuantityInput__Wrapper">
+                                            <div class="group-input">
+                                                <button class="QuantityInput_disable" id="btn-reduce-quantity" onclick="changeQuantity(-1)">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                                <input type="text" value="1" class="input-quantity">
+                                                <button id="btn-increase-quantity" onclick="changeQuantity(1)">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </small>
+                                </div>
+                                <span class="text-muted into-money">119920000</span>
+                            </li>
+
+                            <li>
+                                <input type="text" class="voucher form-control" placeholder="Mã khuyến mãi">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn--primary">Xác nhận</button>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Tổng thành tiền:</span>
+                                <strong>143520000</strong>
+                            </li>
+                        </ul>
+
+
+                        <div class="input-group">
+
+                            <h4 class="mb-3 payment-heading">Hình thức thanh toán:</h4>
+
+                            <div class="d-block my-3">
+                                <form>
+                                    
+                                    <div class="cc-selector">
+                                        <input id="shipcod" type="radio" name="credit-card" value="shipcod" />
+                                        <label class="drinkcard-cc shipcod" for="shipcod"></label>
+
+                                        <input id="visa" type="radio" name="credit-card" value="visa" />
+                                        <label class="drinkcard-cc visa" for="visa"></label>
+
+                                        <input id="mastercard" type="radio" name="credit-card" value="mastercard" />
+                                        <label class="drinkcard-cc mastercard"for="mastercard"></label>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <hr class="mb-4">
+
+                             <button class="btn btn--primary btn-lg btn-block" type="submit" name="btnDatHang">Đặt
+                            hàng</button>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8 order-md-1">
+                        <h4 class="mb-3 order-heading">Thông tin khách hàng</h4>
+
+                        <div class="row customer-info">
+                            <div class="col-md-12">
+                                <label for="kh_ten">Họ và tên:</label>
+                                <input type="text" class="form-control" name="kh_ten" id="kh_ten"
+                                    value="Dương Nguyễn Phú Cường">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="kh_gioitinh">Giới tính:</label>
+                                <input type="text" class="form-control" name="kh_gioitinh" id="kh_gioitinh" value="Nam"
+                                >
+                            </div>
+                            <div class="col-md-12">
+                                <label for="kh_diachi">Địa chỉ:</label>
+                                <input type="text" class="form-control" name="kh_diachi" id="kh_diachi"
+                                    value="130 Xô Viết Nghệ Tỉnh">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="kh_dienthoai">Điện thoại:</label>
+                                <input type="text" class="form-control" name="kh_dienthoai" id="kh_dienthoai"
+                                    value="0915659223">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="kh_email">Email:</label>
+                                <input type="text" class="form-control" name="kh_email" id="kh_email"
+                                    value="abc@ctu.edu.vn">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="kh_ngaysinh">Ngày sinh:</label>
+                                <input type="text" class="form-control" name="kh_ngaysinh" id="kh_ngaysinh"
+                                    value="11/6/1989">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="kh_cmnd">CMND:</label>
+                                <input type="text" class="form-control" name="kh_cmnd" id="kh_cmnd" value="362209685"
+                                >
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+            
+        
+</div>
+
+<script>
+    
+</script>
+

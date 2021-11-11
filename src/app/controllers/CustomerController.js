@@ -25,8 +25,10 @@ exports.create = (req, res) => {
     }
 
     // Create a Customer
-    let avatar = req.body.avatar ? req.body.avatar : '/img/avatar/avatar.png';
-    let password = bcrypt.hashSync(req.body.password, 10);
+    let avatar = req.body.avatar
+        ? '/img/avatar/' + req.body.avatar
+        : '/img/avatar/avatar.png';
+    // let password = bcrypt.hashSync(req.body.password, 2);
 
     const customer = {
         customerName: req.body.customerName,
@@ -35,14 +37,17 @@ exports.create = (req, res) => {
         address: req.body.address,
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
-        password: password,
+        password: req.body.password,
         avatar: avatar,
     };
 
     // Save Customer in the database
     Customer.create(customer)
         .then((data) => {
+            req.flash('info', 'Chuyển hướng đăng nhập');
+            res.redirect('/');
             res.send(data);
+            document.querySelector('#login-form').style.display = 'block';
         })
         .catch((err) => {
             res.status(500).send({
@@ -72,7 +77,7 @@ exports.findAll = (req, res) => {
 };
 
 // Find a single Customer with an customerId
-exports.findOne = (req, res) => {
+exports.findOneId = (req, res) => {
     const customerId = req.params.id;
 
     Customer.findOne({
@@ -186,6 +191,23 @@ exports.deleteAll = (req, res) => {
 exports.findWithEmail = (req, res) => {
     Customer.findAll({
         where: { email: req.params.email },
+        include: [Order, Cart],
+    })
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    err.message ||
+                    'Some error occurred while retrieving Customer.',
+            });
+        });
+};
+
+exports.findWithEmailB = (req, res) => {
+    Customer.findAll({
+        where: { email: req.body.email },
         include: [Order, Cart],
     })
         .then((data) => {

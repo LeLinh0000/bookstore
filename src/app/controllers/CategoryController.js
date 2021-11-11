@@ -80,8 +80,13 @@ exports.findOne = (req, res) => {
 // Update a Category by the categoryId in the request
 exports.update = (req, res) => {
     const categoryId = req.params.id;
+    const categoryName = req.body.categoryName;
 
-    Category.update(req.body, {
+    const category = {
+        categoryName: categoryName,
+    };
+
+    Category.update(category, {
         where: { categoryId: categoryId },
     })
         .then((num) => {

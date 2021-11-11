@@ -1,11 +1,15 @@
+const adminRouter = require('./admin');
 const contactRouter = require('./contact');
 const siteRouter = require('./site');
 const productsRouter = require('./products');
 const registerRouter = require('./register');
 const detailsProductRouter = require('./detailsproduct');
+const orderRouter = require('./orderpage');
+const authRouter = require('./auth');
 const category = require('./category');
 const author = require('./author');
 const customer = require('./customer');
+const manager = require('./manager');
 const publisher = require('./publisher');
 const discount = require('./discount');
 const translator = require('./translator');
@@ -19,8 +23,11 @@ const bookcategory = require('./bookcategory');
 const bookcart = require('./bookcart');
 const bookorder = require('./bookorder');
 const book = require('./book');
+const imagesbook = require('./imagesbook');
 
 function route(app) {
+    app.use('/admin', adminRouter);
+
     app.use('/contact', contactRouter);
 
     app.use('/products', productsRouter);
@@ -29,7 +36,13 @@ function route(app) {
 
     app.use('/register', registerRouter);
 
+    app.use('/auth', authRouter);
+
+    app.use('/order', orderRouter);
+
     app.use('/api/customer', customer);
+
+    app.use('/api/manager', manager);
 
     app.use('/api/category', category);
 
@@ -60,6 +73,8 @@ function route(app) {
     app.use('/api/bookorder', bookorder);
 
     app.use('/api/book', book);
+
+    app.use('/api/imagesbook', imagesbook);
 
     app.use('/', siteRouter);
 }

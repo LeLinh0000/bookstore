@@ -81,8 +81,13 @@ exports.findOne = (req, res) => {
 // Update a Translator by the TranslatorId in the request
 exports.update = (req, res) => {
     const TranslatorId = req.params.id;
+    const translatorName = req.body.translatorName;
 
-    Translator.update(req.body, {
+    const translator = {
+        translatorName: translatorName,
+    };
+
+    Translator.update(translator, {
         where: { translatorId: TranslatorId },
     })
         .then((num) => {

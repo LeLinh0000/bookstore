@@ -104,62 +104,62 @@ function Validator(formSelector) {
         }
     }
     //Xu ly hanh vi submit form
-    formElement.onsubmit = function (event) {
-        event.preventDefault();
+    // formElement.onsubmit = function (event) {
+    //     event.preventDefault();
 
-        _this.onSubmit();
+    //     _this.onSubmit();
 
-        var inputs = formElement.querySelectorAll('[name][rules]');
-        var isValid = true;
-        for (var input of inputs) {
-            if (!handleValidate({ target: input })) {
-                isValid = false;
-            }
-        }
+    //     var inputs = formElement.querySelectorAll('[name][rules]');
+    //     var isValid = true;
+    //     for (var input of inputs) {
+    //         if (!handleValidate({ target: input })) {
+    //             isValid = false;
+    //         }
+    //     }
 
-        // Khi khong co loi thi submit form
-        if (isValid) {
-            if (typeof _this.onSubmit === 'function') {
-                var enableInputs = formElement.querySelectorAll(
-                    '[name]:not([disable])',
-                );
-                var formValues = Array.from(enableInputs).reduce(function (
-                    values,
-                    input,
-                ) {
-                    switch (input.type) {
-                        case 'radio':
-                            if (input.matches(':checked')) {
-                                values[input.name] = input.value;
-                            }
-                            break;
-                        case 'checkbox':
-                            if (!input.matches(':checked')) {
-                                values[input.name] = '';
-                                return values;
-                            }
-                            if (!Array.isArray(values[input.name])) {
-                                values[input.name] = [];
-                            }
+    //     // Khi khong co loi thi submit form
+    //     if (isValid) {
+    //         if (typeof _this.onSubmit === 'function') {
+    //             var enableInputs = formElement.querySelectorAll(
+    //                 '[name]:not([disable])',
+    //             );
+    //             var formValues = Array.from(enableInputs).reduce(function (
+    //                 values,
+    //                 input,
+    //             ) {
+    //                 switch (input.type) {
+    //                     case 'radio':
+    //                         if (input.matches(':checked')) {
+    //                             values[input.name] = input.value;
+    //                         }
+    //                         break;
+    //                     case 'checkbox':
+    //                         if (!input.matches(':checked')) {
+    //                             values[input.name] = '';
+    //                             return values;
+    //                         }
+    //                         if (!Array.isArray(values[input.name])) {
+    //                             values[input.name] = [];
+    //                         }
 
-                            values[input.name].push(input.value);
+    //                         values[input.name].push(input.value);
 
-                            break;
-                        case 'file':
-                            values[input.name] = input.files;
-                            break;
-                        default:
-                            values[input.name] = input.value;
-                    }
-                    return values;
-                },
-                {});
+    //                         break;
+    //                     case 'file':
+    //                         values[input.name] = input.files;
+    //                         break;
+    //                     default:
+    //                         values[input.name] = input.value;
+    //                 }
+    //                 return values;
+    //             },
+    //             {});
 
-                //Goi lai ham onsubmit va tra ve gia tri cua form
-                _this.onSubmit(formValues);
-            } else {
-                formElement.submit();
-            }
-        }
-    };
+    //             //Goi lai ham onsubmit va tra ve gia tri cua form
+    //             _this.onSubmit(formValues);
+    //         } else {
+    //             formElement.submit();
+    //         }
+    //     }
+    // };
 }

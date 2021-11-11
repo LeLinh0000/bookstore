@@ -77,8 +77,12 @@ exports.findOne = (req, res) => {
 // Update a author by the id_loaisach in the request
 exports.update = (req, res) => {
     const authorId = req.params.id;
+    const authorName = req.body.authorName;
 
-    Author.update(req.body, {
+    const author = {
+        authorName: authorName,
+    };
+    Author.update(author, {
         where: { authorId: authorId },
     })
         .then((num) => {

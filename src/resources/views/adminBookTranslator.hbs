@@ -1,0 +1,507 @@
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Quản lý danh mục</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Quản lý danh mục</a></li>
+              <li class="breadcrumb-item active">Danh mục dịch giả</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+
+            <div class="row">
+                <div class="col-sm-12 col-md-9">
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                  <div class="row">
+                    <div class="col-sm-9 col-md-6"></div>
+                    <div class="col-sm-3 col-md-6">
+                        <button type="button" data-toggle="modal" data-target="#modal-sm" class="btn btn-block btn-primary">Thêm</button>
+                    </div>
+                  </div>
+                        
+                  <div class="input-group mt-2 pt-2">
+                      <input type="search" class="form-control" placeholder="Type your keywords here">
+                      <div class="input-group-append">
+                          <button type="submit" class="btn btn-default">
+                              <i class="fa fa-search"></i>
+                          </button>
+                      </div>
+                  </div>
+                </div>
+            </div>  
+        </div>
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th class="text-center">ID</th>
+                      <th class="text-center">Tên dịch giả</th>
+                      <th class="text-center">Thao tác</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dataTable">
+                    <tr class="text-center">
+                      <td class="align-middle"></td>
+                      <td class="align-middle"></td>
+                      <td class="project-actions text-right text-center align-middle">
+                          <a class="btn btn-primary btn-sm" href="#">
+                              <i class="fas fa-folder">
+                              </i>
+                              View
+                          </a>
+                          <a class="btn btn-info btn-sm" href="#">
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                              Edit
+                          </a>
+                        <form action="/api/book/${s.bookId}" method="DELETE" class="d-inline-block">
+                          <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash">
+                                </i>
+                                Delete
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                  </tbody>
+
+                  <tfoot>
+                    <tr>
+                      <th class="text-center">ID</th>
+                      <th class="text-center">Tên dịch giả</th>
+                      <th class="text-center">Thao tác</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+      <!-- /.modal -->
+
+      <div class="modal fade" id="modal-sm">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Thêm dịch giả</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label>Dịch giả:</label>
+                        <input type="text" id="translatorInput" name="translator" class="form-control" value="">
+                      </div>
+                    </div>
+                    <div class="justify-content-between d-flex w-100 p-2">
+                      <button type="button" id="btnCloseEdit" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" id="btnSaveEdit" class="btn btn-primary" value="">Save</button>
+                    </div>
+                  </div>
+              </form>
+            
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+{{!-- Form --}}
+<script src="/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+<!-- Bootstrap4 Duallistbox -->
+<script src="/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<script src="/plugins/inputmask/jquery.inputmask.min.js"></script>  
+
+<!-- SweetAlert2 -->
+<script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="/plugins/toastr/toastr.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="/plugins/toastr/toastr.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables/jquery.dataTables.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/plugins/jszip/jszip.min.js"></script>
+<script src="/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
+<script>
+
+  // Fetch data
+  !async function() {
+      const dataTable = document.getElementById("dataTable");
+
+      let data = await fetch("http://localhost:3000/api/translator")
+        .then(response => response.json())
+        .then(data => {
+              return data;
+          })
+        .catch(error => {
+          console.log(error);
+        });
+
+
+        let translatorHTML = data.map((nd, index) => {
+        return `
+        <tr class="text-center">
+          <td class="align-middle">${nd.translatorId}</td>
+          <td class="align-middle">${nd.translatorName}</td>
+          
+          <td class="project-actions text-right text-center align-middle">
+
+              <button type="button" class="btn btn-info btn-sm btnEdit" data-toggle="modal" data-target="#modal-sm" value="${nd.translatorId}"> 
+                    <i class="fas fa-pencil-alt">
+                    </i>
+                    Edit
+              </button>
+              <button type="submit" class="btn btn-danger btn-sm btnDelete" value="${nd.translatorId}">
+                    <i class="fas fa-trash">
+                    </i>
+                    Delete
+              </button>
+          </td>
+        </tr>
+    `
+        });
+    dataTable.innerHTML = translatorHTML.join('');
+
+
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+
+    // Vietsub notifications
+      "language": {
+        "emptyTable": "Hiện không có sản phẩm nào",
+        "info": "Hiển thị từ _START_ đến _END_ của _TOTAL_",
+        "ifnoEmpty": "Hiển thị từ 0 đến 0 của 0",
+        "search": "Tìm kiếm",
+        "paginate": {
+          "previous": "Trở lại",
+          "next": "Tiếp &nbsp",
+          "last": "Trang cuối",
+          "first": "Trang đầu",
+        },
+      }
+    });
+    
+      const modalBody = document.querySelector('.modal-body')
+
+      const btnEdit = document.querySelectorAll('.btnEdit');
+      btnEdit.forEach(element => {
+        const editId = element.value;
+
+        element.onclick = function() {
+          let translatorItem = data.find((currentEle, index) => {
+              if(currentEle.translatorId == editId) {
+                return currentEle;
+              };
+          });
+
+          modalBody.innerHTML = `
+              <form>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label>Dịch giả:</label>
+                        <input type="text" id="translatorInput" name="translator" class="form-control" value="${translatorItem.translatorName}">
+                      </div>
+                    </div>
+                    <div class="justify-content-between d-flex w-100 p-2">
+                      <button type="button" id="btnCloseEdit" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" id="btnSaveEdit" class="btn btn-primary" value="${translatorItem.translatorId}">Save changes</button>
+                    </div>
+                  </div>
+              </form>
+            `;
+
+          // Edit
+          const btnSaveEdit = document.querySelector('#btnSaveEdit');
+          const saveId = btnSaveEdit.value;
+          btnSaveEdit.onclick = function() {
+            const translatorInput = document.querySelector('#translatorInput');
+            let dataTranslator = {
+              translatorName: translatorInput.value,
+            }
+            const url = 'http://localhost:3000/api/translator/' + btnSaveEdit.value;
+
+            console.log(url);
+            
+            fetch(url,  {
+                          headers: {
+                              'Accept': 'application/json',
+                              'Content-Type': 'application/json',
+                          },
+                          method: 'PUT',
+                          body: JSON.stringify(dataTranslator),
+                      })
+                          .then((response) => response.json())
+                          .then((data) => {
+
+                              console.log('Success:', data);
+
+                              if (data.translatorId == saveId) {
+                                  alert('Đã cập nhật thành công');
+                                  document.querySelector("input[name=translator]").value = data.translatorName;
+                              }
+                              document.querySelector('#btnCloseEdit').click();
+                              translatorInput.value = '';
+                              reload();
+
+                          })
+                          .catch((error) => {
+                              console.error('Error:', error);
+                          });
+            };
+    
+        };
+ 
+ 
+           });
+
+           // Delete
+          const btnDelete = document.querySelectorAll('.btnDelete');
+           btnDelete.forEach(element => {
+              const deleteId = element.value;
+
+              element.onclick = function() {
+                const url = 'http://localhost:3000/api/translator/' + deleteId;
+                fetch(url,  {
+                          headers: {
+                              'Accept': 'application/json',
+                              'Content-Type': 'application/json',
+                          },
+                          method: 'DELETE',
+                      })
+                          .then((response) => response.json())
+                          .then((data) => {
+                              console.log('Success:', data);
+                              reload();
+                          })
+                          .catch((error) => {
+                              console.error('Error:', error);
+                          });
+              }
+            });
+
+           // Add
+          const btnSaveEdit = document.querySelectorAll('#btnSaveEdit');
+          btnSaveEdit.forEach(element => {
+
+              element.onclick = function() {
+                const translatorInput = document.querySelector('#translatorInput');
+                let dataTranslator = {
+                  translatorName: translatorInput.value,
+                }
+                const url = 'http://localhost:3000/api/translator/';
+                
+                fetch(url,  {
+                          headers: {
+                              'Accept': 'application/json',
+                              'Content-Type': 'application/json',
+                          },
+                          method: 'POST',
+                          body: JSON.stringify(dataTranslator),
+                      })
+                          .then((response) => response.json())
+                          .then((data) => {
+                              console.log('Success:', data);
+                              document.querySelector('#btnCloseEdit').click();
+                              translatorInput.value = '';
+                              reload();
+                          })
+                          .catch((error) => {
+                              console.error('Error:', error);
+                          });
+              }
+            });
+  
+          // Reload
+          
+
+          function reload() {
+            // Reload
+            let dataNew = fetch("http://localhost:3000/api/translator")
+              .then(response => response.json())
+              .then(data => {
+                    let htmlNew = data.map((tl, index) => {
+                        return `
+                        <tr class="text-center">
+                          <td class="align-middle">${tl.translatorId}</td>
+                          <td class="align-middle">${tl.translatorName}</td>
+                          
+                          <td class="project-actions text-right text-center align-middle">
+
+                              <button type="button" class="btn btn-info btn-sm btnEdit" data-toggle="modal" data-target="#modal-sm" value="${tl.translatorId}"> 
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                              </button>
+                              <button type="submit" class="btn btn-danger btn-sm btnDelete" value="${tl.translatorId}">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                              </button>
+                          </td>
+                        </tr>
+                    `
+                        });
+                    dataTable.innerHTML = htmlNew.join('');
+
+            const modalBody = document.querySelector('.modal-body')
+
+            const btnEdit = document.querySelectorAll('.btnEdit');
+            btnEdit.forEach(element => {
+              const editId = element.value;
+
+              element.onclick = function() {
+                let translatorItem = data.find((currentEle, index) => {
+                    if(currentEle.translatorId == editId) {
+                      return currentEle;
+                    };
+                });
+
+                modalBody.innerHTML = `
+                    <form>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <div class="form-group">
+                              <label>Loại sách:</label>
+                              <input type="text" id="translatorInput" name="translator" class="form-control" value="${translatorItem.translatorName}">
+                            </div>
+                          </div>
+                          <div class="justify-content-between d-flex w-100 p-2">
+                            <button type="button" id="btnCloseEdit" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" id="btnSaveEdit" class="btn btn-primary" value="${translatorItem.translatorId}">Save changes</button>
+                          </div>
+                        </div>
+                    </form>
+                  `;
+
+                // Edit
+                const btnSaveEdit = document.querySelector('#btnSaveEdit');
+                const saveId = btnSaveEdit.value;
+                btnSaveEdit.onclick = function() {
+                  const translatorInput = document.querySelector('#translatorInput');
+                  let dataTranslator = {
+                    translatorName: translatorInput.value,
+                  }
+                  const url = 'http://localhost:3000/api/translator/' + btnSaveEdit.value;
+
+                  console.log(url);
+                  
+                  fetch(url,  {
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json',
+                                },
+                                method: 'PUT',
+                                body: JSON.stringify(dataTranslator),
+                            })
+                                .then((response) => response.json())
+                                .then((data) => {
+
+                                    console.log('Success:', data);
+
+                                    if (data.translatorId == saveId) {
+                                        alert('Đã cập nhật thành công');
+                                        document.querySelector("input[name=translator]").value = data.translatorName;
+                                    }
+                                    document.querySelector('#btnCloseEdit').click();
+                                    translatorInput.value = '';
+                                    reload();
+
+                                })
+                                .catch((error) => {
+                                    console.error('Error:', error);
+                                });
+                  };
+          
+              };
+      
+      
+                });
+
+                // Delete
+                const btnDelete = document.querySelectorAll('.btnDelete');
+                btnDelete.forEach(element => {
+                    const deleteId = element.value;
+
+                    element.onclick = function() {
+                      const url = 'http://localhost:3000/api/translator/' + deleteId;
+                      fetch(url,  {
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json',
+                                },
+                                method: 'DELETE',
+                            })
+                                .then((response) => response.json())
+                                .then((data) => {
+                                    console.log('Success:', data);
+                                    reload();
+                                })
+                                .catch((error) => {
+                                    console.error('Error:', error);
+                                });
+                    }
+                  });
+                })
+              .catch(error => {
+                console.log(error);
+              });
+              
+            
+          }
+
+          
+
+
+  }();
+
+</script>
