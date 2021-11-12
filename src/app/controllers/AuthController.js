@@ -8,22 +8,22 @@ const bcrypt = require('bcrypt');
 // Log in
 exports.login = (req, res) => {
     const email = req.body.email;
-    // const password = bcrypt.hashSync(req.body.password, 2);
+    const password = req.body.password;
 
     Customer.findOne({
         where: { email: email },
     })
         .then((data) => {
             if (data) {
-                if (data.password === req.body.password) {
+                const result = bcrypt.compareSync(password, data.password);
+                if (result) {
                     req.session.userId = data.customerId;
                     req.session.userName = data.customerName;
                     req.session.userAvatar = data.avatar;
                     res.redirect('/');
+                } else {
+                    req.flash('error', 'Email hoặc mật khẩu sai');
                 }
-            } else {
-                req.flash('error', 'Email hoặc mật khẩu sai');
-                //
             }
         })
         .catch((err) => {

@@ -24,6 +24,10 @@ exports.create = (req, res) => {
     // Create a Book
     let episode = req.body.episode ? req.body.episode : null;
     let language = req.body.language ? req.body.language : 'Tiếng Việt';
+    let layout = req.body.bookLayout ? req.body.bookLayout : 'Bìa mềm';
+    let image = req.body.coverImage
+        ? req.body.coverImage
+        : '/img/products/product0.jpg';
 
     const book = {
         bookName: req.body.bookName,
@@ -31,10 +35,12 @@ exports.create = (req, res) => {
         price: req.body.price,
         episode: episode,
         language: language,
-        bookLayout: req.body.bookLayout,
+        bookSize: req.body.bookSize,
         quantityOfPage: req.body.quantityOfPage,
         weight: req.body.weight,
+        bookLayout: layout,
         publishYear: req.body.publishYear,
+        coverImage: image,
         description: req.body.description,
         PublisherPublisherId: req.body.PublisherPublisherId,
     };
@@ -181,6 +187,10 @@ exports.update = (req, res) => {
     // Create a Book
     let episode = req.body.episode ? req.body.episode : null;
     let language = req.body.language ? req.body.language : 'Tiếng Việt';
+    let layout = req.body.bookLayout ? req.body.bookLayout : 'Bìa mềm';
+    let image = req.body.coverImage
+        ? req.body.coverImage
+        : '/img/products/product0.jpg';
 
     const book = {
         bookName: req.body.bookName,
@@ -188,10 +198,12 @@ exports.update = (req, res) => {
         price: req.body.price,
         episode: episode,
         language: language,
-        bookLayout: req.body.bookLayout,
+        bookSize: req.body.bookSize,
         quantityOfPage: req.body.quantityOfPage,
         weight: req.body.weight,
+        bookLayout: layout,
         publishYear: req.body.publishYear,
+        coverImage: image,
         description: req.body.description,
         PublisherPublisherId: req.body.PublisherPublisherId,
     };

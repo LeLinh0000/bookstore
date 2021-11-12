@@ -5,13 +5,15 @@ const cart = require('../app/controllers/CartController.js');
 // Create a new cart
 router.post('/', cart.create);
 
-// Retrieve all cart
-router.get('/', cart.findAll);
-
 // Retrieve a single cart with id
-router.get('/find', cart.findOne);
+router.get('/session', cart.findUserId);
+
+router.get('/find/:id', cart.findOne);
 
 // // Retrieve all cart with name
+
+// Retrieve all cart
+router.get('/', cart.findAll);
 // router.get('/:name', cart.findAllName);
 
 // Update a cart with id

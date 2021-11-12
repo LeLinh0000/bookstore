@@ -61,6 +61,10 @@
                         <label>Tập</label>
                         <input type="text" name="episode" class="form-control" placeholder="Enter ...">
                       </div>
+                      <div class="form-group">
+                        <label>Hình thức bìa</label>
+                        <input type="text" name="bookLayout" class="form-control" placeholder="Enter ...">
+                      </div>
                      <div class="form-group">
                         <label>Thể loại</label>
                         <div id="addBookCategory" class="row ml-1">
@@ -72,7 +76,7 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label>Kích thước</label>
-                        <input type="text" name="bookLayout" class="form-control" placeholder="Enter ...">
+                        <input type="text" name="bookSize" class="form-control" placeholder="Enter ...">
                       </div>
                       <div class="form-group">
                         <label>Số trang</label>
@@ -103,14 +107,23 @@
                       </div>
                       {{!-- <form action="/api/imagesbook" enctype="multipart/form-data" method="POST"> --}}
                         <div class="form-group">
-                        <label for="exampleInputFile">Hình ảnh sản phẩm</label>
-                        <div class="input-group">
-                          <div class="custom-file">
-                            <input type="file" name="formFileMultiple[]" class="custom-file-input" id="exampleInputFile" multiple/>
-                            <label class="custom-file-label" for="exampleInputFile">Chọn ảnh</label>
+                          <label for="exampleInputFile">Hình ảnh sản phẩm</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" name="coverImage" class="custom-file-input" id="exampleInputFile"/>
+                              <label class="custom-file-label" for="exampleInputFile">Chọn ảnh</label>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                        <div class="form-group">
+                          <label for="exampleInputFile">Ảnh phụ</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" name="formFileMultiple[]" class="custom-file-input" id="exampleInputFile" multiple/>
+                              <label class="custom-file-label" for="exampleInputFile">Chọn ảnh</label>
+                            </div>
+                          </div>
+                        </div>
                       {{!-- </form> --}}
                     </div>
                   </div>

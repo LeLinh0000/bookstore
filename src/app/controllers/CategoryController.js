@@ -155,7 +155,10 @@ exports.deleteAll = (req, res) => {
 };
 // Find all published Category
 exports.findAllName = (req, res) => {
-    Category.findAll({ where: { categoryName: req.params.name } })
+    Category.findAll({
+        where: { categoryName: req.params.name },
+        include: Book,
+    })
         .then((data) => {
             res.send(data);
         })

@@ -28,7 +28,7 @@ exports.create = (req, res) => {
     let avatar = req.body.avatar
         ? '/img/avatar/' + req.body.avatar
         : '/img/avatar/avatar.png';
-    // let password = bcrypt.hashSync(req.body.password, 2);
+    let password = bcrypt.hashSync(req.body.password, 10);
 
     const customer = {
         customerName: req.body.customerName,
@@ -37,14 +37,18 @@ exports.create = (req, res) => {
         address: req.body.address,
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
-        password: req.body.password,
+        password: password,
         avatar: avatar,
     };
 
     // Save Customer in the database
     Customer.create(customer)
         .then((data) => {
-            req.flash('info', 'Chuyển hướng đăng nhập');
+            const cart = {
+                CustomerCustomerId: data.customerId,
+            };
+            Cart.create(cart);
+            req.flash('registerSuccess', 'Chuyển hướng đăng nhập');
             res.redirect('/');
             res.send(data);
             document.querySelector('#login-form').style.display = 'block';

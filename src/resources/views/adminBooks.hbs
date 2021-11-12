@@ -138,7 +138,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Large Modal</h4>
+              <h4 class="modal-title">Thông tin sách</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -270,7 +270,7 @@
             <tr class="text-center">
                       <td class="align-middle">${s.bookId}</td>
                       <td class="align-middle">${s.bookName}</td>
-                      <td><img src="${s.Images[0].path}" class="elevation-2" alt="User Image" style="width: 60px; height:80px;"></td>
+                      <td><img src="${s.coverImage}" class="elevation-2" alt="User Image" style="width: 60px; height:80px;"></td>
                       <td class="align-middle">${s.Authors[0].authorName}</td>
                       <td id="categoryLine" class="align-middle">${categoryStr}</td>
                       <td class="project-actions text-right text-center align-middle">
@@ -373,6 +373,7 @@
             return element.translatorName;
           }).join(', ');
 
+          console.log(translatorStr)
           var translatorItems = dataTranslator.map(element => {
             return `
                 <option value="${element.translatorId}">${element.translatorName}</option>
@@ -431,6 +432,10 @@
                       <input type="text" name="episode" class="form-control" value="${bookItem.episode? bookItem.episode : "Không"}">
                     </div>
                     <div class="form-group">
+                      <label>Hình thức bìa</label>
+                      <input type="text" name="bookLayout" class="form-control" value="${bookItem.bookLayout}">
+                    </div>
+                    <div class="form-group">
                       <label>Thể loại</label>
                       <div id="addBookCategory" class="row ml-1">
                           ${categoryItems}
@@ -441,7 +446,7 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>Kích thước</label>
-                      <input type="text" name="bookLayout" class="form-control" value="${bookItem.bookLayout}">
+                      <input type="text" name="bookSize" class="form-control" value="${bookItem.bookSize}">
                     </div>
                     <div class="form-group">
                       <label>Số trang</label>
@@ -453,7 +458,7 @@
                     </div>  
                     <div class="form-group">
                       <label>Người dịch</label>
-                      <select id="addBookTranslator" name="bookTranslator[]" class="select2" multiple="multiple" value="${translatorStr}" style="width: 100%;">
+                      <select id="addBookTranslator" name="bookTranslator[]" class="select2" multiple="multiple" data-placeholder="${translatorStr}" style="width: 100%;">
                         ${translatorItems}
                       </select>
                     </div>
@@ -469,21 +474,40 @@
                       <input type="text" name="publishYear" class="form-control"value="${bookItem.publishYear}">
                     </div>
                       <div class="form-group">
-                      <label for="exampleInputFile">Hình ảnh sản phẩm</label>
-                      <div class="input-group">
-                        <div class="row">
-                          <div class="custom-file">
-                            <input type="file" name="formFileMultiple[]" class="custom-file-input" id="exampleInputFile" multiple/>
-                            <label class="custom-file-label" for="exampleInputFile">Chọn ảnh</label>
+                        <label for="exampleInputFile">Ảnh bìa</label>
+                        <div class="input-group">
+                          <div class="row">
+                            <div class="custom-file">
+                              <input type="file" name="coverImage" class="custom-file-input" id="exampleInputFile"/>
+                              <label class="custom-file-label" for="exampleInputFile">Chọn ảnh</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="input-group">
+                          <div class="row mt-2">
+                            <div class="form-check col-sm-3">
+                              <img src="${bookItem.coverImage}" class="elevation-2" alt="User Image" style="width: 60px; height:80px;">
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div class="input-group">
-                        <div class="row mt-2">
-                          ${imageItems}
+
+                      <div class="form-group">
+                        <label for="exampleInputFile">Hình ảnh sản phẩm</label>
+                        <div class="input-group">
+                          <div class="row">
+                            <div class="custom-file">
+                              <input type="file" name="formFileMultiple[]" class="custom-file-input" id="exampleInputFile" multiple/>
+                              <label class="custom-file-label" for="exampleInputFile">Chọn ảnh</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="input-group">
+                          <div class="row mt-2">
+                            ${imageItems}
+                          </div>
                         </div>
                       </div>
-                    </div>
                   </div>
                 </div>
                 <div class="row">
@@ -564,7 +588,7 @@
                                   document.querySelector("input[name=book]").value = data.bookName;
                               }
                               document.querySelector('#btnCloseEdit').click();
-                              bookInput.value = '';
+                             // bookInput.value = '';
                               reload();
 
                           })
@@ -607,6 +631,8 @@
           var translatorStr = bookItem.Translators.map(element => {
             return element.translatorName;
           }).join(', ');
+
+          console.log(translatorStr)
 
           // Publisher
           var publisherStr = bookItem.Publisher.publisherName;
@@ -660,6 +686,10 @@
                       <input type="text" name="episode" class="form-control" value="${bookItem.episode? bookItem.episode : "Không"}">
                     </div>
                     <div class="form-group">
+                      <label>Hình thức bìa</label>
+                      <input type="text" name="bookLayout" class="form-control" value="${bookItem.bookLayout}">
+                    </div>
+                    <div class="form-group">
                       <label>Thể loại</label>
                       <div id="addBookCategory" class="row ml-1">
                           ${categoryItems}
@@ -670,7 +700,7 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>Kích thước</label>
-                      <input type="text" name="bookLayout" class="form-control" value="${bookItem.bookLayout}">
+                      <input type="text" name="bookSize" class="form-control" value="${bookItem.bookSize}">
                     </div>
                     <div class="form-group">
                       <label>Số trang</label>

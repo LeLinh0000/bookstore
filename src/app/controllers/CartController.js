@@ -50,7 +50,7 @@ exports.findAll = (req, res) => {
 
 // Find a single Cart with an CartId
 exports.findOne = (req, res) => {
-    const cartId = req.query.customerId;
+    const cartId = req.params.id;
 
     Cart.findOne({
         where: { cartId: cartId },
@@ -138,6 +138,35 @@ exports.deleteAll = (req, res) => {
                 message:
                     err.message ||
                     'Some error occurred while removing all Carts.',
+            });
+        });
+};
+
+// Find with session id
+exports.findUserId = (req, res) => {
+    const userId = req.session.userId;
+    if (!userId) {
+        res.status(404).send({
+            message: `userId=${userId}.`,
+        });
+    }
+    Cart.findOne({
+        where: { CustomerCustomerId: userId },
+        include: Book,
+    })
+        .then((data) => {
+            if (data) {
+                res.send(data);
+            } else {
+                res.status(404).send({
+                    message: `Cannot find cart with CustomerCustomerId=${userId}.`,
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    'Error retrieving cart with CustomerCustomerId=' + userId,
             });
         });
 };

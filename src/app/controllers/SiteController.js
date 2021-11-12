@@ -5,6 +5,7 @@ class SiteController {
             userId: req.session.userId,
             userName: req.session.userName,
             userAvatar: req.session.userAvatar,
+            message: req.flash('registerSuccess'),
         });
     }
 

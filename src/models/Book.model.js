@@ -33,7 +33,7 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: false,
             },
 
-            bookLayout: {
+            bookSize: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
@@ -48,8 +48,19 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: false,
             },
 
+            bookLayout: {
+                type: Sequelize.STRING,
+                allowNull: false,
+                defaultValue: 'Bìa mềm',
+            },
+
             publishYear: {
                 type: Sequelize.INTEGER,
+                allowNull: false,
+            },
+
+            coverImage: {
+                type: Sequelize.STRING,
                 allowNull: false,
             },
 
