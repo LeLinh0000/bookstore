@@ -61,10 +61,49 @@ exports.findAll = (req, res) => {
 
 // Update a BookCart by the id_loaisach in the request
 exports.update = (req, res) => {
-    const BookBookId = req.query.bookId;
-    const CartCartId = req.query.cartId;
+    const BookBookId = req.params.bookId;
+    const CartCartId = req.params.cartId;
+    const bookCart = {
+        BookBookId: BookBookId,
+        CartCartId: CartCartId,
+    };
 
-    BookCart.update(req.body, {
+    BookCart.update(bookCart, {
+        where: { BookBookId: BookBookId, CartCartId: CartCartId },
+    })
+        .then((num) => {
+            if (num == 1) {
+                res.send({
+                    message: 'BookCart was updated successfully.',
+                });
+            } else {
+                res.send({
+                    message: `Cannot update BookCart with BookBookId=${BookBookId}, CartCartId=${CartCartId}. Maybe BookCart was not found or req.body is empty!`,
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    'Error updating BookCart with BookBookId=' +
+                    BookBookId +
+                    'CartCartId=' +
+                    CartCartId,
+            });
+        });
+};
+
+exports.updateQuantity = (req, res) => {
+    const BookBookId = req.params.bookId;
+    const CartCartId = req.params.cartId;
+    const quantity = req.params.quantity;
+    const bookCart = {
+        BookBookId: BookBookId,
+        CartCartId: CartCartId,
+        quantity: quantity,
+    };
+
+    BookCart.update(bookCart, {
         where: { BookBookId: BookBookId, CartCartId: CartCartId },
     })
         .then((num) => {

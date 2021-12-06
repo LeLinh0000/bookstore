@@ -291,8 +291,8 @@
                 return `
                     <div class="col l-2-4 m-4 c-6">
                         <!-- Product item -->
-                        <a href="#" class="home-product-item">
-                            <div class="home-product-item__img" style="background-image: url(${book.Images[0].path});"></div>
+                        <a href="http://localhost:3000/api/book/detail/${book.bookId}" class="home-product-item">
+                            <div class="home-product-item__img" style="background-image: url(${book.coverImage});"></div>
                             <h4 class="home-product-item__name">${book.bookName}</h4>
                             <div class="home-product-item__price">
                                 <span class="home-product__price-old">${book.coverPrice}</span>
@@ -335,75 +335,3 @@
         })
 
 </script>
-
-{{!-- <div class="table">
-    <form method="POST" action="">
-        <table>
-            <tr>
-            <th> Tên sách: </th>
-            <td><input name="tensach" type="text"></td>
-        </tr>
-        <tr>
-            <th> Giá: </th>
-            <td><input name="gia" type="text"></td>
-        </tr>
-        <tr>
-            <th> Tap: </th>
-            <td><input name="tap" type="text"></td>
-        </tr>
-        <tr>
-            <th> Hình thức bìa: </th>
-            <td><input name="hinhthucbia" type="text"></td>
-        </tr>
-        <tr>
-            <th> Ngôn ngữ: </th>
-            <td><input name="ngonngu" type="text"></td>
-        </tr>
-        <tr>
-            <th> Số trang: </th>
-            <td><input name="sotrang" type="text"></td>
-        </tr>
-        <tr>
-            <th> Kích thước: </th>
-            <td><input name="kichthuoc" type="text"></td>
-        </tr>
-        <tr>
-            <th> Năm xuất bản: </th>
-            <td><input name="namxuatban" type="text"></td>
-        </tr>
-        <tr>
-            <th> Mô tả sản phẩm: </th>
-            <td><input name="mota_sach" type="text"></td>
-        </tr>
-        <tr>
-            <th> Tác giả: </th>
-            <td>
-                <input name="tacgia[]" type="checkbox">Nguyễn Ngọc Tư
-                <input name="tacgia[]" type="checkbox">Nguyễn Nhật Ánh
-                <input name="tacgia[]" type="checkbox">Nam Cao
-            </td>
-        </tr>
-        <tr>
-            <th> Nhà phát hành: </th>
-            <td>
-                <select name="nhaphathanh" id="">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th> Nhà xuất bản: </th>
-            <td>
-                <select name="nhaxuatban" id="">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </td>
-        </tr>
-        <button type="submit">Add</button>
-        </table>
-    </form>
-</div> --}}

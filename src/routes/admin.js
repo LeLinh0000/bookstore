@@ -15,6 +15,8 @@ router.get('/bookTranslator', adminController.translator);
 
 router.get('/bookPublisher', adminController.publisher);
 
+router.get('/order', adminController.order);
+
 router.get('/manager', adminController.manager);
 
 router.get('/', adminController.index);

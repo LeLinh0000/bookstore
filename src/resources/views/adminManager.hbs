@@ -51,9 +51,19 @@
 
                 <div class="col-sm-6 col-md-3">
                   <div class="row">
-                    <div class="col-sm-9 col-md-6"></div>
-                    <div class="col-sm-3 col-md-6">
-                        <button type="button" class="btn btn-block btn-primary"  data-toggle="modal" data-target="#modal-lg">Thêm</button>
+                    <div class="col-sm-3 col-md-12">
+                      <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <button type="button" data-toggle="modal" data-target="#modal-lg" class="btn btn-block btn-primary">Thêm</button>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <button type="button" class="btn btn-danger btn-block btnDelete" value="${s.bookId}">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                            </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                         
@@ -78,7 +88,10 @@
                       <th class="text-center">Email</th>
                       <th class="text-center">User Name</th>
                       <th class="text-center">Quyền</th>
-                      <th class="text-center">Thao tác</th>
+                      <th data-orderable="false" class="text-center">Thao tác</th>
+                      <th data-orderable="false" class="text-center">
+                        <input class="checkedAll" name="deleteMulti[]" type="checkbox">
+                      </th>
                     </tr>
                   </thead>
                   <tbody id="dataTable">
@@ -114,6 +127,11 @@
                       <th class="text-center">User Name</th>
                       <th class="text-center">Quyền</th>
                       <th class="text-center">Thao tác</th>
+                      <th class="text-center">
+                        <button type="button" class="btn btn-danger btn-sm btnDelete">
+                                    <i class="fas fa-trash"></i>  
+                        </button>
+                      </th>
                     </tr>
                   </tfoot>
                 </table>
@@ -255,8 +273,7 @@
                       <td class="align-middle">${manager.email}</td>
                       <td id="categoryLine" class="align-middle">${manager.userName}</td>
                       <td id="categoryLine" class="align-middle">${manager.permission}</td>
-                      <td class="project-actions text-right text-center align-middle">
-                        
+                      <td class="project-actions text-right text-center align-middle"> 
                         <button type="button" class="btn btn-info btn-sm btnEdit" data-toggle="modal" data-target="#modal-lg" value="${manager.managerId}"> 
                               <i class="fas fa-pencil-alt">
                               </i>
@@ -268,6 +285,9 @@
                                 </i>
                                 Delete
                           </button>
+                      </td>
+                      <td class="align-middle">
+                        <input class="checkMulti" name="deleteMulti[]" type="checkbox" value="${manager.bookId}">
                       </td>
                     </tr>
             `
@@ -704,7 +724,16 @@
                 document.querySelector("input[name=permission]").value ='';
                 
             };
-    
+            
+        const checkedAll = document.querySelectorAll('.checkedAll');
+        const checkMulti = document.querySelectorAll('.checkMulti');
+        checkedAll.forEach(element => {
+          element.onclick = function() {
+              checkMulti.forEach(ele => {
+                ele.checked = ele.checked ? false : true;
+              });
+          };
+        });
 
   }();
 

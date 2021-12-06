@@ -20,6 +20,8 @@ exports.login = (req, res) => {
                     req.session.userId = data.customerId;
                     req.session.userName = data.customerName;
                     req.session.userAvatar = data.avatar;
+                    // req.session.cart = data.Cart.cartId;
+
                     res.redirect('/');
                 } else {
                     req.flash('error', 'Email hoặc mật khẩu sai');
@@ -28,7 +30,7 @@ exports.login = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: 'Error retrieving customer with email=' + email,
+                message: 'Error retrieving customer with err=' + err,
             });
         });
 };

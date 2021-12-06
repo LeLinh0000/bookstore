@@ -1,11 +1,14 @@
 const adminRouter = require('./admin');
+const adminTMDTRouter = require('./adminTMDT');
 const contactRouter = require('./contact');
 const siteRouter = require('./site');
 const productsRouter = require('./products');
 const registerRouter = require('./register');
 const detailsProductRouter = require('./detailsproduct');
 const orderRouter = require('./orderpage');
+const shoppingCartRouter = require('./shoppingCart');
 const authRouter = require('./auth');
+const managerOrderRouter = require('./managerorder');
 const category = require('./category');
 const author = require('./author');
 const customer = require('./customer');
@@ -28,6 +31,8 @@ const imagesbook = require('./imagesbook');
 function route(app) {
     app.use('/admin', adminRouter);
 
+    app.use('/adminTMDT', adminTMDTRouter);
+
     app.use('/contact', contactRouter);
 
     app.use('/products', productsRouter);
@@ -39,6 +44,10 @@ function route(app) {
     app.use('/auth', authRouter);
 
     app.use('/order', orderRouter);
+
+    app.use('/shoppingCart', shoppingCartRouter);
+
+    app.use('/managerOrder', managerOrderRouter);
 
     app.use('/api/customer', customer);
 

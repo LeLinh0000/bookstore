@@ -78,7 +78,7 @@
                                         <a href="">Địa chỉ của tôi</a>
                                     </li>
                                     <li class="header__navbar-user-item">
-                                        <a href="">Đơn mua</a>
+                                        <a href="/managerOrder">Quản lý đơn hàng</a>
                                     </li>
                                     <li class="header__navbar-user-item header__navbar-user-item--separate">
                                         <a href="/auth/logout">Đăng xuất</a>
@@ -170,61 +170,9 @@
                                     <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
                                     <ul class="header__cart-list-item">
                                         <!-- Cart item -->
-                                        <li class="header__cart-item">
-                                            <img src="/img/products/product1.jpg" alt="" class="header__cart-img">
-                                            <div class="header__cart-item-info">
-                                                <div class="header__cart-item-head">
-                                                    <h5 class="header__cart-item-name">Áo Thun nam Tay Lỡ  Form rộng TRUTH</h5>
-                                                    <div class="header__cart-item-price-wrap">
-                                                        <span class="header__cart-item-price">55.000đ</span>
-                                                        <span class="header__cart-item-multiply">x</span>
-                                                        <span class="header__cart-item-qnt">2</span>
-                                                    </div>
-                                                </div>
-                                                <div class="header__cart-item-body">
-                                                    <span class="header__cart-item-description">Phân loại: Xanh lá</span>
-                                                    <span class="header__cart-item-remove">Xóa</span>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="header__cart-item">
-                                            <img src="/img/products/product1.jpg" alt="" class="header__cart-img">
-                                            <div class="header__cart-item-info">
-                                                <div class="header__cart-item-head">
-                                                    <h5 class="header__cart-item-name">Áo thun nam TinoFun thể thao cổ tròn đẹp tay dài mã TT53 phong cách Hàn Quốc form rộng co giãn tay lỡ mùa hè thu</h5>
-                                                    <div class="header__cart-item-price-wrap">
-                                                        <span class="header__cart-item-price">99.000đ</span>
-                                                        <span class="header__cart-item-multiply">x</span>
-                                                        <span class="header__cart-item-qnt">1</span>
-                                                    </div>
-                                                </div>
-                                                <div class="header__cart-item-body">
-                                                    <span class="header__cart-item-description">Phân loại: Xanh dương</span>
-                                                    <span class="header__cart-item-remove">Xóa</span>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="header__cart-item">
-                                            <img src="/img/products/product1.jpg" alt="" class="header__cart-img">
-                                            <div class="header__cart-item-info">
-                                                <div class="header__cart-item-head">
-                                                    <h5 class="header__cart-item-name">Áo thun nam TinoFun cổ tròn đẹp tay dài mã TT52 phong cách Hàn Quốc form rộng tay lỡ co giãn mùa hè thu</h5>
-                                                    <div class="header__cart-item-price-wrap">
-                                                        <span class="header__cart-item-price">109.000đ</span>
-                                                        <span class="header__cart-item-multiply">x</span>
-                                                        <span class="header__cart-item-qnt">1</span>
-                                                    </div>
-                                                </div>
-                                                <div class="header__cart-item-body">
-                                                    <span class="header__cart-item-description">Phân loại: Bạc</span>
-                                                    <span class="header__cart-item-remove">Xóa</span>
-                                                </div>
-                                            </div>
-                                        </li>
+                                        
                                     </ul>
-                                    <a class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
+                                    <a href="/shoppingCart" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                                 </div>
                             </div>
                         </div>
@@ -234,9 +182,9 @@
 
                 <div class="main__menu">
                     <ul class="category__menu">
-                        <li class="category__menu-item"><a href="./" class="category__menu-link">Trang chủ</a></li>
-                        <li class="category__menu-item"><a href="./products" class="category__menu-link">Sản phẩm</a></li>
-                        <li class="category__menu-item"><a href="./contact" class="category__menu-link">Liên hệ</a></li>
+                        <li class="category__menu-item"><a href="/" class="category__menu-link">Trang chủ</a></li>
+                        <li class="category__menu-item"><a href="/products" class="category__menu-link">Sản phẩm</a></li>
+                        <li class="category__menu-item"><a href="/contact" class="category__menu-link">Liên hệ</a></li>
                     </ul>
                 </div>
             </div>
@@ -291,47 +239,43 @@
             .catch(error => {
                 console.log(error);
             });
-
-        let numCardNotice = 0;
-        let cartHTML = dataCart.Books.map(element => {
-
-            numCardNotice+=1;
-            /* let imgcart = dataBooks.find(book => {    
-                
-                if(book.bookId === element.bookId) {
-                    return book;
-                };
-            });
            
-            let imgPath = '/img/products/product1.jpg';
-            if (imgcart.Images.length > 0 ) imgPath = imgcart.Images[0].path;
-            let percentDiscount = calPercent(element.coverPrice, element.price);*/
-            return  `
-                <li class="header__cart-item">
-                    <img src="/img/products/product1.jpg" alt="Product image" class="header__cart-img">
-                    <div class="header__cart-item-info">
-                        <div class="header__cart-item-head">
-                            <h5 class="header__cart-item-name">${element.bookName}</h5>
-                            <div class="header__cart-item-price-wrap">
-                                <span class="header__cart-item-price">${element.price}</span>
-                                <span class="header__cart-item-multiply">x</span>
-                                <span class="header__cart-item-qnt">${element.BookCart.quantity}</span>
+
+        if(dataCart.message != 'userId=undefined.'){
+            if(dataCart && dataCart.Books.length > 0){
+
+                let numCardNotice = 0;
+                let cartHTML = dataCart.Books.map(element => {
+
+                    numCardNotice+=1;
+                    return  `
+                        <li class="header__cart-item">
+                            <img src="${element.coverImage}" alt="Product image" class="header__cart-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-head">
+                                    <h5 class="header__cart-item-name">${element.bookName}</h5>
+                                    <div class="header__cart-item-price-wrap">
+                                        <span class="header__cart-item-price">${element.price}</span>
+                                        <span class="header__cart-item-multiply">x</span>
+                                        <span class="header__cart-item-qnt">${element.BookCart.quantity}</span>
+                                    </div>
+                                </div>
+                                <div class="header__cart-item-body">
+                                    <span class="header__cart-item-description">Phân loại: ${element.language}</span>
+                                    <span class="header__cart-item-remove">Xóa</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="header__cart-item-body">
-                            <span class="header__cart-item-description">Phân loại: ${element.language}</span>
-                            <span class="header__cart-item-remove">Xóa</span>
-                        </div>
-                    </div>
-                </li>
-            `
-        }).join('');
+                        </li>
+                    `
+                }).join('');
+                
+                noCartContainer.style.display = 'none';
+                outterCard.style.display = 'block';
+                cartContainer.innerHTML = cartHTML;
+                cardNotice.innerHTML = numCardNotice;
+            }
+        }
         
-        console.log(cartHTML);
-        noCartContainer.style.display = 'none';
-        outterCard.style.display = 'block';
-        cartContainer.innerHTML = cartHTML;
-        cardNotice.innerHTML = numCardNotice;
 
     }();
 </script>

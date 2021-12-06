@@ -51,7 +51,7 @@ exports.create = (req, res) => {
             req.flash('registerSuccess', 'Chuyển hướng đăng nhập');
             res.redirect('/');
             res.send(data);
-            document.querySelector('#login-form').style.display = 'block';
+            document.querySelector('#login-form').click;
         })
         .catch((err) => {
             res.status(500).send({
@@ -209,9 +209,9 @@ exports.findWithEmail = (req, res) => {
         });
 };
 
-exports.findWithEmailB = (req, res) => {
-    Customer.findAll({
-        where: { email: req.body.email },
+exports.findWithSession = (req, res) => {
+    Customer.findOne({
+        where: { customerId: req.session.userId },
         include: [Order, Cart],
     })
         .then((data) => {

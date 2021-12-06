@@ -1,12 +1,16 @@
+const { bookOrder } = require('../../models/index');
 const db = require('../../models/index');
 const Order = db.order;
 const Book = db.book;
+const BookOrder = db.bookOrder;
+const Customer = db.customer;
+const Cart = db.cart;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Order
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.CustomerCustomerId) {
+    if (!req.session.userId) {
         res.status(400).send({
             message: 'Content can not be empty!',
         });
@@ -15,13 +19,21 @@ exports.create = (req, res) => {
 
     // Create a Order
     const order = {
-        CustomerCustomerId: req.body.CustomerCustomerId,
+        CustomerCustomerId: req.session.userId,
+        payments: req.body.payments,
     };
 
     // Save Order in the database
     Order.create(order)
         .then((data) => {
-            res.send(data);
+            addBookOrder(data);
+            Cart.destroy({
+                where: {},
+                truncate: false,
+            });
+            res.redirect('/managerOrder');
+            req.flash('ms', 'Add order success');
+            return data;
         })
         .catch((err) => {
             res.status(500).send({
@@ -30,6 +42,30 @@ exports.create = (req, res) => {
                     'Some error occurred while creating the Order.',
             });
         });
+
+    function addBookOrder(dataB) {
+        let arrBooks = req.body.BookBookId;
+        let arrQuantity = req.body.quantity;
+        arrBooks.forEach((element, index) => {
+            let bookOrder = {
+                BookBookId: element,
+                OrderOrderId: dataB.orderId,
+                quantity: arrQuantity[index],
+            };
+            // Save BookOrder in the database
+            BookOrder.create(bookOrder)
+                .then((data) => {
+                    res.send(data);
+                })
+                .catch((err) => {
+                    res.status(500).send({
+                        message:
+                            err.message ||
+                            'Some error occurred while creating the BookOrder.',
+                    });
+                });
+        });
+    }
 };
 
 // Retrieve all Order from the database.
@@ -37,7 +73,7 @@ exports.findAll = (req, res) => {
     const orderState = req.query.orderState;
     var condition = orderState ? { orderState: orderState } : null;
 
-    Order.findAll({ where: condition, include: Book })
+    Order.findAll({ where: condition, include: [Book, Customer] })
         .then((data) => {
             res.send(data);
         })
@@ -142,7 +178,10 @@ exports.deleteAll = (req, res) => {
 };
 // Find all user Order
 exports.findOrdersOfCus = (req, res) => {
-    Order.findAll({ where: { CustomerCustomerId: req.params.customerId } })
+    Order.findAll({
+        where: { CustomerCustomerId: req.session.userId },
+        include: [Book, Customer],
+    })
         .then((data) => {
             res.send(data);
         })

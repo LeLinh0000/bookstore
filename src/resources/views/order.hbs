@@ -1,7 +1,6 @@
 <hr class="header-line">
 <div class="container mt-4 order-container">
-            <form class="needs-validation" name="frmthanhtoan" method="post"
-                action="#">
+            <form class="needs-validation" action="/api/order" method="post">
                 <input type="hidden" name="kh_tendangnhap" value="dnpcuong">
 
                 <div class="py-5 text-center order-header">
@@ -17,60 +16,14 @@
                         <h4 class="mb-3 order-heading">Thông tin thanh toán</h4>
                         <h4 class="d-flex justify-content-between align-items-center mb-3">
                             <span class="text-muted order-sub-heading">Sản phẩm</span>
-                            <span class="badge badge-secondary badge-pill">2</span>
+                            <span class="badge badge-secondary badge-pill">1</span>
                         </h4>
                         <ul class="list-group mb-3">
-                            <input type="hidden" name="sanphamgiohang[1][sp_ma]" value="2">
-                            <input type="hidden" name="sanphamgiohang[1][gia]" value="11800000.00">
-                            <input type="hidden" name="sanphamgiohang[1][soluong]" value="2">
+                            <div class="cartList">
 
-                            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                <div class="order-product">
-                                    <h6 class="my-0">Apple Ipad 4 Wifi 16GB</h6>
-                                    <small class="text-muted">11800000.00 x 
-                                        <div class="QuantityInput__Wrapper">
-                                            <div class="group-input">
-                                                <button class="QuantityInput_disable" id="btn-reduce-quantity" onclick="changeQuantity(-1)">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                                <input type="text" value="1" class="input-quantity">
-                                                <button id="btn-increase-quantity" onclick="changeQuantity(1)">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </small>
-                                </div>
-
-
-                                <span class="text-muted into-money">23600000</span>
-                            </li>
-                            <input type="hidden" name="sanphamgiohang[2][sp_ma]" value="4">
-                            <input type="hidden" name="sanphamgiohang[2][gia]" value="14990000.00">
-                            <input type="hidden" name="sanphamgiohang[2][soluong]" value="8">
-
-                            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                <div class="order-product">
-                                    <h6 class="my-0">Apple iPhone 5 16GB White</h6>
-                                    <small class="text-muted">11800000.00 x 
-                                        <div class="QuantityInput__Wrapper">
-                                            <div class="group-input">
-                                                <button class="QuantityInput_disable" id="btn-reduce-quantity" onclick="changeQuantity(-1)">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                                <input type="text" value="1" class="input-quantity">
-                                                <button id="btn-increase-quantity" onclick="changeQuantity(1)">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </small>
-                                </div>
-                                <span class="text-muted into-money">119920000</span>
-                            </li>
-
+                            </div>
                             <li>
-                                <input type="text" class="voucher form-control" placeholder="Mã khuyến mãi">
+                                <input type="text" class="voucher form-control form-control-full" placeholder="Mã khuyến mãi">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn--primary">Xác nhận</button>
                                 </div>
@@ -78,7 +31,7 @@
 
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>Tổng thành tiền:</span>
-                                <strong>143520000</strong>
+                                <strong class="totalMoney"></strong>
                             </li>
                         </ul>
 
@@ -91,13 +44,13 @@
                                 <form>
                                     
                                     <div class="cc-selector">
-                                        <input id="shipcod" type="radio" name="credit-card" value="shipcod" />
+                                        <input id="shipcod" type="radio" name="payments" value="shipcod" />
                                         <label class="drinkcard-cc shipcod" for="shipcod"></label>
 
-                                        <input id="visa" type="radio" name="credit-card" value="visa" />
+                                        <input id="visa" type="radio" name="payments" value="visa" />
                                         <label class="drinkcard-cc visa" for="visa"></label>
 
-                                        <input id="mastercard" type="radio" name="credit-card" value="mastercard" />
+                                        <input id="mastercard" type="radio" name="payments" value="mastercard" />
                                         <label class="drinkcard-cc mastercard"for="mastercard"></label>
                                     </div>
                                 </form>
@@ -105,8 +58,9 @@
                             </div>
                             <hr class="mb-4">
 
-                             <button class="btn btn--primary btn-lg btn-block" type="submit" name="btnDatHang">Đặt
-                            hàng</button>
+                            <button class="btn btn--primary btn-lg btn-block" type="submit" id="btnOrder">
+                                 Đặt hàng
+                            </button>
                         </div>
 
                     </div>
@@ -114,41 +68,7 @@
                         <h4 class="mb-3 order-heading">Thông tin khách hàng</h4>
 
                         <div class="row customer-info">
-                            <div class="col-md-12">
-                                <label for="kh_ten">Họ và tên:</label>
-                                <input type="text" class="form-control" name="kh_ten" id="kh_ten"
-                                    value="Dương Nguyễn Phú Cường">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="kh_gioitinh">Giới tính:</label>
-                                <input type="text" class="form-control" name="kh_gioitinh" id="kh_gioitinh" value="Nam"
-                                >
-                            </div>
-                            <div class="col-md-12">
-                                <label for="kh_diachi">Địa chỉ:</label>
-                                <input type="text" class="form-control" name="kh_diachi" id="kh_diachi"
-                                    value="130 Xô Viết Nghệ Tỉnh">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="kh_dienthoai">Điện thoại:</label>
-                                <input type="text" class="form-control" name="kh_dienthoai" id="kh_dienthoai"
-                                    value="0915659223">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="kh_email">Email:</label>
-                                <input type="text" class="form-control" name="kh_email" id="kh_email"
-                                    value="abc@ctu.edu.vn">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="kh_ngaysinh">Ngày sinh:</label>
-                                <input type="text" class="form-control" name="kh_ngaysinh" id="kh_ngaysinh"
-                                    value="11/6/1989">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="kh_cmnd">CMND:</label>
-                                <input type="text" class="form-control" name="kh_cmnd" id="kh_cmnd" value="362209685"
-                                >
-                            </div>
+                            
                         </div>
 
                     </div>
@@ -159,6 +79,94 @@
 </div>
 
 <script>
-    
+    !async function() {
+        const customerInfo = document.querySelector('.customer-info');
+        const cartList = document.querySelector('.cartList');
+
+        let customer = await fetch("http://localhost:3000/api/customer/session")
+            .then(response => response.json())
+            .then(data => {
+                return data;
+            });
+        console.log(customer)
+        let customerInfoHTML = `
+            <div class="col-md-12">
+                <label for="kh_ten">Họ và tên:</label>
+                <input type="text" class="form-control form-control-full" name="customerName" value="${customer.customerName}">
+            </div>
+            <div class="col-md-12">
+                <label for="kh_gioitinh">Giới tính:</label>
+                <input type="text" class="form-control form-control-full" name="gender" value="${customer.gender}">
+            </div>
+            <div class="col-md-12">
+                <label for="kh_diachi">Địa chỉ:</label>
+                <input type="text" class="form-control form-control-full" name="address" value="${customer.address}">
+            </div>
+            <div class="col-md-12">
+                <label for="kh_dienthoai">Điện thoại:</label>
+                <input type="text" class="form-control form-control-full" name="phoneNumber" value="${customer.phoneNumber}">
+            </div>
+            <div class="col-md-12">
+                <label for="kh_email">Email:</label>
+                <input type="text" class="form-control form-control-full" name="kh_email" value="${customer.email}">
+            </div>
+            <div class="col-md-12">
+                <label for="kh_ngaysinh">Ngày sinh:</label>
+                <input type="text" class="form-control form-control-full" name="birthday" value="${customer.birthday}">
+            </div>
+        `;
+        customerInfo.innerHTML = customerInfoHTML;
+
+        let dataCart = await fetch("http://localhost:3000/api/cart/session")
+            .then(response => response.json())
+            .then(data => {
+                return data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        
+        console.log(dataCart);
+        let dataCartHTML = dataCart.Books.map(element => {
+            let itemPrice = parseInt(element.price * element.BookCart.quantity);
+            return `
+                <input type="hidden" name="BookBookId[]" value="${element.bookId}">
+                <input type="hidden" name="price" value="${element.price}">
+                <input type="hidden" name="quantity[]" value="${element.BookCart.quantity}">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div class="order-product">
+                        <h6 class="my-0">${element.bookName}</h6>
+                        <small class="text-muted">${element.price} x 
+                            <div class="QuantityInput__Wrapper">
+                                <div class="group-input">
+                                    <button class="QuantityInput_disable" id="btn-reduce-quantity" onclick="changeQuantity(-1)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="text" value="${element.BookCart.quantity}" class="input-quantity">
+                                    <button id="btn-increase-quantity" onclick="changeQuantity(1)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </small>
+                    </div>
+
+
+                    <span class="text-muted into-money">${itemPrice}</span>
+                </li>
+            `
+        }).join('');
+
+        cartList.innerHTML = dataCartHTML;
+        let intoMoney = document.querySelectorAll('.into-money');
+        let totalPay = 0;
+        intoMoney.forEach(element => {
+            totalPay += parseInt(element.innerHTML);
+        })
+
+        document.querySelector('.totalMoney').innerHTML = totalPay;
+        
+
+    }();
 </script>
 

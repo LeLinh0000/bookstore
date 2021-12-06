@@ -11,6 +11,8 @@ router.get('/', book.findAll);
 // Retrieve a single book with id
 router.get('/:id', book.findOne);
 
+router.get('/detail/:id', book.findOneDetail);
+
 // Retrieve all book with name
 router.get('/:name', book.findAllName);
 

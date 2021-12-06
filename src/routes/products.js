@@ -4,8 +4,8 @@ const Book = require('../models/Book.model');
 
 const ProductsController = require('../app/controllers/ProductsController');
 
-router.get('/', ProductsController.index);
+router.get('/:id', ProductsController.details_product);
 
-router.get('/details', ProductsController.details_product);
+router.get('/', ProductsController.index);
 
 module.exports = router;

@@ -58,9 +58,19 @@
 
                 <div class="col-sm-6 col-md-3">
                   <div class="row">
-                    <div class="col-sm-9 col-md-6"></div>
-                    <div class="col-sm-3 col-md-6">
-                        <button type="button" class="btn btn-block btn-primary"><a href="/admin/addBook" class="text-white h-100 w-100">Thêm</a></button>
+                    <div class="col-sm-3 col-md-12">
+                      <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <button type="button" class="btn btn-block btn-primary"><a href="/admin/addBook" class="text-white h-100 w-100">Thêm</a></button>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <button type="button" class="btn btn-danger btn-block btnDelete" value="${s.bookId}">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                            </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                         
@@ -84,7 +94,10 @@
                       <th class="text-center">Hình ảnh</th>
                       <th class="text-center">Tác giả</th>
                       <th class="text-center">Thể loại</th>
-                      <th class="text-center">Thao tác</th>
+                      <th data-orderable="false" class="text-center">Thao tác</th>
+                      <th data-orderable="false" class="text-center">
+                        <input class="checkedAll" name="deleteMulti[]" type="checkbox">
+                      </th>
                     </tr>
                   </thead>
                   <tbody id="dataTable">
@@ -124,6 +137,12 @@
                       <th class="text-center">Tác giả</th>
                       <th class="text-center">Thể loại</th>
                       <th class="text-center">Thao tác</th>
+                      <th class="text-center">
+                        <button type="button" class="btn btn-danger btn-sm btnDelete">
+                                    <i class="fas fa-trash">
+                                    </i>  
+                        </button>
+                      </th>
                     </tr>
                   </tfoot>
                 </table>
@@ -146,10 +165,7 @@
             <div class="modal-body">
               
             </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            
           </div>
           <!-- /.modal-content -->
         </div>
@@ -286,11 +302,14 @@
                               Edit
                         </button>
 
-                          <button type="submit" class="btn btn-danger btn-sm btnDelete" value="${s.bookId}">
+                          <button type="button" class="btn btn-danger btn-sm btnDelete" value="${s.bookId}">
                                 <i class="fas fa-trash">
                                 </i>
                                 Delete
                           </button>
+                      </td>
+                      <td class="align-middle">
+                        <input class="checkMulti" name="deleteMulti[]" type="checkbox" value="${s.bookId}">
                       </td>
                     </tr>
             `
@@ -348,23 +367,18 @@
 
           // Category
           var categoryItems = dataCategory.map(element => {
-            return bookItem.Categories.map(ele => {
+            let checked = '';
+            bookItem.Categories.map(ele => {
               if(element.categoryId == ele.categoryId) {
-                return `
-                <div class="form-check col-sm-6">
-                      <input name="bookCategory[]" class="form-check-input" type="checkbox" value="${element.categoryId}" checked>
-                      <label class="form-check-label">${element.categoryName}</label>
-                </div>
-              `;
-              } else {
-                 return `
-                <div class="form-check col-sm-6">
-                      <input name="bookCategory[]" class="form-check-input" type="checkbox" value="${element.categoryId}">
-                      <label class="form-check-label">${element.categoryName}</label>
-                </div>
-              `;
+                checked = 'checked';
               }
             });
+              return `
+                <div class="form-check col-sm-6">
+                      <input id="${element.categoryName}" name="bookCategory[]" class="form-check-input" type="checkbox" value="${element.categoryId}" ${checked}>
+                      <label for="${element.categoryName}" class="form-check-label">${element.categoryName}</label>
+                </div>
+              `;
 
           }).join('');
 
@@ -373,7 +387,7 @@
             return element.translatorName;
           }).join(', ');
 
-          console.log(translatorStr)
+          
           var translatorItems = dataTranslator.map(element => {
             return `
                 <option value="${element.translatorId}">${element.translatorName}</option>
@@ -536,7 +550,7 @@
                           <button type="reset" class="btn btn-block btn-default btn-lg">Làm lại</button>
                       </div>
                       <div class="col-md-6">
-                          <button id="btnSaveEdit" type="button" class="btn btn-block btn-success btn-lg">Thêm</button>
+                          <button id="btnSaveEdit" type="button" class="btn btn-block btn-success btn-lg" value="${bookItem.bookId}">Thêm</button>
                       </div>
                     </div>
                   </div>
@@ -621,7 +635,7 @@
           var categoryItems = bookItem.Categories.map(ele => {
                 return `
                 <div class="form-check col-sm-6">
-                      <input name="bookCategory[]" class="form-check-input" type="checkbox" value="${ele.categoryId}" checked>
+                      <input name="bookCategory[]" class="form-check-input" type="checkbox" value="${ele.categoryId}" checked disabled>
                       <label class="form-check-label">${ele.categoryName}</label>
                 </div>
               `;
@@ -763,7 +777,7 @@
                           <button type="reset" class="btn btn-block btn-default btn-lg">Làm lại</button>
                       </div>
                       <div class="col-md-6">
-                          <button id="btnSaveEdit" type="button" class="btn btn-block btn-success btn-lg">Thêm</button>
+                          <button id="btnSaveEdit" type="button" class="btn btn-block btn-success btn-lg" value="${bookItem.bookId}">Thêm</button>
                       </div>
                     </div>
                   </div>
@@ -784,7 +798,16 @@
           })
           }
         });
-    
+
+        const checkedAll = document.querySelectorAll('.checkedAll');
+        const checkMulti = document.querySelectorAll('.checkMulti');
+        checkedAll.forEach(element => {
+          element.onclick = function() {
+              checkMulti.forEach(ele => {
+                ele.checked = ele.checked ? false : true;
+              });
+          };
+        });
 
   }();
 

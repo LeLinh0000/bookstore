@@ -10,7 +10,11 @@ router.post('/', BookCartController.create);
 router.get('/', BookCartController.findAll);
 
 // Update a Author with id
-router.put('/', BookCartController.update);
+router.put(
+    '/update/:cartId/:bookId/:quantity',
+    BookCartController.updateQuantity,
+);
+router.put('/:cartId/:bookId', BookCartController.update);
 
 // Delete a Author with id
 router.delete('/', BookCartController.delete);

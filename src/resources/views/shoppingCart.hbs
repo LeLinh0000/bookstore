@@ -1,0 +1,178 @@
+<hr class="header-line">
+<div class="container mt-4 order-container">
+           <section class="pt-5 pb-5">
+  <div class="container">
+    <div class="row w-100">
+        <div class="col-lg-12 col-md-12 col-12">
+            <h3 class="display-5 mb-2 text-center">Giỏ hàng</h3>
+            <p class="mb-5 text-center">
+                <i class="text-info font-weight-bold">3</i> sản phẩm trong giỏ hàng</p>
+            <table id="shoppingCart" class="table table-condensed table-responsive">
+                <thead>
+                    <tr>
+                        <th style="width:50%">Tên sách</th>
+                        <th style="width:12%">Giá</th>
+                        <th style="width:10%">Số lượng</th>
+                        <th style="width:12%; text-align: center">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+            <div style="margin-right:30px" class="float-right text-right">
+                <h4>Tổng tiền:</h4>
+                <h1 class="total">$99.00</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4 d-flex align-items-center">
+        <div class="col-sm-6 order-md-2 text-right">
+            <a href="/order" style="margin-right:30px" id="buyNow" class="btn btn--primary mb-4 btn-lg pl-5 pr-5">Mua ngay</a>
+        </div>
+        <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+            <a href="../">
+                <i class="fas fa-arrow-left mr-2"></i> Continue Shopping</a>
+        </div>
+    </div>
+</div>
+</section>
+        
+</div>
+
+<script>
+    !async function() {
+        const bodyTB = document.querySelector('tbody');
+
+        let dataCart = await fetch("http://localhost:3000/api/cart/session")
+            .then(response => response.json())
+            .then(data => {
+                return data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        console.log(dataCart);
+        if(dataCart.message != 'userId=undefined.') {
+
+            let cartLineHTML = 
+                dataCart.Books.map(element => {
+                    return `
+                        <tr id=${element.bookId} class="itemLine">
+                            <td data-th="Product">
+                                <div class="row">
+                                    <div class="col-md-3 text-left">
+                                        <img src="${element.coverImage}" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                    </div>
+                                    <div class="col-md-9 text-left mt-sm-2">
+                                        <h4>${element.bookName}</h4>
+                                        <p class="font-weight-light">Phiên bản: ${element.bookLayout}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-th="Price"><span class="pricePay">${element.price}</span>đ</td>
+                            <td data-th="Quantity">
+                                <input type="number" style="width:60%" class="form-control form-control-lg text-center inputQuantity" value="${element.BookCart.quantity}">
+                            </td>
+                            <td class="actions" data-th="">
+                                <div class="text-right">
+                                    <button class="btn btn-white border-secondary bg-white btn-md mb-2" value="${element.bookId}">
+                                        <i class="fas fa-sync"></i>
+                                    </button>
+                                    <button class="btn btn-white border-secondary bg-white btn-md mb-2" value="${element.bookId}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `
+                }).join('');
+            
+            bodyTB.innerHTML = cartLineHTML;
+
+            // Total payment
+            function totalPay() {
+                const pricePay = document.querySelectorAll('.pricePay');
+                const inputQuantity = document.querySelectorAll('.inputQuantity');
+                let totalPrice = 0;
+                pricePay.forEach((element, index) => {
+                    totalPrice += parseInt(element.innerHTML) * parseInt(inputQuantity[index].value);
+                });
+
+                console.log(totalPrice)
+
+                return totalPrice;
+            }
+            let totalPayment = totalPay();
+            
+            document.querySelector('.total').innerHTML = totalPayment + "đ";
+            
+            // Total quantity
+            function totalQuantity() {
+                const pricePay = document.querySelectorAll('.pricePay')
+                const inputQuantity = document.querySelectorAll('.inputQuantity');
+                let totalQuan = 0;
+                pricePay.forEach((element, index) => {
+                    totalQuan += parseInt(inputQuantity[index].value);
+                });
+
+                return totalQuan;
+            }
+
+            const cardNotice = document.querySelector('.header__cart-notice');
+            const totalBooks = document.querySelector('.text-info.font-weight-bold');
+            totalBooks.innerHTML = totalQuantity();
+            cardNotice.innerHTML = totalQuantity();
+
+            // Reload when change quantity
+            const inputQuantity = document.querySelectorAll('input[type="number"]')
+            inputQuantity.forEach(element => {
+                element.oninput = function() {
+                        document.querySelector('.total').innerHTML = totalPay();
+                        totalBooks.innerHTML = totalQuantity();
+                        cardNotice.innerHTML = totalQuantity();
+                    
+                }
+            });
+
+            const btnBuyNow = document.querySelector('#buyNow');
+            const itemLine = document.querySelectorAll('.itemLine');
+                console.log(itemLine)
+            btnBuyNow.onclick = function() {
+                const pricePay = document.querySelectorAll('.pricePay');
+                const inputQuantity = document.querySelectorAll('.inputQuantity');
+                const itemLine = document.querySelectorAll('.itemLine');
+                console.log(itemLine)
+                pricePay.forEach((element, index) => {
+                    let BookCart = {
+                        BookBookId: itemLine[index].id,
+                        CartCartId: dataCart.cartId,
+                        quantity: inputQuantity[index].value,
+                    }
+
+                    const url = `http://localhost:3000/api/BookCart/update/${dataCart.cartId}/${itemLine[index].id}/${inputQuantity[index].value}`;
+                    console.log(url, BookCart)
+                    fetch(url,  {
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json',
+                                },
+                                method: 'PUT',
+                            })
+                                .then((response) => response.json())
+                                .then((data) => {
+                                    console.log(data);
+                                    return data;
+                                })
+                                .catch((error) => {
+                                    console.error('Error:', error);
+                                });
+                })
+            }
+        } else {
+            alert("Vui lòng đăng nhập");
+            document.querySelector('#login-btn').click();
+        }
+    }();
+</script>
+

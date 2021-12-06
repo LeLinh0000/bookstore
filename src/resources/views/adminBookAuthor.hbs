@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Danh mục loại sách</h1>
+            <h1>Danh mục tác giả</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -27,15 +27,22 @@
 
             <div class="row">
                 <div class="col-sm-12 col-md-9">
+                  <div class="row mt-3">
+                        <div class="col-sm-4 col-md-2">
+                            <button type="button" data-toggle="modal" data-target="#modal-sm" class="btn btn-block btn-primary">Thêm</button>
+                        </div>
+                        <div class="col-sm-4 col-md-2">
+                            <button type="button" class="btn btn-danger btn-block btnDelete" value="${s.bookId}">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                            </button>
+                        </div>
+                        <div class="col-sm-6 col-md-8"></div>
+                  </div>
                 </div>
 
                 <div class="col-sm-6 col-md-3">
-                  <div class="row">
-                    <div class="col-sm-9 col-md-6"></div>
-                    <div class="col-sm-3 col-md-6">
-                        <button type="button" data-toggle="modal" data-target="#modal-sm" class="btn btn-block btn-primary">Thêm</button>
-                    </div>
-                  </div>
                         
                   <div class="input-group mt-2 pt-2">
                       <input type="search" class="form-control" placeholder="Type your keywords here">
@@ -52,9 +59,12 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                     <tr>
+                      <th data-orderable="false" class="text-center">
+                        <input class="checkedAll" name="deleteMulti[]" type="checkbox">
+                      </th>
                       <th class="text-center">ID</th>
                       <th class="text-center">Tên tác giả</th>
-                      <th class="text-center">Thao tác</th>
+                      <th class="text-center" data-orderable="false">Thao tác</th>
                     </tr>
                   </thead>
                   <tbody id="dataTable">
@@ -85,9 +95,15 @@
 
                   <tfoot>
                     <tr>
+                      <th class="text-center">
+                        <button type="button" class="btn btn-danger btn-sm btnDelete">
+                            <i class="fas fa-trash"></i>
+                            Xóa
+                        </button>
+                      </th>
                       <th class="text-center">ID</th>
                       <th class="text-center">Tên tác giả</th>
-                      <th class="text-center">Thao tác</th>
+                      <th class="text-center class="text-center"">Thao tác</th>
                     </tr>
                   </tfoot>
                 </table>
@@ -184,6 +200,9 @@
         let authorHTML = data.map((tg, index) => {
         return `
         <tr class="text-center">
+          <td class="align-middle">
+              <input class="checkMulti" name="deleteMulti[]" type="checkbox" value="${tg.authorId}">
+          </td>
           <td class="align-middle">${tg.authorId}</td>
           <td class="align-middle">${tg.authorName}</td>
           
@@ -214,6 +233,7 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
+      "order": [],
 
     // Vietsub notifications
       "language": {
@@ -499,8 +519,15 @@
             
           }
 
-          
-
+        const checkedAll = document.querySelectorAll('.checkedAll');
+        const checkMulti = document.querySelectorAll('.checkMulti');
+        checkedAll.forEach(element => {
+          element.onclick = function() {
+              checkMulti.forEach(ele => {
+                ele.checked = ele.checked ? false : true;
+              });
+          };
+        });
 
   }();
 

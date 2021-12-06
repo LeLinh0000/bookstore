@@ -7,6 +7,10 @@ module.exports = (sequelize, Sequelize) => {
                 primaryKey: true,
                 autoIncrement: true,
             },
+            payments: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
             orderState: {
                 type: Sequelize.STRING,
                 allowNull: false,

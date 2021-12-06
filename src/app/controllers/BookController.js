@@ -26,7 +26,7 @@ exports.create = (req, res) => {
     let language = req.body.language ? req.body.language : 'Tiếng Việt';
     let layout = req.body.bookLayout ? req.body.bookLayout : 'Bìa mềm';
     let image = req.body.coverImage
-        ? req.body.coverImage
+        ? '/img/products/' + req.body.coverImage
         : '/img/products/product0.jpg';
 
     const book = {
@@ -52,6 +52,8 @@ exports.create = (req, res) => {
             addBookAuthor(data);
             addBookCategory(data);
             if (req.body.bookTranslator) addBookTranslator(data);
+            req.flash('message', 'Thêm sách mới thành công');
+            res.redirect('/admin/addBook');
             res.send(data);
         })
         .catch((err) => {
@@ -177,6 +179,40 @@ exports.findOne = (req, res) => {
         });
 };
 
+// Find a single Book with an BookId
+exports.findOneDetail = (req, res) => {
+    const BookId = req.params.id;
+
+    Book.findOne({
+        where: {
+            bookId: BookId,
+        },
+        include: [Image, Author, Translator, Category, Publisher],
+    })
+        .then((data) => {
+            if (data) {
+                res.render('details_product', {
+                    data: data,
+                    ...{
+                        userId: req.session.userId,
+                        userName: req.session.userName,
+                        userAvatar: req.session.userAvatar,
+                        message: req.flash('registerSuccess'),
+                    },
+                });
+            } else {
+                res.status(404).send({
+                    message: `Cannot find Book with BookId=${BookId}.`,
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: 'Error retrieving Book with BookId=' + BookId,
+            });
+        });
+};
+
 // Update a Book by the id_loaisach in the request
 exports.update = (req, res) => {
     const bookId = req.params.id;
@@ -189,7 +225,7 @@ exports.update = (req, res) => {
     let language = req.body.language ? req.body.language : 'Tiếng Việt';
     let layout = req.body.bookLayout ? req.body.bookLayout : 'Bìa mềm';
     let image = req.body.coverImage
-        ? req.body.coverImage
+        ? '/img/products/' + req.body.coverImage
         : '/img/products/product0.jpg';
 
     const book = {

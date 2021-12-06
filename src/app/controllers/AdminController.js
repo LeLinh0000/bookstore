@@ -6,6 +6,7 @@ class AdminController {
     index(req, res) {
         res.render('adminHome.hbs', {
             layout: 'admin.hbs',
+            home: 'active',
         });
     }
 
@@ -54,6 +55,14 @@ class AdminController {
             layout: 'admin.hbs',
             qldm: 'menu-open',
             dmnxb: 'active',
+        });
+    }
+
+    order(req, res) {
+        res.render('adminOrder.hbs', {
+            layout: 'admin.hbs',
+            qldh: 'menu-open',
+            dh: 'active',
         });
     }
 

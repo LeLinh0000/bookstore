@@ -6,7 +6,7 @@ const order = require('../app/controllers/OrderController.js');
 router.post('/', order.create);
 
 // Retrieve all order with name
-router.get('/find/:customerId', order.findOrdersOfCus);
+router.get('/find', order.findOrdersOfCus);
 
 // // Retrieve a single order with id
 // router.get('/find', order.findordersHaveCmt);

@@ -1,11 +1,12 @@
 const db = require('../../models/index');
 const Cart = db.cart;
 const Book = db.book;
+const BookCart = db.bookCart;
 
 // Create and Save a new Cart
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.CustomerCustomerId) {
+    if (!req.session.userId) {
         res.status(400).send({
             message: 'Content can not be empty!',
         });
@@ -14,7 +15,7 @@ exports.create = (req, res) => {
 
     // Create a Cart
     const cart = {
-        CustomerCustomerId: req.body.CustomerCustomerId,
+        CustomerCustomerId: req.session.userId,
     };
 
     // Save Cart in the database
@@ -158,9 +159,10 @@ exports.findUserId = (req, res) => {
             if (data) {
                 res.send(data);
             } else {
-                res.status(404).send({
-                    message: `Cannot find cart with CustomerCustomerId=${userId}.`,
-                });
+                res.flash(
+                    'error',
+                    "Can't not find Cart with userId = " + userId,
+                );
             }
         })
         .catch((err) => {
