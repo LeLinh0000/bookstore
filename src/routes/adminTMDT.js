@@ -17,7 +17,7 @@ router.get('/category', adminTMDTController.category);
 
 // router.get('/order', adminTMDTController.order);
 
-// router.get('/manager', adminTMDTController.manager);
+router.get('/member', adminTMDTController.member);
 
 router.get('/', adminTMDTController.index);
 

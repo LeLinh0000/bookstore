@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Danh sách đơn hàng</h1>
+            <h1>Quản lý đơn hàng</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -64,7 +64,7 @@
                       <th class="text-center">Mã đơn hàng</th>
                       <th class="text-center">Tên khách hàng</th>
                       <th class="text-center">Giá trị đơn hàng</th>
-                      <th class="text-center">Ngày đặt hàng</th>
+                      <th class="text-center">Thời gian đặt hàng</th>
                       <th class="text-center" data-orderable="false">Trạng thái đơn hàng</th>
                       <th class="text-center" data-orderable="false">Xem chi tiết</th>
                     </tr>
@@ -100,7 +100,7 @@
                       <th class="text-center">Mã đơn hàng</th>
                       <th class="text-center">Tên khách hàng</th>
                       <th class="text-center">Giá trị đơn hàng</th>
-                      <th class="text-center">Ngày đặt hàng</th>
+                      <th class="text-center">Thời gian đặt hàng</th>
                       <th class="text-center" data-orderable="false">Trạng thái đơn hàng</th>
                       <th class="text-center" data-orderable="false">Xem chi tiết</th>
                     </tr>
@@ -210,7 +210,8 @@
           
           <td class="project-actions text-right text-center align-middle">
 
-              <select class="btn btn-info btnEdit" id="${nd.orderId}" style="width: 80%"> 
+            
+              <select class="btn btn-info btnEdit" id="${nd.orderId}" style=""> 
                     <option value="Đang xử lý">Đang xử lý</option>
                     <option value="Đã đóng gói">Đã đóng gói</option>
                     <option value="Đang giao hàng">Đang giao hàng</option>

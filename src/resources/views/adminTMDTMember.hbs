@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Quản lý nhân viên</h1>
+            <h1>Quản lý thành viên</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Quản lý nhân viên</li>
+              <li class="breadcrumb-item active">Quản lý thành viên</li>
             </ol>
           </div>
         </div>
@@ -33,16 +33,17 @@
                         <label>Sắp xếp theo:</label>
                         <select class="form-control" name="sortBy">
                           <option value="id">ID</option>
-                          <option value="name">Tên</option>
+                          <option value="name">Họ và tên</option>
                         </select>
                       </div>
                   </div>
                   <div class="col-md-3">
                       <div class="form-group">
-                        <label>Quyền</label>
+                        <label>Trạng thái tài khoản</label>
                         <select id="selectPermission" class="form-control" name="category">
-                          <option value="Nhân viên">Nhân viên</option>
-                          <option value="Admin">Admin</option>
+                          <option value="all">All</option>
+                          <option value="Bình thường">Bình thường</option>
+                          <option value="Tạm khóa">Tạm khóa</option>
                         </select>
                       </div>
                   </div>
@@ -50,24 +51,8 @@
                 </div>
 
                 <div class="col-sm-6 col-md-3">
-                  <div class="row">
-                    <div class="col-sm-3 col-md-12">
-                      <div class="row">
-                        <div class="col-sm-6 col-md-6">
-                            <button type="button" data-toggle="modal" data-target="#modal-lg" class="btn btn-block btn-primary">Thêm</button>
-                        </div>
-                        <div class="col-sm-6 col-md-6">
-                            <button type="button" class="btn btn-danger btn-block btnDelete" value="${s.bookId}">
-                                    <i class="fas fa-trash">
-                                    </i>
-                                    Delete
-                            </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                         
-                        <div class="input-group mt-2 pt-2">
+                        <div class="input-group mt-3 pt-3">
                             <input type="search" class="form-control" placeholder="Type your keywords here">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default">
@@ -84,54 +69,89 @@
                     <tr>
                       <th class="text-center">ID</th>
                       <th class="text-center">Họ và tên</th>
-                      <th class="text-center">Avatar</th>
-                      <th class="text-center">Email</th>
-                      <th class="text-center">User Name</th>
-                      <th class="text-center">Quyền</th>
+                      <th data-orderable="false" class="text-center">Avatar</th>
+                      <th data-orderable="false" class="text-center">Địa chỉ</th>
+                      <th data-orderable="false" class="text-center">Số điện thoại</th>
+                      <th data-orderable="false" class="text-center">Trạng thái tài khoản</th>
                       <th data-orderable="false" class="text-center">Thao tác</th>
-                      <th data-orderable="false" class="text-center">
-                        <input class="checkedAll" name="deleteMulti[]" type="checkbox">
-                      </th>
                     </tr>
                   </thead>
                   <tbody id="dataTable">
                     <tr class="text-center">
-                      <td class="align-middle"></td>
-                      <td class="align-middle"></td>
-                      <td><img src="" class="elevation-2" alt="User Image" style="width: 60px; height:80px;"></td>
-                      <td class="align-middle"></td>
-                      <td id="categoryLine" class="align-middle"></td>
+                      <td class="align-middle">1</td>
+                      <td class="align-middle">Dung Thành Tâm</td>
+                      <td><img src="/img/avatar/avatar4.png" class="elevation-2" alt="User Image" style="width: 60px; height:80px;"></td>
+                      <td class="align-middle">Ô Môn, Cần Thơ</td>
+                      <td class="align-middle">0909090909</td>
+                      <td class="align-middle">Bình thường</td>
                       <td class="project-actions text-right text-center align-middle">
-                          <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt">
+                          <a class="btn btn-primary btn-sm" href="#">
+                              <i class="fas fa-eye">
                               </i>
-                              Edit
+                              Xem
                           </a>
-                        <form action="/api/manager/${manager.managerId}" method="DELETE" class="d-inline-block">
+                        <form action="/api/book/${s.bookId}" method="DELETE" class="d-inline-block">
                           <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash">
-                                </i>
-                                Delete
+                                <i class="fas fa-ban"></i>
+                                Khóa
                           </button>
                         </form>
                       </td>
                     </tr>
+                    <tr class="text-center">
+                      <td class="align-middle">2</td>
+                      <td class="align-middle">Quých Đi</td>
+                      <td><img src="/img/avatar/avatar5.png" class="elevation-2" alt="User Image" style="width: 60px; height:80px;"></td>
+                      <td class="align-middle">Tri Tôn, An Giang</td>
+                      <td class="align-middle">0908080808</td>
+                      <td class="align-middle">Bình thường</td>
+                      <td class="project-actions text-right text-center align-middle">
+                          <a class="btn btn-primary btn-sm" href="#">
+                              <i class="fas fa-eye">
+                              </i>
+                              Xem
+                          </a>
+                        <form action="/api/book/${s.bookId}" method="DELETE" class="d-inline-block">
+                          <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-ban"></i>
+                                Khóa
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                    <tr class="text-center">
+                      <td class="align-middle">3</td>
+                      <td class="align-middle">Cao Hoàng Kha</td>
+                      <td><img src="/img/avatar/avatar4.png" class="elevation-2" alt="User Image" style="width: 60px; height:80px;"></td>
+                      <td class="align-middle">Ninh Kiều, Cần Thơ</td>
+                      <td class="align-middle">0906060606</td>
+                      <td class="align-middle">Bình thường</td>
+                      <td class="project-actions text-right text-center align-middle">
+                          <a class="btn btn-primary btn-sm" href="#">
+                              <i class="fas fa-eye">
+                              </i>
+                              Xem
+                          </a>
+                        <form action="/api/book/${s.bookId}" method="DELETE" class="d-inline-block">
+                          <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-ban"></i>
+                                Khóa
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                    
                   </tbody>
 
                   <tfoot>
                     <tr>
                       <th class="text-center">ID</th>
                       <th class="text-center">Họ và tên</th>
-                      <th class="text-center">Avatar</th>
-                      <th class="text-center">Email</th>
-                      <th class="text-center">User Name</th>
-                      <th class="text-center">Quyền</th>
-                      <th class="text-center">Thao tác</th>
-                      <th class="text-center">
-                        <button type="button" class="btn btn-danger btn-sm btnDelete">
-                                    <i class="fas fa-trash"></i>  
-                        </button>
-                      </th>
+                      <th data-orderable="false" class="text-center">Avatar</th>
+                      <th data-orderable="false" class="text-center">Địa chỉ</th>
+                      <th data-orderable="false" class="text-center">Số điện thoại</th>
+                      <th data-orderable="false" class="text-center">Trạng thái tài khoản</th>
+                      <th data-orderable="false" class="text-center">Thao tác</th>
                     </tr>
                   </tfoot>
                 </table>
@@ -146,7 +166,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Cập nhật nhân viên</h4>
+              <h4 class="modal-title">Cập nhật thành viên</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -244,8 +264,41 @@
 <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
-
 <script>
+  var table;
+        if ($.fn.dataTable.isDataTable('#example2')) {
+            table = $('#example2').DataTable();
+            table.clear();
+            table.rows.add(jsonData).draw();
+        }
+        else {
+            table = $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+
+          // Vietsub notifications
+            "language": {
+              "emptyTable": "Hiện không có sản phẩm nào",
+              "info": "Hiển thị từ _START_ đến _END_ của _TOTAL_",
+              "ifnoEmpty": "Hiển thị từ 0 đến 0 của 0",
+              "search": "Tìm kiếm",
+              "paginate": {
+                "previous": "Trở lại",
+                "next": "Tiếp &nbsp",
+                "last": "Trang cuối",
+                "first": "Trang đầu",
+              },
+            }
+          });
+        }
+</script>
+
+{{!-- <script>
 
   !async function() {
 
@@ -274,11 +327,6 @@
                       <td id="categoryLine" class="align-middle">${manager.userName}</td>
                       <td id="categoryLine" class="align-middle">${manager.permission}</td>
                       <td class="project-actions text-right text-center align-middle"> 
-                        <button type="button" class="btn btn-primary btn-sm btnView" data-toggle="modal" data-target="#modal-lg" value="2">
-                              <i class="fas fa-eye">
-                              </i>
-                              View
-                        </button>
                         <button type="button" class="btn btn-info btn-sm btnEdit" data-toggle="modal" data-target="#modal-lg" value="${manager.managerId}"> 
                               <i class="fas fa-pencil-alt">
                               </i>
@@ -742,4 +790,4 @@
 
   }();
 
-</script>
+</script> --}}

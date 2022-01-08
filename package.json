@@ -30,12 +30,7 @@
     "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
   },
   "dependencies": {
-    "@admin-bro/express": "^3.1.0",
-    "@admin-bro/sequelize": "^1.2.1",
-    "admin-bro": "^4.0.1",
-    "axios": "^0.22.0",
     "bcrypt": "^5.0.1",
-    "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -51,7 +46,6 @@
   },
   "devDependencies": {
     "dart-sass": "^1.25.0",
-    "husky": "^7.0.0",
     "lint-staged": "^11.1.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.12",

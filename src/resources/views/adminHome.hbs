@@ -87,36 +87,26 @@
         <div class="row">
           <!-- Left col -->
           <section class="col-lg-7 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
-            <div class="card">
+          <!-- BAR CHART -->
+            <div class="card card-success">
               <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-chart-pie mr-1"></i>
-                  Sales
-                </h3>
+                <h3 class="card-title">Biểu đồ tình hình kinh doanh của Website</h3>
+
                 <div class="card-tools">
-                  <ul class="nav nav-pills ml-auto">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
-                    </li>
-                  </ul>
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
                 </div>
-              </div><!-- /.card-header -->
+              </div>
               <div class="card-body">
-                <div class="tab-content p-0">
-                  <!-- Morris chart - Sales -->
-                  <div class="chart tab-pane active" id="revenue-chart"
-                       style="position: relative; height: 300px;">
-                      <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
-                   </div>
-                  <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                    <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
-                  </div>
+                <div class="chart">
+                  <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                 </div>
-              </div><!-- /.card-body -->
+              </div>
+              <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </section>
@@ -180,3 +170,68 @@
   </div>
   <!-- /.content-wrapper -->
   <script src="/plugins/chart.js/Chart.min.js"></script>
+  <script>
+    var thisInterval = setInterval(function() {
+  //this if statment checks if the id "thisCanvas" is linked to something
+  if(document.getElementById("barChart") != null){
+    $(function () {
+    /* ChartJS
+     * -------
+     * Here we will create a few charts using ChartJS
+     */
+var areaChartData = {
+  labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label               : 'Tổng giá trị đơn hàng (* 100.000vnđ)',
+      backgroundColor     : 'rgba(210, 214, 222, 1)',
+      borderColor         : 'rgba(210, 214, 222, 1)',
+      pointRadius         : false,
+      pointColor          : 'rgba(210, 214, 222, 1)',
+      pointStrokeColor    : '#c1c7d1',
+      pointHighlightFill  : '#fff',
+      pointHighlightStroke: 'rgba(220,220,220,1)',
+      data                : [65, 59, 80, 51, 56, 55, 90]
+    },
+    {
+      label               : 'Số lượng đơn hàng',
+      backgroundColor     : 'rgba(60,141,188,0.9)',
+      borderColor         : 'rgba(60,141,188,0.8)',
+      pointRadius          : false,
+      pointColor          : '#3b8bba',
+      pointStrokeColor    : 'rgba(60,141,188,1)',
+      pointHighlightFill  : '#fff',
+      pointHighlightStroke: 'rgba(60,141,188,1)',
+      data                : [28, 48, 40, 39, 36, 27, 40]
+    },
+  ]
+}
+
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+    var barChartData = $.extend(true, {}, areaChartData)
+    var temp0 = areaChartData.datasets[0]
+    var temp1 = areaChartData.datasets[1]
+    barChartData.datasets[0] = temp1
+    barChartData.datasets[1] = temp0
+
+    var barChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : false
+    }
+
+    new Chart(barChartCanvas, {
+      type: 'bar',
+      data: barChartData,
+      options: barChartOptions
+    })
+
+  });
+    clearInterval(thisInterval)
+  }
+//the 500 means that you will loop through this every 500 milliseconds (1/2 a second)
+},500)
+  </script>

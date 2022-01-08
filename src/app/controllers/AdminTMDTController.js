@@ -66,13 +66,13 @@ class AdminController {
     //     });
     // }
 
-    // manager(req, res) {
-    //     res.render('adminManager.hbs', {
-    //         layout: 'admin.hbs',
-    //         qltk: 'menu-open',
-    //         tk: 'active',
-    //     });
-    // }
+    member(req, res) {
+        res.render('adminTMDTMember.hbs', {
+            layout: 'adminTMDT.hbs',
+            qltv: 'menu-open',
+            qltva: 'active',
+        });
+    }
 }
 
 module.exports = new AdminController();
