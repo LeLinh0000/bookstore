@@ -14,7 +14,6 @@ module.exports = (sequelize, Sequelize) => {
             orderState: {
                 type: Sequelize.STRING,
                 allowNull: false,
-                defaultValue: 'Đang xử lý',
             },
         },
         {

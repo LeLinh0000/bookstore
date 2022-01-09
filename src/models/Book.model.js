@@ -51,7 +51,6 @@ module.exports = (sequelize, Sequelize) => {
             bookLayout: {
                 type: Sequelize.STRING,
                 allowNull: false,
-                defaultValue: 'Bìa mềm',
             },
 
             publishYear: {
