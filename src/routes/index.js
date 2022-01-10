@@ -6,6 +6,7 @@ const productsRouter = require('./products');
 const registerRouter = require('./register');
 const detailsProductRouter = require('./detailsproduct');
 const orderRouter = require('./orderpage');
+const shoppingCartRouter = require('./shoppingcart');
 const authRouter = require('./auth');
 const managerOrderRouter = require('./managerorder');
 const category = require('./category');
@@ -43,6 +44,8 @@ function route(app) {
     app.use('/auth', authRouter);
 
     app.use('/order', orderRouter);
+
+    app.use('/shoppingCart', shoppingCartRouter);
 
     app.use('/managerOrder', managerOrderRouter);
 
