@@ -1,0 +1,211 @@
+
+  .form {
+    width: 380px;
+    min-height: 100px;
+    text-align: center;
+    background: #fff;
+    border-radius: 2px;
+    align-self: center;
+  }
+  .form .heading {
+    font-size: 2rem;
+    margin-top: 10px;
+  }
+  .form .desc {
+    text-align: center;
+    color: #636d77;
+    font-size: 1.6rem;
+    font-weight: lighter;
+    line-height: 2.4rem;
+    margin-top: 16px;
+    font-weight: 300;
+  }
+  
+  .form-group {
+    display: flex;
+    margin-bottom: 16px;
+    flex-direction: column;
+  }
+  
+  .form-label,
+  .form-message {
+    text-align: left;
+  }
+  
+  .form-label {
+    font-weight: 700;
+    padding-bottom: 6px;
+    line-height: 1.8rem;
+    font-size: 1.4rem;
+  }
+  
+  .form-control {
+    height: 40px;
+    padding: 8px 12px;
+    border: 1px solid #b3b3b3;
+    border-radius: 3px;
+    outline: none;
+    font-size: 1.4rem;
+    width: auto;
+  }
+
+  .form-control-full {
+    width: 100%;
+  }
+  
+  .form-control:hover {
+    border-color: var(--primary-color);
+  }
+  
+  .form-group.invalid .form-control {
+    border-color: #f33a58;
+  }
+  
+  .form-group.invalid .form-message {
+    color: #f33a58;
+  }
+  
+  .form-message {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    padding: 4px 0 0;
+  }
+  
+  .form-submit {
+    outline: none;
+    background-color: var(--primary-color);
+    margin-top: 12px;
+    padding: 12px 16px;
+    font-weight: 600;
+    color: #fff;
+    border: none;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .form-submit:hover {
+    background-color: var(--primary-color);
+  }
+  
+  .spacer {
+    margin-top: 36px;
+  }
+ 
+/* Reg */
+.radio-container {
+  display: flex;
+  align-items: center;
+  height: 68px;
+}
+
+.radio-container label {
+  padding-bottom: 0;
+  margin-right: 30px;
+}
+
+.form-check-inline {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.form-check-inline input {
+  height: 16px;
+  margin-top: 0;
+  margin-right: 5px;
+  font-size: 1.4rem;
+}
+
+.form-check-inline label {
+  line-height: 100%;
+  font-size: 1.4rem;
+}
+
+
+/* layout */
+
+.main-register.grid.wide {
+  margin-top: -10px;
+  margin-bottom: 30px;
+  margin: -10px 0 10px 0 !important;
+  width: 1000px !important;
+}
+
+.main-register.grid.wide .form {
+  width: 100%;
+  /* margin-left: 5%; */
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 10px 0 30px 50px;
+  text-align: left;
+}
+
+.main-register.grid.wide .form .desc {
+  text-align: left;
+}
+
+.main-register.grid.wide .form-submit {
+  margin-right: 50px;
+}
+
+.main-register.grid.wide .form-group {
+  display: flex;
+  justify-content: center;
+}
+
+.col .form-group input[type="text"],
+.col .form-group input[type="password"],
+.col .form-group input[type="date"]
+{
+  width: 70%;
+}
+
+#address-register {
+  height: 80px;
+  width: 70%;
+}
+
+#avatar-register {
+  width: 70%;
+}
+
+.main-register.grid.wide .auth-form__aside {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.main-register.grid.wide .auth-form__aside p,
+.main-register.grid.wide .auth-form__aside a {
+  font-size: 1.4rem;
+}
+
+.close-modal {
+  position: absolute;
+  right: 10px;
+  top: -15px;
+  font-size: 3rem;
+  padding: 8px;
+  color: #aaaaaa;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.auth-form__container .close-modal {
+    right: calc(50% - 240px);
+    top: 8px;
+}
+
+
+/* Form add book */
+.form-add-book {
+  margin-top: 48px;
+}
