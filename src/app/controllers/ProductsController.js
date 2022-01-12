@@ -8,7 +8,10 @@ class ProductsController {
     }
 
     details_product(req, res, next) {
-        fetch('http://localhost:3000/api/book/' + req.params.id)
+        fetch(
+            'https://bookstore-backend-nodejs.herokuapp.com/api/book/' +
+                req.params.id,
+        )
             .then((response) => response.json())
             .then((data) => {
                 res.render('details_product', data);

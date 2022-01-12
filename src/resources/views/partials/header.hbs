@@ -231,7 +231,7 @@
         const outterCard = document.querySelector('.header__cart-have-prod');
         const cardNotice = document.querySelector('.header__cart-notice');
 
-        let dataCart = await fetch("http://localhost:3000/api/cart/session")
+        let dataCart = await fetch(hostname +"api/cart/session")
             .then(response => response.json())
             .then(data => {
                 return data;
