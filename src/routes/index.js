@@ -3,7 +3,6 @@ const adminTMDTRouter = require('./adminTMDT');
 const contactRouter = require('./contact');
 const siteRouter = require('./site');
 const productsRouter = require('./products');
-const registerRouter = require('./register');
 const detailsProductRouter = require('./detailsproduct');
 const orderRouter = require('./orderpage');
 const shoppingCartRouter = require('./shoppingcart');
@@ -38,8 +37,6 @@ function route(app) {
     app.use('/products', productsRouter);
 
     app.use('/detailsProduct', detailsProductRouter);
-
-    app.use('/register', registerRouter);
 
     app.use('/auth', authRouter);
 

@@ -83,7 +83,7 @@
         const customerInfo = document.querySelector('.customer-info');
         const cartList = document.querySelector('.cartList');
 
-        let customer = await fetch("http://localhost:3000/api/customer/session")
+        let customer = await fetch(hostname + "api/customer/session")
             .then(response => response.json())
             .then(data => {
                 return data;
@@ -117,7 +117,7 @@
         `;
         customerInfo.innerHTML = customerInfoHTML;
 
-        let dataCart = await fetch("http://localhost:3000/api/cart/session")
+        let dataCart = await fetch(hostname + "api/cart/session")
             .then(response => response.json())
             .then(data => {
                 return data;

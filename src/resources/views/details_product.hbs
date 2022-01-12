@@ -317,7 +317,7 @@
             discountPercent.innerHTML = parseInt((coverPrice/price)*100 - 100);
         };
 
-        let dataBook = await fetch("http://localhost:3000/api/book/" + bookId)
+        let dataBook = await fetch(hostname + "api/book/" + bookId)
             .then(response => response.json())
             .then(data => {
                 return data;
@@ -354,7 +354,7 @@
           }).join(', ');
         tbTranslator.innerHTML = translatorStr;
 
-        let dataCart = await fetch("http://localhost:3000/api/cart/session")
+        let dataCart = await fetch(hostname + "api/cart/session")
                 .then(response => response.json())
                 .then(data => {
                     return data;
@@ -371,7 +371,7 @@
                     CartCartId: dataCart.cartId,
                     }
             console.log(objBookCart)
-            const url = 'http://localhost:3000/api/BookCart/';
+            const url = `${hostname}api/BookCart/`;
 
             let addCardResult = fetch(url,  {
                         headers: {
@@ -389,7 +389,7 @@
                                 const outerCard = document.querySelector('.header__cart-have-prod');
                                 const cardNotice = document.querySelector('.header__cart-notice');
 
-                                let dataCart = fetch("http://localhost:3000/api/cart/session")
+                                let dataCart = fetch(hostname + "api/cart/session")
                                     .then(response => response.json())
                                     .then(data => {
                                         if(data.message != 'userId=undefined.'){
@@ -446,7 +446,7 @@
             };
 
 
-        let dataBooks = await fetch("http://localhost:3000/api/book")
+        let dataBooks = await fetch(hostname + "api/book")
             .then(response => response.json())
             .then(data => {
                 return data;
@@ -457,7 +457,7 @@
 
         const featuredContainer = document.querySelector('#featuredContainer');
 
-        let featured = await fetch("http://localhost:3000/api/category/name/S%C3%A1ch%20v%C4%83n%20h%E1%BB%8Dc")
+        let featured = await fetch(hostname + "api/category/name/S%C3%A1ch%20v%C4%83n%20h%E1%BB%8Dc")
             .then(response => response.json())
             .then(data => {
                 return data[0].Books;
@@ -481,7 +481,7 @@
                 <div class="slick__item">
                     <div class="slick__item-content">
                         <!-- Product item -->
-                        <a href="http://localhost:3000/api/book/detail/${element.bookId}" class="home-product-item">
+                        <a href="${hostname}api/book/detail/${element.bookId}" class="home-product-item">
                             <div class="home-product-item__img" style="background-image: url(${imgPath});"></div>
                             <h4 class="home-product-item__name">${element.bookName}</h4>
                             <div class="home-product-item__price">

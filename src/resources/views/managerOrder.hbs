@@ -89,7 +89,7 @@
   !async function() {
       const dataTable = document.getElementById("dataTable");
 
-      let data = await fetch("http://localhost:3000/api/order/find")
+      let data = await fetch(hostname + "api/order/find")
         .then(response => response.json())
         .then(data => {
               return data;

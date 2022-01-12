@@ -253,7 +253,7 @@
   const dataTableF = document.getElementById("dataTable");
   const selectPermission = document.getElementById("selectPermission");
 
-    let dataManager = await fetch("http://localhost:3000/api/manager")
+    let dataManager = await fetch(hostname + "api/manager")
         .then(response => response.json())
         .then(data => {
               return data;
@@ -425,7 +425,7 @@
                 avatar: avatar,
             };
 
-            const url = 'http://localhost:3000/api/manager/' + btnSaveEdit.value;
+            const url = `${hostname}api/manager/` + btnSaveEdit.value;
 
             console.log(url);
             
@@ -468,7 +468,7 @@
               const deleteId = element.value;
 
               element.onclick = function() {
-                const url = 'http://localhost:3000/api/manager/' + deleteId;
+                const url = `${hostname}api/manager/` + deleteId;
                 fetch(url,  {
                           headers: {
                               'Accept': 'application/json',
@@ -504,7 +504,7 @@
                     avatar: avatar,
                 };
                 
-                const url = 'http://localhost:3000/api/manager/';
+                const url = `${hostname}api/manager/`;
                 fetch(url,  {
                           headers: {
                               'Accept': 'application/json',
@@ -529,7 +529,7 @@
         function reload() {
             // Reload
             console.log('reload')
-            const dataManagerNew = fetch("http://localhost:3000/api/manager")
+            const dataManagerNew = fetch(hostname + "api/manager")
               .then(response => response.json())
               .then(data => {
                 let managerHTML = data.map((manager, index) => {
@@ -654,7 +654,7 @@
                       avatar: avatar,
                   };
 
-                  const url = 'http://localhost:3000/api/manager/' + btnSaveEdit.value;
+                  const url = `${hostname}api/manager/` + btnSaveEdit.value;
 
                   console.log(url);
                   
@@ -695,7 +695,7 @@
                     const deleteId = element.value;
 
                     element.onclick = function() {
-                      const url = 'http://localhost:3000/api/manager/' + deleteId;
+                      const url = `${hostname}api/manager/` + deleteId;
                       fetch(url,  {
                                 headers: {
                                     'Accept': 'application/json',

@@ -186,7 +186,7 @@
   !async function() {
       const dataTable = document.getElementById("dataTable");
 
-      let data = await fetch("http://localhost:3000/api/category")
+      let data = await fetch(hostname + "api/category")
         .then(response => response.json())
         .then(data => {
               return data;
@@ -287,7 +287,7 @@
             let dataCategory = {
               categoryName: categoryInput.value,
             }
-            const url = 'http://localhost:3000/api/category/' + btnSaveEdit.value;
+            const url = `${hostname}api/category/` + btnSaveEdit.value;
 
             console.log(url);
             
@@ -329,7 +329,7 @@
               const deleteId = element.value;
 
               element.onclick = function() {
-                const url = 'http://localhost:3000/api/category/' + deleteId;
+                const url = `${hostname}api/category/` + deleteId;
                 fetch(url,  {
                           headers: {
                               'Accept': 'application/json',
@@ -357,7 +357,7 @@
                 let dataCategory = {
                   categoryName: categoryInput.value,
                 }
-                const url = 'http://localhost:3000/api/category/';
+                const url = `${hostname}api/category/`;
                 
                 fetch(url,  {
                           headers: {
@@ -385,7 +385,7 @@
 
           function reload() {
             // Reload
-            let dataNew = fetch("http://localhost:3000/api/category")
+            let dataNew = fetch(hostname + "api/category")
               .then(response => response.json())
               .then(data => {
                     let htmlNew = data.map((tl, index) => {
@@ -450,7 +450,7 @@
                   let dataCategory = {
                     categoryName: categoryInput.value,
                   }
-                  const url = 'http://localhost:3000/api/category/' + btnSaveEdit.value;
+                  const url = `${hostname}api/category/` + btnSaveEdit.value;
 
                   console.log(url);
                   
@@ -492,7 +492,7 @@
                     const deleteId = element.value;
 
                     element.onclick = function() {
-                      const url = 'http://localhost:3000/api/category/' + deleteId;
+                      const url = `${hostname}api/category/` + deleteId;
                       fetch(url,  {
                                 headers: {
                                     'Accept': 'application/json',

@@ -220,7 +220,7 @@
   const selectAuthor = document.getElementById("selectAuthor");
 
 
-    let dataAuthor = await fetch("http://localhost:3000/api/author")
+    let dataAuthor = await fetch(hostname + "api/author")
         .then(response => response.json())
         .then(data => {
               return data;
@@ -236,7 +236,7 @@
         });
         selectAuthor.innerHTML = authorHTML.join('');
 
-    let dataTranslator = await fetch("http://localhost:3000/api/translator")
+    let dataTranslator = await fetch(hostname + "api/translator")
         .then(response => response.json())
         .then(data => {
               return data;
@@ -245,7 +245,7 @@
           console.log(error);
         });
 
-    let dataPublisher = await fetch("http://localhost:3000/api/publisher")
+    let dataPublisher = await fetch(hostname + "api/publisher")
         .then(response => response.json())
         .then(data => {
               return data;
@@ -254,7 +254,7 @@
           console.log(error);
         });
 
-    let dataCategory = await fetch("http://localhost:3000/api/category")
+    let dataCategory = await fetch(hostname + "api/category")
         .then(response => response.json())
         .then(data => {
               return data;
@@ -270,7 +270,7 @@
         });
         selectCategory.innerHTML = categoryHTML.join('');
 
-    let dataBook = await fetch("http://localhost:3000/api/book")
+    let dataBook = await fetch(hostname + "api/book")
         .then(response => response.json())
         .then(data => {
               return data;
@@ -582,7 +582,7 @@
             let databook = {
               bookName: bookInput.value,
             }
-            const url = 'http://localhost:3000/api/book/' + btnSaveEdit.value;
+            const url = `${hostname}api/book/` + btnSaveEdit.value;
 
             console.log(url);
             

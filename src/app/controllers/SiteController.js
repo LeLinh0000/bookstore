@@ -9,11 +9,6 @@ class SiteController {
         });
     }
 
-    // [GET] /search
-    search(req, res) {
-        res.render('search');
-    }
-
     // [GET] /products
     products(req, res) {
         res.render('products', {

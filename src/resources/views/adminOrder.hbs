@@ -186,7 +186,7 @@
   !async function() {
       const dataTable = document.getElementById("dataTable");
 
-      let data = await fetch("http://localhost:3000/api/order")
+      let data = await fetch(hostname + "api/order")
         .then(response => response.json())
         .then(data => {
               return data;
