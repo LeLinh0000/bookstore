@@ -1,1 +1,1 @@
-const hostname = window.location.protocol + '//' + window.location.host;
+const hostname = window.location.protocol + '//' + window.location.host + '/';
