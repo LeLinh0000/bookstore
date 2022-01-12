@@ -13,8 +13,6 @@ const port = process.env.PORT || 3000;
 
 const route = require('./routes');
 
-location.hostname = 'https://bookstore-backend-nodejs.herokuapp.com/';
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(
