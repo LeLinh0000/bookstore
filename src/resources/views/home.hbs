@@ -184,7 +184,7 @@
         
         const bestSalerContainer = document.querySelector('#bestSalerContainer');
         
-        let dataBooks = await fetch(location.host + "api/book")
+        let dataBooks = await fetch(location.hostname + "api/book")
             .then(response => response.json())
             .then(data => {
                 return data;
@@ -197,7 +197,7 @@
             return parseInt((coverPrice/price)*100 - 100);
         }
 
-        let bestSaler = await fetch(location.host + "api/category/name/S%C3%A1ch%20b%C3%A1n%20ch%E1%BA%A1y")
+        let bestSaler = await fetch(location.hostname + "api/category/name/S%C3%A1ch%20b%C3%A1n%20ch%E1%BA%A1y")
             .then(response => response.json())
             .then(data => {
                 return data[0].Books;
@@ -221,7 +221,7 @@
                 <div class="slick__item">
                     <div class="slick__item-content">
                         <!-- Product item -->
-                        <a href = "${location.host}api/book/detail/${element.bookId}" class="home-product-item">
+                        <a href = "${location.hostname}api/book/detail/${element.bookId}" class="home-product-item">
                             <div class="home-product-item__img" style="background-image: url(${imgPath});"></div>
                             <h4 class="home-product-item__name">${element.bookName}</h4>
                             <div class="home-product-item__price">
@@ -279,7 +279,7 @@
         // Sản phẩm nổi bật
         const featuredContainer = document.querySelector('#featuredContainer');
 
-        let featured = await fetch(location.host + "api/category/name/S%C3%A1ch%20v%C4%83n%20h%E1%BB%8Dc")
+        let featured = await fetch(location.hostname + "api/category/name/S%C3%A1ch%20v%C4%83n%20h%E1%BB%8Dc")
             .then(response => response.json())
             .then(data => {
                 return data[0].Books;
@@ -301,7 +301,7 @@
             let percentDiscount = calPercent(element.coverPrice, element.price);
             return  `
                 <div class="col l-4 famousProd__item">
-                    <a href = "${location.host}api/book/detail/${element.bookId}"><img src="${imgPath}" alt="Product image">
+                    <a href = "${location.hostname}api/book/detail/${element.bookId}"><img src="${imgPath}" alt="Product image">
                     <p>${element.bookName}</p>
                     
                     <div class="home-product-item__sale-off">
@@ -320,7 +320,7 @@
         // Sách thiếu nhi
         const childrenContainer = document.querySelector('#childrenContainer');
 
-        let children = await fetch(location.host + "api/category/name/S%C3%A1ch%20thi%E1%BA%BFu%20nhi")
+        let children = await fetch(location.hostname + "api/category/name/S%C3%A1ch%20thi%E1%BA%BFu%20nhi")
             .then(response => response.json())
             .then(data => {
                 return data[0].Books;
@@ -342,7 +342,7 @@
             let percentDiscount = calPercent(element.coverPrice, element.price);
             return  `
                 <div class="col l-4 famousProd__item">
-                    <a href = "${location.host}api/book/detail/${element.bookId}"><img src="${imgPath}" alt="Product image">
+                    <a href = "${location.hostname}api/book/detail/${element.bookId}"><img src="${imgPath}" alt="Product image">
                     <p>${element.bookName}</p>
                     
                     <div class="home-product-item__sale-off">
