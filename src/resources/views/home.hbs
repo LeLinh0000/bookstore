@@ -181,6 +181,7 @@
     };
 
     !async function() {
+        let host = 'https://bookstore-backend-nodejs.herokuapp.com/';
         const bestSalerContainer = document.querySelector('#bestSalerContainer');
         
         let dataBooks = await fetch(host + "api/book")
